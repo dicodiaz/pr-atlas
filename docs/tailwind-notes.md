@@ -46,3 +46,17 @@ Use:
 Project-specific classes defined in [`src/index.css`](../src/index.css) such as
 `panel-surface`, `fade-up`, and `data-row` are valid and should not be replaced
 just to satisfy a Tailwind-only style preference.
+
+## Native search input chrome is intentionally overridden
+
+The search field uses `type="search"` for semantics, but the browser-provided
+search decorations are hidden on purpose so the UI stays visually consistent.
+
+The `search-input` class in [`src/index.css`](../src/index.css):
+
+- removes the native `x` clear control
+- removes browser-specific search decorations
+- keeps the field styled entirely by the app's own design language
+
+If you restyle the search bar later, preserve that override unless you
+explicitly want the browser-native search affordances back.

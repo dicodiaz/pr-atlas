@@ -45,15 +45,60 @@ Search logic lives in [`src/lib/search.ts`](../src/lib/search.ts).
 
 That approach keeps the behavior simple, testable, and tolerant of casing, extra spaces, and partial phrase searches.
 
+## Search limitations
+
+The current search intentionally favors predictability over complexity.
+
+- matching is token-based rather than fuzzy-ranked
+- search is case-insensitive
+- extra whitespace is collapsed before matching
+- partial substring matches are allowed within the normalized topic index
+- results are not typo-tolerant
+- results are not ranked by relevance; matching topics keep their data order
+
+This is a good fit for a small local interview-prep dataset. If the dataset
+grows substantially or relevance becomes more important, the next iteration
+could introduce a precomputed search index or fuzzy-ranking layer without
+changing the table-oriented rendering model.
+
 ## Rendering strategy
 
 The app stays as a single SPA screen with no routing.
 
-- the main app owns only the search query state
+- the main app owns the immediate search input state
+- a debounced query drives filtering and URL sync through `?q=`
 - filtered results are derived from pure data and utility functions
 - the table renders one row per topic
 - each topic row stacks multiple PR links inside the same cell for quick scanning
 - empty state and result count update from the same filtered result set
+- browser back/forward navigation rehydrates the search from the URL immediately
+
+## State flow
+
+The search interaction has two layers of state:
+
+- `inputQuery`: the immediate controlled input value shown in the search field
+- `activeQuery`: the debounced query derived from `inputQuery` and used for filtering and URL sync
+
+The flow is:
+
+1. The user types into the search field and `inputQuery` updates immediately.
+2. A debounce hook waits 250ms before promoting that value to `activeQuery`.
+3. `activeQuery` drives both filtered results and the `?q=` URL parameter.
+4. Clear and `Escape` bypass the delay and reset both the visible input and active search immediately.
+5. Browser `popstate` events read from the URL and immediately rehydrate both the visible input and the applied search.
+
+## Performance notes
+
+The current UI is optimized for smooth typing without adding architectural
+complexity.
+
+- filtered results are memoized in the app layer
+- the topic table is memoized so it does not rerender on every keystroke before
+  the debounced query changes
+- debounce behavior is isolated in a small hook in `src/lib`
+- current optimizations are intentionally lightweight because the dataset is still local and relatively small
+- the next likely optimization, if the dataset grows substantially, would be precomputing topic search text in the data layer rather than rebuilding it during every filter pass
 
 ## Why this supports later PR-data refinement
 

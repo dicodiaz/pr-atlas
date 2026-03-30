@@ -93,7 +93,19 @@ Highlights:
 
 - `src/data/topics.ts` keeps authoring grouped by topic while sharing PR definitions
 - `src/lib/search.ts` contains pure search logic that matches topic names, tags, and PR titles
+- `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/components` handles focused rendering concerns
-- the UI renders one row per topic and stacks PR links inside the same table cell
+- the UI renders one row per topic, stacks PR links inside the same table cell, and syncs the applied query to `?q=`
 
 That structure is intentionally simple, interview-friendly, and easy to refine later as your real PR data becomes more detailed.
+
+## Testing approach
+
+The test suite is intentionally split by responsibility:
+
+- `src/test/search.test.ts`: search correctness and matching rules
+- `src/test/use-debounced-value.test.tsx`: debounce timing and immediate flush behavior
+- `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, focus behavior, clear behavior, and empty-state rendering
+
+This keeps pure logic tests focused and fast while reserving the app-level tests
+for behavior that only matters when the pieces are wired together.
