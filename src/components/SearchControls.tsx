@@ -1,24 +1,17 @@
-import { type FC, type FormEvent, type KeyboardEvent, useId } from 'react'
+import { type FC, type KeyboardEvent, useId } from 'react'
 
 interface SearchControlsProps {
   onClear: () => void
   onQueryChange: (value: string) => void
-  onSearch: () => void
   query: string
 }
 
 export const SearchControls: FC<SearchControlsProps> = ({
   onClear,
   onQueryChange,
-  onSearch,
   query,
 }) => {
   const searchId = useId()
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    onSearch()
-  }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape' && query.length > 0) {
@@ -28,10 +21,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
   }
 
   return (
-    <form
-      className="fade-up flex flex-col gap-3 lg:flex-row lg:items-center"
-      onSubmit={handleSubmit}
-    >
+    <div className="fade-up flex flex-col gap-3 lg:flex-row lg:items-center">
       <div className="flex-1">
         <label
           className="text-secondary mb-2 block text-sm font-medium"
@@ -61,6 +51,6 @@ export const SearchControls: FC<SearchControlsProps> = ({
           Clear search
         </button>
       </div>
-    </form>
+    </div>
   )
 }

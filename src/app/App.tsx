@@ -1,4 +1,4 @@
-import { type FC, useEffect, useMemo, useRef, useState } from 'react'
+import { type FC, useEffect, useMemo, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -12,7 +12,6 @@ const SEARCH_DEBOUNCE_MS = 250
 
 export const App: FC = () => {
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
-  const resultsHeadingRef = useRef<HTMLHeadingElement | null>(null)
   const { debouncedValue: activeQuery, flush } = useDebouncedValue(
     inputQuery,
     SEARCH_DEBOUNCE_MS,
@@ -39,10 +38,6 @@ export const App: FC = () => {
   useEffect(() => {
     setQueryInUrl(activeQuery)
   }, [activeQuery])
-
-  const handleSearch = () => {
-    resultsHeadingRef.current?.focus()
-  }
 
   const handleClear = () => {
     setInputQuery('')
@@ -84,7 +79,6 @@ export const App: FC = () => {
           <SearchControls
             query={inputQuery}
             onQueryChange={setInputQuery}
-            onSearch={handleSearch}
             onClear={handleClear}
           />
 
@@ -93,8 +87,6 @@ export const App: FC = () => {
               <div>
                 <h2
                   id="results-heading"
-                  ref={resultsHeadingRef}
-                  tabIndex={-1}
                   className="text-primary font-display text-2xl font-semibold outline-none"
                 >
                   Topic results

@@ -81,7 +81,7 @@ through the top-level app screen.
 - helper tests cover search-adjacent utilities such as highlighting and URL query state
 - hook tests cover debounce timing and flush behavior in isolation
 - app tests cover integration points such as hydration, debounced filtering,
-  result rendering, focus movement, clear behavior, and empty states
+  result rendering, clear behavior, and empty states
 
 That split keeps the app-level suite meaningful while still covering smaller
 branches where they naturally belong.

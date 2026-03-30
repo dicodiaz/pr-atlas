@@ -107,7 +107,7 @@ The test suite is intentionally split by responsibility:
 - `src/test/highlight.test.ts`: highlight segmentation and edge cases
 - `src/test/url-state.test.ts`: query-string parsing and URL update behavior
 - `src/test/use-debounced-value.test.tsx`: debounce timing and immediate flush behavior
-- `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, focus behavior, clear behavior, and empty-state rendering
+- `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, clear behavior, and empty-state rendering
 
 This keeps pure logic tests focused and fast while reserving the app-level tests
 for behavior that only matters when the pieces are wired together.

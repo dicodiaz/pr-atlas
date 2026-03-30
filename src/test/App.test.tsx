@@ -132,24 +132,6 @@ describe('App', () => {
     ).toBeInTheDocument()
   })
 
-  it('moves focus to the results heading when the form is submitted', () => {
-    window.history.replaceState(null, '', '/')
-
-    render(<App />)
-
-    const searchInput = getSearchInput()
-    const form = searchInput.closest('form')
-
-    expect(form).not.toBeNull()
-
-    fireEvent.change(searchInput, { target: { value: 'search' } })
-    fireEvent.submit(form!)
-
-    expect(
-      screen.getByRole('heading', { name: /topic results/i }),
-    ).toHaveFocus()
-  })
-
   it('clears the search immediately on Escape', () => {
     window.history.replaceState(null, '', '/')
 
