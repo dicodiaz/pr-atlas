@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 
-import { getHighlightSegments } from '../lib/highlight'
+import { getHighlightSegments } from '@/lib/highlight'
 
 interface HighlightTextProps {
   query: string

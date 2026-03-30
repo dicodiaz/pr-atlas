@@ -1,5 +1,5 @@
-import type { Topic } from '../types/topics'
-import { HighlightText } from './HighlightText'
+import { HighlightText } from '@/components/HighlightText'
+import type { Topic } from '@/types/topics'
 
 interface TopicTableProps {
   query: string

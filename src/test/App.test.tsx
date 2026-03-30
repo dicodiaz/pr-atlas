@@ -1,8 +1,8 @@
 import userEvent from '@testing-library/user-event'
 import { render, screen, within } from '@testing-library/react'
 
-import { App } from '../app/App'
-import { topics } from '../data/topics'
+import { App } from '@/app/App'
+import { topics } from '@/data/topics'
 
 describe('App', () => {
   it('renders one row per topic by default', () => {
@@ -80,6 +80,58 @@ describe('App', () => {
     )
 
     await user.click(screen.getByRole('button', { name: /clear search/i }))
+
+    expect(searchInput).toHaveValue('')
+    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+      `${topics.length} topics shown`,
+    )
+  })
+
+  it('renders the singular result count when exactly one topic matches', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.type(
+      screen.getByRole('searchbox', {
+        name: /search by topic, keyword, or pr title/i,
+      }),
+      'ops readiness',
+    )
+
+    expect(screen.getByText('1 topic shown')).toBeInTheDocument()
+    expect(
+      screen.getByRole('rowheader', { name: /incident response/i }),
+    ).toBeInTheDocument()
+  })
+
+  it('moves focus to the results heading when search is submitted', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.type(
+      screen.getByRole('searchbox', {
+        name: /search by topic, keyword, or pr title/i,
+      }),
+      'search',
+    )
+
+    await user.click(screen.getByRole('button', { name: /^search$/i }))
+
+    expect(
+      screen.getByRole('heading', { name: /topic results/i }),
+    ).toHaveFocus()
+  })
+
+  it('clears the active query when escape is pressed in the search input', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const searchInput = screen.getByRole('searchbox', {
+      name: /search by topic, keyword, or pr title/i,
+    })
+
+    await user.type(searchInput, 'observability')
+    await user.keyboard('{Escape}')
 
     expect(searchInput).toHaveValue('')
     expect(screen.getByText(/topics shown/i)).toHaveTextContent(

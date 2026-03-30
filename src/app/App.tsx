@@ -1,10 +1,10 @@
 import { useDeferredValue, useRef, useState } from 'react'
 
-import { EmptyState } from '../components/EmptyState'
-import { SearchControls } from '../components/SearchControls'
-import { TopicTable } from '../components/TopicTable'
-import { topics } from '../data/topics'
-import { searchTopics } from '../lib/search'
+import { EmptyState } from '@/components/EmptyState'
+import { SearchControls } from '@/components/SearchControls'
+import { TopicTable } from '@/components/TopicTable'
+import { topics } from '@/data/topics'
+import { searchTopics } from '@/lib/search'
 
 export function App() {
   const [query, setQuery] = useState('')

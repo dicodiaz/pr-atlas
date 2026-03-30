@@ -1,4 +1,4 @@
-import type { Topic } from '../types/topics'
+import type { Topic } from '@/types/topics'
 
 export const normalizeText = (value: string): string =>
   value.toLowerCase().replace(/\s+/g, ' ').trim()

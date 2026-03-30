@@ -1,8 +1,8 @@
-import type { PullRequestExample, Topic } from '../types/topics'
+import type { PullRequestExample, Topic } from '@/types/topics'
 
 type PullRequestCatalog = Record<string, PullRequestExample>
 
-interface TopicSeed {
+export interface TopicSeed {
   id: string
   name: string
   tags: string[]
@@ -118,9 +118,12 @@ const pullRequestCatalog: PullRequestCatalog = {
   },
 }
 
-const pickPullRequests = (...ids: string[]): PullRequestExample[] =>
+export const resolvePullRequests = (
+  catalog: PullRequestCatalog,
+  ...ids: string[]
+): PullRequestExample[] =>
   ids.map((id) => {
-    const pullRequest = pullRequestCatalog[id]
+    const pullRequest = catalog[id]
 
     if (!pullRequest) {
       throw new Error(`Missing pull request seed for id "${id}"`)
@@ -128,6 +131,17 @@ const pickPullRequests = (...ids: string[]): PullRequestExample[] =>
 
     return pullRequest
   })
+
+export const buildTopics = (
+  seeds: TopicSeed[],
+  catalog: PullRequestCatalog,
+): Topic[] =>
+  seeds.map((topic) => ({
+    id: topic.id,
+    name: topic.name,
+    tags: topic.tags,
+    prExamples: resolvePullRequests(catalog, ...topic.prExampleIds),
+  }))
 
 const topicSeed: TopicSeed[] = [
   {
@@ -347,9 +361,4 @@ const topicSeed: TopicSeed[] = [
 // Replace these placeholder topics and PR URLs with your real interview examples later.
 // Keeping the data grouped by topic makes it easy to refine each topic independently while
 // still reusing shared PR catalog entries across multiple topics.
-export const topics: Topic[] = topicSeed.map((topic) => ({
-  id: topic.id,
-  name: topic.name,
-  tags: topic.tags,
-  prExamples: pickPullRequests(...topic.prExampleIds),
-}))
+export const topics: Topic[] = buildTopics(topicSeed, pullRequestCatalog)
