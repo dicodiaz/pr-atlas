@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -6,16 +6,24 @@ import { TopicTable } from '@/components/TopicTable'
 import { topics } from '@/data/topics'
 import { searchTopics } from '@/lib/search'
 import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
+import { useDebouncedValue } from '@/lib/use-debounced-value'
+
+const SEARCH_DEBOUNCE_MS = 250
 
 export function App() {
-  const [query, setQuery] = useState(getQueryFromUrl)
+  const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
   const resultsHeadingRef = useRef<HTMLHeadingElement | null>(null)
-  const deferredQuery = useDeferredValue(query)
-  const results = searchTopics(topics, deferredQuery)
+  const { debouncedValue: activeQuery, flush } = useDebouncedValue(
+    inputQuery,
+    SEARCH_DEBOUNCE_MS,
+  )
+  const results = searchTopics(topics, activeQuery)
 
   useEffect(() => {
     const handlePopState = () => {
-      setQuery(getQueryFromUrl())
+      const nextQuery = getQueryFromUrl()
+      setInputQuery(nextQuery)
+      flush(nextQuery)
     }
 
     window.addEventListener('popstate', handlePopState)
@@ -23,18 +31,19 @@ export function App() {
     return () => {
       window.removeEventListener('popstate', handlePopState)
     }
-  }, [])
+  }, [flush])
 
   useEffect(() => {
-    setQueryInUrl(query)
-  }, [query])
+    setQueryInUrl(activeQuery)
+  }, [activeQuery])
 
   const handleSearch = () => {
     resultsHeadingRef.current?.focus()
   }
 
   const handleClear = () => {
-    setQuery('')
+    setInputQuery('')
+    flush('')
   }
 
   return (
@@ -70,8 +79,8 @@ export function App() {
           </header>
 
           <SearchControls
-            query={query}
-            onQueryChange={setQuery}
+            query={inputQuery}
+            onQueryChange={setInputQuery}
             onSearch={handleSearch}
             onClear={handleClear}
           />
@@ -102,9 +111,9 @@ export function App() {
             </div>
 
             {results.length > 0 ? (
-              <TopicTable query={deferredQuery} topics={results} />
+              <TopicTable query={activeQuery} topics={results} />
             ) : (
-              <EmptyState query={query.trim()} />
+              <EmptyState query={activeQuery.trim()} />
             )}
           </section>
         </div>

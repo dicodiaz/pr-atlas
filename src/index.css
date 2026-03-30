@@ -130,6 +130,21 @@ input {
   font: inherit;
 }
 
+input[type='search'].search-input::-webkit-search-cancel-button,
+input[type='search'].search-input::-webkit-search-decoration,
+input[type='search'].search-input::-webkit-search-results-button,
+input[type='search'].search-input::-webkit-search-results-decoration {
+  appearance: none;
+  display: none;
+}
+
+input[type='search'].search-input::-ms-clear,
+input[type='search'].search-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 #root {
   min-height: 100vh;
 }

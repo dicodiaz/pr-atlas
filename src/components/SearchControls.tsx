@@ -47,22 +47,16 @@ export function SearchControls({
             onChange={(event) => onQueryChange(event.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Try: circuit breaker, observability, or bundle budget"
-            className="text-primary placeholder:text-muted min-w-0 flex-1 rounded-l-2xl border-0 bg-transparent px-5 py-4 text-base outline-none"
+            className="search-input text-primary placeholder:text-muted focus-ring-panel min-w-0 flex-1 rounded-2xl border-0 bg-transparent px-5 py-4 text-base outline-none"
           />
-          <button
-            type="submit"
-            className="text-primary border-default focus-ring-panel interactive-soft rounded-r-2xl border-l px-5 py-4 text-sm font-semibold tracking-[0.04em]"
-          >
-            Search
-          </button>
         </div>
       </div>
-      <div className="flex shrink-0 items-end">
+      <div className="flex shrink-0 lg:self-end">
         <button
           type="button"
           onClick={onClear}
           disabled={query.length === 0}
-          className="text-secondary border-strong focus-ring-page hover:text-primary w-full rounded-2xl border bg-transparent px-4 py-3 text-sm font-medium transition hover:border-(--color-accent) disabled:cursor-not-allowed disabled:opacity-45 lg:w-auto"
+          className="text-secondary border-strong focus-ring-page hover:text-primary w-full rounded-2xl border bg-transparent px-4 py-4 text-sm font-medium transition hover:border-(--color-accent) disabled:cursor-not-allowed disabled:opacity-45 lg:w-auto"
         >
           Clear search
         </button>
