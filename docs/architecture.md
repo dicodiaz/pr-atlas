@@ -6,7 +6,7 @@
 - `src/components`: focused UI building blocks
 - `src/data`: local topic and PR seed data
 - `src/lib`: pure utilities for search and highlighting
-- `src/test`: Vitest and React Testing Library coverage
+- `src/test`: Vitest and React Testing Library coverage split by responsibility
 - `src/types`: shared TypeScript models
 - `docs`: supporting project documentation
 
@@ -72,6 +72,19 @@ The app stays as a single SPA screen with no routing.
 - each topic row stacks multiple PR links inside the same cell for quick scanning
 - empty state and result count update from the same filtered result set
 - browser back/forward navigation rehydrates the search from the URL immediately
+
+## Testing strategy
+
+The suite intentionally layers confidence instead of pushing every assertion
+through the top-level app screen.
+
+- helper tests cover search-adjacent utilities such as highlighting and URL query state
+- hook tests cover debounce timing and flush behavior in isolation
+- app tests cover integration points such as hydration, debounced filtering,
+  result rendering, focus movement, clear behavior, and empty states
+
+That split keeps the app-level suite meaningful while still covering smaller
+branches where they naturally belong.
 
 ## State flow
 

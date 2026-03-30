@@ -168,6 +168,21 @@ describe('App', () => {
     expect(window.location.search).toBe('')
   })
 
+  it('does not clear the search when Escape is pressed on an empty input', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    const searchInput = getSearchInput()
+
+    fireEvent.keyDown(searchInput, { key: 'Escape', code: 'Escape' })
+
+    expect(searchInput).toHaveValue('')
+    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+      `${topics.length} topics shown`,
+    )
+  })
+
   it('shows an empty state when no results match', () => {
     window.history.replaceState(null, '', '/')
 
