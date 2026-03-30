@@ -16,7 +16,8 @@ The local dataset lives in [`src/data/topics.ts`](../src/data/topics.ts). It use
 
 - a shared pull request catalog keyed by PR id
 - a topic seed array grouped by topic for maintainability
-- a final exported `topics` array that resolves each topic's `prExampleIds` into full PR objects
+- small data helpers that resolve each topic's `prExampleIds` into full PR objects
+- a final exported `topics` array built from those helpers
 
 Each topic includes:
 
