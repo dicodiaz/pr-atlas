@@ -1,0 +1,47 @@
+---
+description: PR Atlas project context, conventions, and change checklist
+alwaysApply: true
+---
+
+# PR Atlas
+
+Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology topics and shows matching GitHub PR examples. Uses pnpm, Tailwind CSS v4 (via `@tailwindcss/vite`, no JS config), Vitest 4, React Testing Library, ESLint 9, and Prettier with Tailwind class sorting.
+
+## Key paths
+
+- `src/app/App.tsx` — root component: debounced search, URL sync, layout
+- `src/data/topics.ts` — local dataset with shared PR catalog keyed by ID
+- `src/lib/search.ts` — token-based search (lowercase, collapsed whitespace, all-terms match)
+- `src/lib/highlight.ts` — text highlighting for matched terms
+- `src/lib/url-state.ts` — `?q=` query-string parsing and updates
+- `src/lib/use-debounced-value.ts` — 250ms debounce hook (two-layer state: `inputQuery` / `activeQuery`)
+- `src/components/` — `SearchControls`, `TopicTable`, `HighlightText`, `EmptyState`
+- `src/types/topics.ts` — shared TypeScript models
+- `src/index.css` — Tailwind `@theme`, custom utilities (`panel-surface`, `fade-up`, `data-row`, `search-input`)
+
+## Testing split
+
+Tests live in `src/test/` and are split by responsibility:
+
+- `search.test.ts` — search correctness and matching rules
+- `highlight.test.ts` — highlight segmentation and edge cases
+- `url-state.test.ts` — query-string parsing and URL updates
+- `use-debounced-value.test.tsx` — debounce timing and flush
+- `App.test.tsx` — integration: URL hydration, debounced results, clear, empty state
+
+## Tailwind conventions
+
+- Use v4 token syntax: `text-(--color-text-primary)` not `text-[var(--color-text-primary)]`
+- Prefer built-in scale utilities over arbitrary values (`rounded-4xl` not `rounded-[32px]`)
+- Custom CSS classes in `src/index.css` are intentional — do not replace them
+- Class ordering is handled by `prettier-plugin-tailwindcss` (`pnpm format`)
+
+## Change checklist
+
+After every code change, verify:
+
+1. **Tests** — update or add tests in the matching `src/test/` file for any changed logic. Run `pnpm test` to confirm.
+2. **Docs** — update `README.md` and `docs/architecture.md` if the change affects folder structure, data model, search behavior, rendering strategy, state flow, or testing strategy.
+3. **Tailwind notes** — update `docs/tailwind-notes.md` if new CSS conventions or custom classes are introduced.
+4. **Types** — keep `src/types/topics.ts` in sync with any data-model changes.
+5. **Lint and format** — run `pnpm lint` and `pnpm format` before finishing.
