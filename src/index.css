@@ -8,6 +8,66 @@
   --font-mono: 'Cascadia Code', 'JetBrains Mono', 'SFMono-Regular', monospace;
 }
 
+@utility text-primary {
+  color: var(--color-text-primary);
+}
+
+@utility text-secondary {
+  color: var(--color-text-secondary);
+}
+
+@utility text-muted {
+  color: var(--color-text-muted);
+}
+
+@utility text-accent {
+  color: var(--color-accent-strong);
+}
+
+@utility border-default {
+  border-color: var(--color-border);
+}
+
+@utility border-strong {
+  border-color: var(--color-border-strong);
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-focus);
+  }
+}
+
+@utility focus-ring-panel {
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--color-focus),
+      0 0 0 4px var(--color-panel);
+  }
+}
+
+@utility focus-ring-page {
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--color-focus),
+      0 0 0 4px var(--color-bg);
+  }
+}
+
+@utility interactive-soft {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+
+  &:hover {
+    background-color: var(--color-hover);
+  }
+}
+
 :root {
   color-scheme: dark;
   --color-bg: #07111d;

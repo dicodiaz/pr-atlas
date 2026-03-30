@@ -15,7 +15,7 @@ export function HighlightText({ query, text }: HighlightTextProps) {
       {segments.map((segment, index) => (
         <Fragment key={`${segment.text}-${index}`}>
           {segment.isMatch ? (
-            <mark className="rounded-sm bg-(--color-hover) px-1 py-0.5 text-(--color-accent-strong)">
+            <mark className="text-accent rounded-sm bg-(--color-hover) px-1 py-0.5">
               {segment.text}
             </mark>
           ) : (

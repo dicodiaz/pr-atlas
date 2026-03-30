@@ -26,26 +26,26 @@ export function App() {
         <div className="flex flex-col gap-8">
           <header className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-end">
             <div>
-              <p className="text-sm tracking-[0.2em] text-(--color-accent-strong) uppercase">
+              <p className="text-accent text-sm tracking-[0.2em] uppercase">
                 Personal Interview Demo
               </p>
-              <h1 className="font-display mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-(--color-text-primary) sm:text-5xl lg:text-6xl">
+              <h1 className="text-primary font-display mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
                 PR Atlas for technology topics and GitHub examples
               </h1>
-              <p className="mt-4 max-w-3xl text-base leading-8 text-(--color-text-secondary) sm:text-lg">
+              <p className="text-secondary mt-4 max-w-3xl text-base leading-8 sm:text-lg">
                 Search 30+ interview-ready topics and jump straight to the pull
                 request stories that back them up. The dataset is local, typed,
                 and structured for easy refinement before live demos.
               </p>
             </div>
-            <div className="rounded-3xl border border-(--color-border) bg-[rgba(10,18,30,0.86)] p-5 shadow-(--shadow-row)">
-              <p className="text-xs tracking-[0.18em] text-(--color-text-muted) uppercase">
+            <div className="border-default rounded-3xl border bg-[rgba(10,18,30,0.86)] p-5 shadow-(--shadow-row)">
+              <p className="text-muted text-xs tracking-[0.18em] uppercase">
                 Dataset snapshot
               </p>
-              <p className="font-display mt-3 text-3xl font-semibold text-(--color-text-primary)">
+              <p className="text-primary font-display mt-3 text-3xl font-semibold">
                 {topics.length}
               </p>
-              <p className="mt-2 text-sm leading-6 text-(--color-text-secondary)">
+              <p className="text-secondary mt-2 text-sm leading-6">
                 seeded topics with reusable PR references for interview prep and
                 structured walkthroughs.
               </p>
@@ -60,24 +60,24 @@ export function App() {
           />
 
           <section aria-labelledby="results-heading" className="space-y-5">
-            <div className="flex flex-col gap-2 border-b border-(--color-border) pb-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="border-default flex flex-col gap-2 border-b pb-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2
                   id="results-heading"
                   ref={resultsHeadingRef}
                   tabIndex={-1}
-                  className="font-display text-2xl font-semibold text-(--color-text-primary) outline-none"
+                  className="text-primary font-display text-2xl font-semibold outline-none"
                 >
                   Topic results
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-(--color-text-secondary)">
+                <p className="text-secondary mt-2 text-sm leading-6">
                   One row per topic, with linked PR examples stacked inside the
                   same result cell for fast scanning.
                 </p>
               </div>
               <p
                 aria-live="polite"
-                className="text-sm font-medium text-(--color-text-secondary)"
+                className="text-secondary text-sm font-medium"
               >
                 {results.length} {results.length === 1 ? 'topic' : 'topics'}{' '}
                 shown
