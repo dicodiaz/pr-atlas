@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -17,7 +17,10 @@ export function App() {
     inputQuery,
     SEARCH_DEBOUNCE_MS,
   )
-  const results = searchTopics(topics, activeQuery)
+  const results = useMemo(
+    () => searchTopics(topics, activeQuery),
+    [activeQuery],
+  )
 
   useEffect(() => {
     const handlePopState = () => {
