@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, type FC } from 'react'
 
 import { getHighlightSegments } from '@/lib/highlight'
 
@@ -7,7 +7,7 @@ interface HighlightTextProps {
   text: string
 }
 
-export function HighlightText({ query, text }: HighlightTextProps) {
+export const HighlightText: FC<HighlightTextProps> = ({ query, text }) => {
   const segments = getHighlightSegments(text, query)
 
   return (

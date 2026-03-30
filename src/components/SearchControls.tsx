@@ -1,4 +1,4 @@
-import { type FormEvent, type KeyboardEvent, useId } from 'react'
+import { type FC, type FormEvent, type KeyboardEvent, useId } from 'react'
 
 interface SearchControlsProps {
   onClear: () => void
@@ -7,12 +7,12 @@ interface SearchControlsProps {
   query: string
 }
 
-export function SearchControls({
+export const SearchControls: FC<SearchControlsProps> = ({
   onClear,
   onQueryChange,
   onSearch,
   query,
-}: SearchControlsProps) {
+}) => {
   const searchId = useId()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

@@ -5,10 +5,10 @@ interface UseDebouncedValueResult<T> {
   flush: (nextValue: T) => void
 }
 
-export function useDebouncedValue<T>(
+export const useDebouncedValue = <T>(
   value: T,
   delay: number,
-): UseDebouncedValueResult<T> {
+): UseDebouncedValueResult<T> => {
   const [debouncedValue, setDebouncedValue] = useState(value)
   const timeoutIdRef = useRef<number | null>(null)
 

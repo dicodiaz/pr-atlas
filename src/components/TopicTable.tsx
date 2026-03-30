@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, type FC } from 'react'
 
 import { HighlightText } from '@/components/HighlightText'
 import type { Topic } from '@/types/topics'
@@ -8,7 +8,7 @@ interface TopicTableProps {
   topics: Topic[]
 }
 
-function TopicTableComponent({ query, topics }: TopicTableProps) {
+const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
   return (
     <div className="border-default fade-up overflow-hidden rounded-3xl border bg-[rgba(8,14,24,0.84)] shadow-(--shadow-panel)">
       <div className="overflow-x-auto">

@@ -1,8 +1,10 @@
+import type { FC } from 'react'
+
 interface EmptyStateProps {
   query: string
 }
 
-export function EmptyState({ query }: EmptyStateProps) {
+export const EmptyState: FC<EmptyStateProps> = ({ query }) => {
   return (
     <section
       aria-live="polite"

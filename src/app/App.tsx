@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { type FC, useEffect, useMemo, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -10,7 +10,7 @@ import { useDebouncedValue } from '@/lib/use-debounced-value'
 
 const SEARCH_DEBOUNCE_MS = 250
 
-export function App() {
+export const App: FC = () => {
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
   const resultsHeadingRef = useRef<HTMLHeadingElement | null>(null)
   const { debouncedValue: activeQuery, flush } = useDebouncedValue(
