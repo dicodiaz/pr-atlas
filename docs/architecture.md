@@ -68,6 +68,7 @@ The app stays as a single SPA screen with no routing.
 - the main app owns the immediate search input state
 - a debounced query drives filtering and URL sync through `?q=`
 - filtered results are derived from pure data and utility functions
+- a polite live region announces applied filtered results for screen reader users
 - the table renders one row per topic
 - each topic row stacks multiple PR links inside the same cell for quick scanning
 - empty state and result count update from the same filtered result set
@@ -97,8 +98,8 @@ The flow is:
 
 1. The user types into the search field and `inputQuery` updates immediately.
 2. A debounce hook waits 250ms before promoting that value to `activeQuery`.
-3. `activeQuery` drives both filtered results and the `?q=` URL parameter.
-4. Clear and `Escape` bypass the delay and reset both the visible input and active search immediately.
+3. `activeQuery` drives filtered results, screen reader announcements, and the `?q=` URL parameter.
+4. Clear and `Escape` bypass the delay, reset both the visible input and active search immediately, and return focus to the search field.
 5. Browser `popstate` events read from the URL and immediately rehydrate both the visible input and the applied search.
 
 ## Performance notes

@@ -111,6 +111,7 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
 
     expect(searchInput).toHaveValue('')
+    expect(searchInput).toHaveFocus()
     expect(screen.getByText(/topics shown/i)).toHaveTextContent(
       `${topics.length} topics shown`,
     )
@@ -130,6 +131,20 @@ describe('App', () => {
     expect(
       screen.getByRole('rowheader', { name: /incident response/i }),
     ).toBeInTheDocument()
+  })
+
+  it('announces the filtered query, result count, and navigation hint', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), { target: { value: 'ops readiness' } })
+
+    advanceDebounce()
+
+    expect(screen.getByText(/filtered by ops readiness\./i)).toHaveTextContent(
+      'Filtered by ops readiness. 1 result. Tab to navigate to the results.',
+    )
   })
 
   it('clears the search immediately on Escape', () => {
@@ -178,6 +193,7 @@ describe('App', () => {
 
     advanceDebounce()
 
+    expect(screen.getByText('No results found.')).toBeInTheDocument()
     expect(screen.getByText(/no matching topics/i)).toBeInTheDocument()
     expect(screen.getByText(/no pr examples matched/i)).toBeInTheDocument()
     expect(screen.queryByRole('table')).not.toBeInTheDocument()
