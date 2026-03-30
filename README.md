@@ -95,7 +95,7 @@ Highlights:
 - `src/lib/search.ts` contains pure search logic that matches topic names, tags, and PR titles
 - `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/components` handles focused rendering concerns
-- the UI renders one row per topic, stacks PR links inside the same table cell, syncs the applied query to `?q=`, announces filtered result changes, and returns focus to the search field after clearing
+- the UI renders one row per topic, stacks PR links inside the same table cell, and syncs the applied query to `?q=`
 
 That structure is intentionally simple, interview-friendly, and easy to refine later as your real PR data becomes more detailed.
 

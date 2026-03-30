@@ -1,4 +1,4 @@
-import { type FC, useEffect, useMemo, useRef, useState } from 'react'
+import { type FC, useEffect, useMemo, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -12,7 +12,6 @@ const SEARCH_DEBOUNCE_MS = 250
 
 export const App: FC = () => {
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
-  const searchInputRef = useRef<HTMLInputElement | null>(null)
   const { debouncedValue: activeQuery, flush } = useDebouncedValue(
     inputQuery,
     SEARCH_DEBOUNCE_MS,
@@ -43,18 +42,7 @@ export const App: FC = () => {
   const handleClear = () => {
     setInputQuery('')
     flush('')
-    searchInputRef.current?.focus()
   }
-
-  const trimmedActiveQuery = activeQuery.trim()
-  const resultsAnnouncement =
-    trimmedActiveQuery.length === 0
-      ? ''
-      : results.length > 0
-        ? `Filtered by ${trimmedActiveQuery}. ${results.length} ${
-            results.length === 1 ? 'result' : 'results'
-          }. Tab to navigate to the results.`
-        : 'No results found.'
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-330 flex-col px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
@@ -89,16 +77,12 @@ export const App: FC = () => {
           </header>
 
           <SearchControls
-            inputRef={searchInputRef}
             query={inputQuery}
             onQueryChange={setInputQuery}
             onClear={handleClear}
           />
 
           <section aria-labelledby="results-heading" className="space-y-5">
-            <p aria-live="polite" aria-atomic="true" className="sr-only">
-              {resultsAnnouncement}
-            </p>
             <div className="border-default flex flex-col gap-2 border-b pb-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2
@@ -124,7 +108,7 @@ export const App: FC = () => {
             {results.length > 0 ? (
               <TopicTable query={activeQuery} topics={results} />
             ) : (
-              <EmptyState query={trimmedActiveQuery} />
+              <EmptyState query={activeQuery.trim()} />
             )}
           </section>
         </div>
