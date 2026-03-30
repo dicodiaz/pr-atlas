@@ -1,11 +1,28 @@
 import userEvent from '@testing-library/user-event'
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 
 import { App } from '@/app/App'
 import { topics } from '@/data/topics'
 
 describe('App', () => {
+  it('hydrates the search input from the url query parameter', () => {
+    window.history.replaceState(null, '', '/?q=rollback%20notes')
+
+    render(<App />)
+
+    expect(
+      screen.getByRole('searchbox', {
+        name: /search by topic, keyword, or pr title/i,
+      }),
+    ).toHaveValue('rollback notes')
+    expect(
+      screen.getByRole('rowheader', { name: /incident response/i }),
+    ).toBeInTheDocument()
+  })
+
   it('renders one row per topic by default', () => {
+    window.history.replaceState(null, '', '/')
+
     render(<App />)
 
     const rows = screen.getAllByRole('row')
@@ -13,6 +30,8 @@ describe('App', () => {
   })
 
   it('renders multiple PR links within the same topic row', () => {
+    window.history.replaceState(null, '', '/')
+
     render(<App />)
 
     const topicCell = screen.getByRole('rowheader', { name: /^observability/i })
@@ -23,6 +42,8 @@ describe('App', () => {
   })
 
   it('filters results live using topic, tag, and PR text', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -45,6 +66,8 @@ describe('App', () => {
   })
 
   it('returns all related topics for a shared PR search', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -67,6 +90,8 @@ describe('App', () => {
   })
 
   it('clears the search and restores the full topic list', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -85,9 +110,12 @@ describe('App', () => {
     expect(screen.getByText(/topics shown/i)).toHaveTextContent(
       `${topics.length} topics shown`,
     )
+    expect(window.location.search).toBe('')
   })
 
   it('renders the singular result count when exactly one topic matches', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -105,6 +133,8 @@ describe('App', () => {
   })
 
   it('moves focus to the results heading when search is submitted', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -123,6 +153,8 @@ describe('App', () => {
   })
 
   it('clears the active query when escape is pressed in the search input', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -137,9 +169,12 @@ describe('App', () => {
     expect(screen.getByText(/topics shown/i)).toHaveTextContent(
       `${topics.length} topics shown`,
     )
+    expect(window.location.search).toBe('')
   })
 
   it('shows an empty state when no results match', async () => {
+    window.history.replaceState(null, '', '/')
+
     const user = userEvent.setup()
     render(<App />)
 
@@ -153,5 +188,41 @@ describe('App', () => {
     expect(screen.getByText(/no matching topics/i)).toBeInTheDocument()
     expect(screen.getByText(/no pr examples matched/i)).toBeInTheDocument()
     expect(screen.queryByRole('table')).not.toBeInTheDocument()
+  })
+
+  it('writes the active query into the url', async () => {
+    window.history.replaceState(null, '', '/')
+
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.type(
+      screen.getByRole('searchbox', {
+        name: /search by topic, keyword, or pr title/i,
+      }),
+      'bundle budget',
+    )
+
+    expect(window.location.search).toBe('?q=bundle+budget')
+  })
+
+  it('updates the search state when navigating with browser history', async () => {
+    window.history.replaceState(null, '', '/?q=observability')
+
+    render(<App />)
+
+    await act(async () => {
+      window.history.pushState(null, '', '/?q=rollback%20notes')
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    })
+
+    expect(
+      screen.getByRole('searchbox', {
+        name: /search by topic, keyword, or pr title/i,
+      }),
+    ).toHaveValue('rollback notes')
+    expect(
+      screen.getByRole('rowheader', { name: /incident response/i }),
+    ).toBeInTheDocument()
   })
 })

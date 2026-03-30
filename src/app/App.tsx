@@ -1,16 +1,33 @@
-import { useDeferredValue, useRef, useState } from 'react'
+import { useDeferredValue, useEffect, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
 import { TopicTable } from '@/components/TopicTable'
 import { topics } from '@/data/topics'
 import { searchTopics } from '@/lib/search'
+import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
 
 export function App() {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(getQueryFromUrl)
   const resultsHeadingRef = useRef<HTMLHeadingElement | null>(null)
   const deferredQuery = useDeferredValue(query)
   const results = searchTopics(topics, deferredQuery)
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setQuery(getQueryFromUrl())
+    }
+
+    window.addEventListener('popstate', handlePopState)
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [])
+
+  useEffect(() => {
+    setQueryInUrl(query)
+  }, [query])
 
   const handleSearch = () => {
     resultsHeadingRef.current?.focus()
