@@ -117,6 +117,21 @@ describe('App', () => {
     expect(window.location.search).toBe('')
   })
 
+  it('returns focus to the search input after clicking Clear', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    const searchInput = getSearchInput()
+
+    fireEvent.change(searchInput, { target: { value: 'observability' } })
+    advanceDebounce()
+
+    fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
+
+    expect(document.activeElement).toBe(searchInput)
+  })
+
   it('renders singular result count for one matching topic', () => {
     window.history.replaceState(null, '', '/')
 

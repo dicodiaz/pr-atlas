@@ -1,4 +1,4 @@
-import { type FC, useEffect, useMemo, useState } from 'react'
+import { type FC, useEffect, useMemo, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
 import { SearchControls } from '@/components/SearchControls'
@@ -12,6 +12,7 @@ const SEARCH_DEBOUNCE_MS = 250
 
 export const App: FC = () => {
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
+  const searchInputRef = useRef<HTMLInputElement | null>(null)
   const { debouncedValue: activeQuery, flush } = useDebouncedValue(
     inputQuery,
     SEARCH_DEBOUNCE_MS,
@@ -42,6 +43,7 @@ export const App: FC = () => {
   const handleClear = () => {
     setInputQuery('')
     flush('')
+    searchInputRef.current?.focus()
   }
 
   return (
@@ -77,6 +79,7 @@ export const App: FC = () => {
           </header>
 
           <SearchControls
+            inputRef={searchInputRef}
             query={inputQuery}
             onQueryChange={setInputQuery}
             onClear={handleClear}

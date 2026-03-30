@@ -9,7 +9,7 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 
 ## Key paths
 
-- `src/app/App.tsx` — root component: debounced search, URL sync, layout
+- `src/app/App.tsx` — root component: debounced search, URL sync, focus management, layout
 - `src/data/topics.ts` — local dataset with shared PR catalog keyed by ID
 - `src/lib/search.ts` — token-based search (lowercase, collapsed whitespace, all-terms match)
 - `src/lib/highlight.ts` — text highlighting for matched terms
@@ -27,7 +27,7 @@ Tests live in `src/test/` and are split by responsibility:
 - `highlight.test.ts` — highlight segmentation and edge cases
 - `url-state.test.ts` — query-string parsing and URL updates
 - `use-debounced-value.test.tsx` — debounce timing and flush
-- `App.test.tsx` — integration: URL hydration, debounced results, clear, empty state
+- `App.test.tsx` — integration: URL hydration, debounced results, clear, focus management, empty state
 
 ## Tailwind conventions
 

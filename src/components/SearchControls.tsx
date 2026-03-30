@@ -1,12 +1,14 @@
-import { type FC, type KeyboardEvent, useId } from 'react'
+import { type FC, type KeyboardEvent, type RefObject, useId } from 'react'
 
 interface SearchControlsProps {
+  inputRef?: RefObject<HTMLInputElement | null>
   onClear: () => void
   onQueryChange: (value: string) => void
   query: string
 }
 
 export const SearchControls: FC<SearchControlsProps> = ({
+  inputRef,
   onClear,
   onQueryChange,
   query,
@@ -31,6 +33,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
         </label>
         <div className="border-strong flex rounded-2xl border bg-(--color-panel) shadow-(--shadow-row)">
           <input
+            ref={inputRef}
             id={searchId}
             type="search"
             value={query}

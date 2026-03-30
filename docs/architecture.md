@@ -72,6 +72,7 @@ The app stays as a single SPA screen with no routing.
 - each topic row stacks multiple PR links inside the same cell for quick scanning
 - empty state and result count update from the same filtered result set
 - browser back/forward navigation rehydrates the search from the URL immediately
+- clear and Escape return focus to the search input for keyboard-driven workflows
 
 ## Testing strategy
 
@@ -98,7 +99,7 @@ The flow is:
 1. The user types into the search field and `inputQuery` updates immediately.
 2. A debounce hook waits 250ms before promoting that value to `activeQuery`.
 3. `activeQuery` drives both filtered results and the `?q=` URL parameter.
-4. Clear and `Escape` bypass the delay and reset both the visible input and active search immediately.
+4. Clear and `Escape` bypass the delay, reset both the visible input and active search immediately, and return focus to the search field.
 5. Browser `popstate` events read from the URL and immediately rehydrate both the visible input and the applied search.
 
 ## Performance notes
