@@ -9,9 +9,11 @@ import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
 import { useDebouncedValue } from '@/lib/use-debounced-value'
 
 const SEARCH_DEBOUNCE_MS = 250
+const ANNOUNCE_DELAY_MS = 1000
 
 export const App: FC = () => {
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
+  const [countAnnouncement, setCountAnnouncement] = useState('')
   const searchInputRef = useRef<HTMLInputElement | null>(null)
   const { debouncedValue: activeQuery, flush } = useDebouncedValue(
     inputQuery,
@@ -21,6 +23,30 @@ export const App: FC = () => {
     () => searchTopics(topics, activeQuery),
     [activeQuery],
   )
+
+  useEffect(() => {
+    const trimmed = activeQuery.trim()
+
+    let text: string
+    let delay: number
+
+    if (activeQuery.length === 0) {
+      text = `Search cleared. Showing all ${topics.length} topics.`
+      delay = 0
+    } else if (trimmed.length === 0) {
+      text = `Showing all ${topics.length} topics.`
+      delay = 0
+    } else if (results.length > 0) {
+      text = `${results.length} ${results.length === 1 ? 'topic' : 'topics'} shown for ${trimmed}. Tab to navigate to the results.`
+      delay = ANNOUNCE_DELAY_MS
+    } else {
+      text = `No matching topics found for ${trimmed}.`
+      delay = ANNOUNCE_DELAY_MS
+    }
+
+    const id = setTimeout(() => setCountAnnouncement(text), delay)
+    return () => clearTimeout(id)
+  }, [activeQuery, results.length])
 
   useEffect(() => {
     const handlePopState = () => {
@@ -41,6 +67,7 @@ export const App: FC = () => {
   }, [activeQuery])
 
   const handleClear = () => {
+    setCountAnnouncement('')
     setInputQuery('')
     flush('')
     searchInputRef.current?.focus()
@@ -99,12 +126,11 @@ export const App: FC = () => {
                   same result cell for fast scanning.
                 </p>
               </div>
-              <p
-                aria-live="polite"
-                className="text-secondary text-sm font-medium"
-              >
-                {results.length} {results.length === 1 ? 'topic' : 'topics'}{' '}
-                shown
+              <p className="text-secondary text-sm font-medium">
+                {`${results.length} ${results.length === 1 ? 'topic' : 'topics'} shown`}
+              </p>
+              <p aria-live="polite" aria-atomic="true" className="sr-only">
+                {countAnnouncement}
               </p>
             </div>
 

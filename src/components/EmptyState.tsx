@@ -7,7 +7,6 @@ interface EmptyStateProps {
 export const EmptyState: FC<EmptyStateProps> = ({ query }) => {
   return (
     <section
-      aria-live="polite"
       className="border-strong fade-up rounded-3xl border border-dashed bg-[rgba(14,23,36,0.76)] px-8 py-14 text-center"
     >
       <p className="text-muted text-sm tracking-[0.18em] uppercase">

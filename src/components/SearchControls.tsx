@@ -29,7 +29,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
           className="text-secondary mb-2 block text-sm font-medium"
           htmlFor={searchId}
         >
-          Search by topic, keyword, or PR title
+          Search by topic, keyword, or PR title.
         </label>
         <div className="border-strong flex rounded-2xl border bg-(--color-panel) shadow-(--shadow-row)">
           <input
@@ -39,7 +39,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Try: circuit breaker, observability, or bundle budget"
+            placeholder="Try: circuit breaker, observability, or bundle budget."
             className="search-input text-primary placeholder:text-muted focus-ring-panel min-w-0 flex-1 rounded-2xl border-0 bg-transparent px-5 py-4 text-base outline-none"
           />
         </div>

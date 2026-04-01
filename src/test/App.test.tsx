@@ -5,6 +5,7 @@ import { App } from '@/app/App'
 import { topics } from '@/data/topics'
 
 const debounceMs = 250
+const announceMs = 1000
 
 const advanceTimers = (ms: number) => {
   act(() => {
@@ -16,10 +17,22 @@ const advanceDebounce = () => {
   advanceTimers(debounceMs)
 }
 
+const advanceAnnounce = () => {
+  advanceTimers(announceMs)
+}
+
 const getSearchInput = () =>
   screen.getByRole('searchbox', {
     name: /search by topic, keyword, or pr title/i,
   })
+
+const getVisibleCount = () =>
+  screen
+    .getAllByText(/topics? shown/i)
+    .find((el) => el.getAttribute('aria-live') === null)!
+
+const getLiveRegion = () =>
+  document.querySelector<HTMLElement>('[aria-live="polite"]')!
 
 describe('App', () => {
   beforeEach(() => {
@@ -98,20 +111,18 @@ describe('App', () => {
 
     fireEvent.change(searchInput, { target: { value: 'circuit breaker' } })
 
-    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+    expect(getVisibleCount()).toHaveTextContent(
       `${topics.length} topics shown`,
     )
 
     advanceDebounce()
 
-    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
-      '3 topics shown',
-    )
+    expect(getVisibleCount()).toHaveTextContent('3 topics shown')
 
     fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
 
     expect(searchInput).toHaveValue('')
-    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+    expect(getVisibleCount()).toHaveTextContent(
       `${topics.length} topics shown`,
     )
     expect(window.location.search).toBe('')
@@ -141,7 +152,7 @@ describe('App', () => {
 
     advanceDebounce()
 
-    expect(screen.getByText('1 topic shown')).toBeInTheDocument()
+    expect(getVisibleCount()).toHaveTextContent('1 topic shown')
     expect(
       screen.getByRole('rowheader', { name: /incident response/i }),
     ).toBeInTheDocument()
@@ -159,7 +170,7 @@ describe('App', () => {
     fireEvent.keyDown(searchInput, { key: 'Escape', code: 'Escape' })
 
     expect(searchInput).toHaveValue('')
-    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+    expect(getVisibleCount()).toHaveTextContent(
       `${topics.length} topics shown`,
     )
     expect(window.location.search).toBe('')
@@ -175,8 +186,50 @@ describe('App', () => {
     fireEvent.keyDown(searchInput, { key: 'Escape', code: 'Escape' })
 
     expect(searchInput).toHaveValue('')
-    expect(screen.getByText(/topics shown/i)).toHaveTextContent(
+    expect(getVisibleCount()).toHaveTextContent(
       `${topics.length} topics shown`,
+    )
+  })
+
+  it('announces showing all topics without search cleared for whitespace-only input', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), { target: { value: '   ' } })
+    advanceDebounce()
+    advanceTimers(0)
+
+    expect(getLiveRegion()).toHaveTextContent(
+      `Showing all ${topics.length} topics.`,
+    )
+    expect(getLiveRegion()).not.toHaveTextContent('Search cleared')
+  })
+
+  it('delays the screen reader announcement until after the announce delay', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+    advanceTimers(0)
+
+    const liveRegion = getLiveRegion()
+
+    expect(liveRegion).toHaveTextContent(
+      `Search cleared. Showing all ${topics.length} topics.`,
+    )
+
+    fireEvent.change(getSearchInput(), { target: { value: 'ops readiness' } })
+    advanceDebounce()
+
+    expect(getVisibleCount()).toHaveTextContent('1 topic shown')
+    expect(liveRegion).not.toHaveTextContent(
+      '1 topic shown for ops readiness.',
+    )
+
+    advanceAnnounce()
+
+    expect(liveRegion).toHaveTextContent(
+      '1 topic shown for ops readiness. Tab to navigate to the results.',
     )
   })
 
