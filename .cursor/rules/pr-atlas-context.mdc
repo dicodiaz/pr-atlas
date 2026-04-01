@@ -11,7 +11,7 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 
 - `src/app/App.tsx` — root component: debounced search, URL sync, focus management, layout
 - `src/data/sections.ts` — 180+ topics in compact section format (source of truth, rarely changes)
-- `src/data/topics.ts` — pull requests, PR↔topic mappings, and `buildTopics` (update here when adding a PR)
+- `src/data/topics.ts` — pull requests, PR↔topic mappings (with feature labels), and `buildTopics` (update here when adding a PR)
 - `src/lib/search.ts` — token-based search (lowercase, collapsed whitespace, all-terms match)
 - `src/lib/highlight.ts` — text highlighting for matched terms
 - `src/lib/storage.ts` — typed localStorage wrapper (get/set/remove with JSON serialization)
@@ -21,7 +21,7 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 - `src/i18n/index.ts` — i18next configuration (language detection, localStorage persistence, bundled translations)
 - `src/i18n/locales/en.json` / `es.json` — English and Spanish translation files
 - `src/components/` — `SearchControls`, `SavedSearches`, `TopicTable`, `HighlightText`, `EmptyState`, `LanguageSwitcher`
-- `src/types/topics.ts` — shared TypeScript models
+- `src/types/topics.ts` — shared TypeScript models (`PullRequestId`, `TopicId` enums; `PR_FEATURES` const; `Feature`, `PrTopicMappings`, `TopicPr`, `Topic` types)
 - `src/index.css` — Tailwind `@theme`, custom utilities (`panel-surface`, `fade-up`, `data-row`, `search-input`)
 
 ## Testing split

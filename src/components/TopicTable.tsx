@@ -20,13 +20,13 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
             <tr className="border-default border-b bg-[rgba(18,28,44,0.9)]">
               <th
                 scope="col"
-                className="text-secondary px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
+                className="text-secondary w-1/2 px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
               >
                 {t('table.topic')}
               </th>
               <th
                 scope="col"
-                className="text-secondary px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
+                className="text-secondary w-1/2 px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
               >
                 {t('table.prExamples')}
               </th>
@@ -39,7 +39,7 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                 className="border-default data-row border-b last:border-b-0"
               >
                 <th scope="row" className="px-6 py-5 align-top">
-                  <div className="max-w-sm">
+                  <div>
                     <p className="text-primary font-display text-lg font-semibold">
                       <HighlightText query={query} text={topic.name} />
                     </p>
@@ -62,14 +62,17 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                           href={pr.url}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-start gap-2 rounded-xl px-3 py-2 text-sm leading-6"
+                          className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm leading-6"
                           aria-label={t('table.opensNewTab', {
                             title: pr.title,
                           })}
                         >
-                          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
+                          <span className="h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
                           <span>
                             <HighlightText query={query} text={pr.title} />
+                            <span className="text-muted block text-xs">
+                              <HighlightText query={query} text={pr.feature} />
+                            </span>
                           </span>
                         </a>
                       </li>

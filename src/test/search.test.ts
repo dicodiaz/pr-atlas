@@ -67,4 +67,13 @@ describe('search utilities', () => {
     expect(topic).toBeDefined()
     expect(matchesTopic(topic!, 'language metaprogramming')).toBe(true)
   })
+
+  it('matches by PR feature name', () => {
+    const results = searchTopics(topics, 'saved searches')
+    const coveredIds = results.flatMap((t) =>
+      t.prs.filter((pr) => pr.feature === 'Saved searches').map(() => t.id),
+    )
+
+    expect(coveredIds.length).toBeGreaterThan(0)
+  })
 })

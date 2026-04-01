@@ -20,17 +20,22 @@ The dataset is split across two files:
 To add a new pull request:
 
 1. Add a member to the `PullRequestId` enum in `src/types/topics.ts`.
-2. Add an entry to the `pullRequests` array in `src/data/topics.ts`.
-3. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates.
+2. Add the PR's allowed feature names to `PR_FEATURES` in `src/types/topics.ts`.
+3. Add an entry to the `pullRequests` array in `src/data/topics.ts`.
+4. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates and which feature covers each topic.
 
 Type definitions live in [`src/types/topics.ts`](../src/types/topics.ts):
 
 - `PullRequestId` enum — identifies each PR
 - `TopicId` enum — identifies each topic (181 members, one per competency)
 - `PullRequest` interface — `id`, `title`, `url`
-- `Topic` interface — `id`, `name`, `tags`, `prs`
+- `PR_FEATURES` const — maps each `PullRequestId` to its allowed feature strings (single source of truth)
+- `Feature` type — union of all feature strings across all PRs
+- `PrTopicMappings` type — mapped type constraining each PR's mapping entries to its own features via `FeatureOf<K>`
+- `TopicPr` interface — extends `PullRequest` with a `feature` field
+- `Topic` interface — `id`, `name`, `tags`, `prs: TopicPr[]`
 
-Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. PRs can be shared across multiple topics without duplicating metadata.
+Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. Each PR-topic mapping carries a `feature` label indicating which feature of the PR demonstrates that topic. PRs can be shared across multiple topics without duplicating metadata.
 
 ## Search strategy
 
@@ -38,7 +43,7 @@ Search logic lives in [`src/lib/search.ts`](../src/lib/search.ts).
 
 - input is normalized to lowercase with collapsed whitespace
 - queries are tokenized into space-separated terms
-- each topic builds a search index from its name, tags, and PR titles
+- each topic builds a search index from its name, tags, PR titles, and PR feature names
 - a topic matches when every query token appears somewhere in that topic index
 
 That approach keeps the behavior simple, testable, and tolerant of casing, extra spaces, and partial phrase searches.
@@ -140,7 +145,7 @@ complexity.
 
 ## Why this supports later PR-data refinement
 
-To add a new PR, add it to the `pullRequests` array and map it to topics in `prTopicMappings` — both in [`src/data/topics.ts`](../src/data/topics.ts). No changes to sections, rendering, or search architecture are needed.
+To add a new PR, add its ID and feature list to [`src/types/topics.ts`](../src/types/topics.ts), then add it to the `pullRequests` array and map it to topics (with feature labels) in `prTopicMappings` — both in [`src/data/topics.ts`](../src/data/topics.ts). No changes to sections, rendering, or search architecture are needed.
 
 - the section source of truth is stable and separate from PR assignment
 - shared PR relationships are handled by `prTopicMappings`

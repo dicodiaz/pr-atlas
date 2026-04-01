@@ -2,6 +2,20 @@ export enum PullRequestId {
   PR_ATLAS = 'pr-atlas',
 }
 
+export const PR_FEATURES = {
+  [PullRequestId.PR_ATLAS]: [
+    'Debounced search',
+    'Responsive layout',
+    'Accessibility',
+    'Saved searches',
+    'Internationalization',
+    'Testing suite',
+    'Data modeling',
+    'Architecture',
+    'Build and tooling',
+  ],
+} as const satisfies Record<PullRequestId, readonly string[]>
+
 export enum TopicId {
   MANAGES_COLLECTIONS_OF_DATA_USING_LANGUAGE = 'manages-collections-of-data-using-language',
   STORES_REUSES_AND_MANIPULATES_DATA = 'stores-reuses-and-manipulates-data',
@@ -192,9 +206,23 @@ export interface PullRequest {
   url: string
 }
 
+type PrFeatures = typeof PR_FEATURES
+
+type FeatureOf<T extends PullRequestId> = PrFeatures[T][number]
+
+export type Feature = FeatureOf<PullRequestId>
+
+export type PrTopicMappings = {
+  [K in PullRequestId]: { topicId: TopicId; feature: FeatureOf<K> }[]
+}
+
+export interface TopicPr extends PullRequest {
+  feature: Feature
+}
+
 export interface Topic {
   id: TopicId
   name: string
   tags: string[]
-  prs: PullRequest[]
+  prs: TopicPr[]
 }

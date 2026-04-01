@@ -8,7 +8,12 @@ export const tokenizeQuery = (query: string): string[] =>
 
 const getTopicSearchIndex = (topic: Topic): string =>
   normalizeText(
-    [topic.name, ...topic.tags, ...topic.prs.map((pr) => pr.title)].join(' '),
+    [
+      topic.name,
+      ...topic.tags,
+      ...topic.prs.map((pr) => pr.title),
+      ...topic.prs.map((pr) => pr.feature),
+    ].join(' '),
   )
 
 export const matchesTopic = (topic: Topic, query: string): boolean => {
