@@ -9,7 +9,14 @@ export interface TopicSeed {
   prExampleIds: string[]
 }
 
-const pullRequestCatalog: PullRequestCatalog = {}
+const pullRequestCatalog: PullRequestCatalog = {
+  'pr-atlas': {
+    id: 'pr-atlas',
+    title:
+      'PR Atlas — accessible interview-prep SPA with debounced search, responsive layout, and full test coverage',
+    url: 'https://github.com/dicodiaz/pr-atlas',
+  },
+}
 
 export const resolvePullRequests = (
   catalog: PullRequestCatalog,
@@ -893,6 +900,128 @@ const ids = topicSeed.map((t) => t.id)
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i)
 if (duplicates.length > 0) {
   throw new Error(`Duplicate topic IDs detected: ${duplicates.join(', ')}`)
+}
+
+// ---------------------------------------------------------------------------
+// PR ↔ topic mappings — assign PRs to the topics they demonstrate
+// ---------------------------------------------------------------------------
+
+const prTopicMappings: Record<string, string[]> = {
+  'pr-atlas': [
+    // Language – JavaScript
+    'manages-collections-of-data-using-language',
+    'stores-reuses-and-manipulates-data',
+    'stores-reuses-and-operates-on-basic-data-types',
+    'uses-and-maintains-language-operators-and-comments',
+    'applies-and-maintains-control-flow-structures',
+    'handles-exceptions-using-language-capabilities',
+    'handles-user-interaction-with-events-handlers',
+    'interacts-with-a-user-interface-using-language-built-in-technics',
+    'reuses-and-encapsulates-related-data-and-behaviour',
+    'uses-built-in-iterators-to-traverse-through-different-types-of-collections',
+    'defines-maintains-and-uses-modular-structures-for-code-namespacing-and-reusability',
+    'implements-asynchrony-and-non-blocking-environment-concepts',
+    'validates-finds-and-replaces-string-data-with-regular-expressions',
+    'applies-methodology-and-best-practices-for-language-performance-optimisation',
+    'creates-and-maintains-custom-user-interface-components',
+    'manages-advanced-collections-of-data-using-language',
+    'optimises-application-performance-taking-into-account-the-complexity-of-the-algorithms',
+
+    // Framework – React JS Web
+    'creates-supports-and-composes-user-interface-components',
+    'styling-elements-using-framework-capability',
+    'uses-built-in-mechanism-to-manage-component-interaction',
+    'uses-technics-to-dynamically-generate-elements',
+    'applies-technics-and-uses-technology-for-styling-components',
+    'displays-data-on-the-user-interface',
+    'handles-user-interaction-with-event-handlers-in-framework',
+    'interacts-with-lifecycles-in-components-using-framework-capability',
+    'sets-up-builds-tests-and-deploys-application-with-cli',
+    'uses-forms-for-user-inputs-and-interaction',
+    'uses-framework-built-in-tools-for-code-reusability',
+    'uses-framework-related-and-basic-tools-for-application-s-debugging',
+    'applies-accessibility-rules-and-guidelines-for-building-user-interface',
+
+    // Libraries – React JS Web
+    'debugs-application-using-debugging-tools-and-techniques',
+    'manages-project-dependencies-with-package-managers',
+    'ensures-type-integrity-in-the-application',
+    'handles-user-input-through-form-widgets',
+    'optimizes-the-development-process-with-utils',
+    'configures-bundlers-for-application',
+
+    // Markup and Styling
+    'adds-styling-to-template-document',
+    'adjusts-values-and-units-to-set-the-size-of-various-elements-with-style-sheet-language',
+    'handles-overflowing-content-on-a-page',
+    'styles-elements-using-basic-style-sheet-language-properties',
+    'uses-basic-box-model-and-handles-margin-collapsing',
+    'aligns-various-element-positions-with-style-sheet-language',
+    'creates-and-composes-pages-and-layouts-using-standard-markup-language',
+    'creates-forms-using-a-standard-markup-language',
+    'creates-layouts-with-basic-layout-modes-using-style-sheet-language',
+    'creates-tables-with-a-standard-markup-language',
+    'styles-elements-with-various-style-sheet-language-selectors',
+    'styles-text-using-basic-style-sheet-language-rules',
+    'animates-user-interface-elements-using-style-sheet-language',
+    'applies-standardised-methodologies-while-using-style-sheet-language',
+    'creates-layouts-with-advanced-layout-modes-using-style-sheet-language',
+    'creates-responsive-layouts-with-adaptive-technics',
+    'styles-user-interface-using-preprocessors-or-scripting-solutions',
+    'creates-accessible-web-pages',
+    'creates-web-pages-for-various-device-types',
+    'optimises-page-performance',
+
+    // Code-Based Testing – React JS Web
+    'applies-community-recommended-practice-and-methodologies-to-automated-tests',
+    'structures-tests-using-framework-capabilities',
+    'uses-dummy-data-for-testing',
+    'uses-matchers-for-testing-expected-result',
+    'uses-unit-tests-techniques',
+    'tests-async-code-using-framework-capabilities',
+    'uses-fake-objects-to-decouple-from-dependencies',
+    'uses-integration-test-approaches-strategies-and-methodologies',
+    'uses-techniques-and-methodology-for-accessibility-testing',
+    'configures-and-maintains-code-coverage-reports',
+    'configures-test-framework-for-tests-execution',
+
+    // Design
+    'creates-components-and-modules-using-basic-design-techniques',
+    'creates-reusable-structures-by-applying-design-strategies-and-methodologies',
+    'implements-solutions-based-on-different-requirement-types',
+    'refactors-and-restructures-software-components-and-modules-using-community-recommended-practices-and-methodologies',
+    'uses-design-patterns-to-create-new-structures-based-on-requirements',
+    'distributes-responsibility-between-structures-using-design-patterns',
+    'ensures-efficient-and-flexible-composition-of-structures-with-design-patterns',
+    'evaluates-and-modifies-software-design-to-ensure-software-quality',
+    'uses-methodologies-and-technics-to-document-design',
+
+    // Development Environments – React JS Web
+    'manages-environments-using-built-in-operating-system-tools',
+    'uses-version-control-tools-for-development',
+    'configures-and-maintains-development-environment-and-ecosystem',
+    'distributes-work-using-version-control-tools',
+    'maintains-code-quality-of-the-application',
+    'manages-and-maintains-the-condition-of-the-application-s-dependencies',
+    'configures-the-build-process-to-compile-ready-to-use-applications-from-source-code',
+    'controls-code-quality-with-measurement-tools',
+  ],
+}
+
+const topicMap = new Map(topicSeed.map((t) => [t.id, t]))
+
+for (const [prId, topicIds] of Object.entries(prTopicMappings)) {
+  for (const topicId of topicIds) {
+    const topic = topicMap.get(topicId)
+
+    if (!topic) {
+      throw new Error(
+        `PR mapping references unknown topic "${topicId}" for PR "${prId}"`,
+      )
+    }
+
+    topic.prExampleIds.push(prId)
+  }
 }
 
 export const topics: Topic[] = buildTopics(topicSeed, pullRequestCatalog)
