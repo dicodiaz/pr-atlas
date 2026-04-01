@@ -7,24 +7,24 @@ based on the competency framework defined in [`src/data/topics.ts`](../src/data/
 
 All of the following must be satisfied simultaneously:
 
-| Condition | Threshold |
-|-----------|-----------|
-| Trainee KEY topics | 100% |
-| Junior KEY topics | 100% |
-| Middle KEY topics | 100% |
-| All Trainee topics | 80% |
-| All Junior topics | 80% |
-| All Middle topics | 80% |
-| All Senior topics | 50% |
+| Condition          | Threshold |
+| ------------------ | --------- |
+| Trainee KEY topics | 100%      |
+| Junior KEY topics  | 100%      |
+| Middle KEY topics  | 100%      |
+| All Trainee topics | 80%       |
+| All Junior topics  | 80%       |
+| All Middle topics  | 80%       |
+| All Senior topics  | 50%       |
 
 ## Topic counts by level
 
-| Level | Total | KEY | Non-key | Need KEY | Need total (%) |
-|-------|-------|-----|---------|----------|----------------|
-| Trainee | 20 | 15 | 5 | 15 (100%) | 16 (80%) |
-| Junior | 42 | 25 | 17 | 25 (100%) | 34 (80%) |
-| Middle | 60 | 25 | 35 | 25 (100%) | 48 (80%) |
-| Senior | 59 | 23 | 36 | — | 30 (50%) |
+| Level   | Total | KEY | Non-key | Need KEY  | Need total (%) |
+| ------- | ----- | --- | ------- | --------- | -------------- |
+| Trainee | 20    | 15  | 5       | 15 (100%) | 16 (80%)       |
+| Junior  | 42    | 25  | 17      | 25 (100%) | 34 (80%)       |
+| Middle  | 60    | 25  | 35      | 25 (100%) | 48 (80%)       |
+| Senior  | 59    | 23  | 36      | —         | 30 (50%)       |
 
 Beyond the mandatory KEY topics the additional non-key topics needed to reach
 each threshold are:
@@ -38,38 +38,38 @@ each threshold are:
 
 PR Atlas (this project) is a React SPA that demonstrates accessible search with
 debounced filtering, responsive layout, semantic HTML, comprehensive test
-coverage, and documented architecture. It covers **84 of 181 topics** across
-eight categories.
+coverage, documented architecture, and localStorage-backed saved searches. It
+covers **86 of 181 topics** across eight categories.
 
 ### Coverage by level
 
-| Level | Covered | KEY covered | KEY gap | Threshold met? |
-|-------|---------|-------------|---------|----------------|
-| Trainee | 17 / 20 | 14 / 15 | 1 | 80% threshold met (17 ≥ 16) |
-| Junior | 28 / 42 | 22 / 25 | 3 | Not yet (28 < 34) |
-| Middle | 22 / 60 | 17 / 25 | 8 | Not yet (22 < 48) |
-| Senior | 17 / 59 | — | — | Not yet (17 < 30) |
+| Level   | Covered | KEY covered | KEY gap | Threshold met?              |
+| ------- | ------- | ----------- | ------- | --------------------------- |
+| Trainee | 17 / 20 | 14 / 15     | 1       | 80% threshold met (17 ≥ 16) |
+| Junior  | 29 / 42 | 23 / 25     | 2       | Not yet (29 < 34)           |
+| Middle  | 23 / 60 | 18 / 25     | 7       | Not yet (23 < 48)           |
+| Senior  | 17 / 59 | —           | —       | Not yet (17 < 30)           |
 
 ### Coverage by category
 
-| Category | Covered | Total | % |
-|----------|---------|-------|---|
-| Language – JavaScript | 17 | 28 | 61% |
-| Framework – React JS Web | 13 | 22 | 59% |
-| Libraries – React JS Web | 6 | 24 | 25% |
-| Markup and Styling | 20 | 24 | 83% |
-| Code-Based Testing – React JS Web | 11 | 12 | 92% |
-| Design | 9 | 13 | 69% |
-| Development Environments – React JS Web | 8 | 15 | 53% |
-| Cloud Environments | 0 | 4 | 0% |
-| Project Process | 0 | 10 | 0% |
-| Technical Process | 0 | 4 | 0% |
-| Expertise Contribution | 0 | 11 | 0% |
-| Generative AI | 0 | 14 | 0% |
+| Category                                | Covered | Total | %   |
+| --------------------------------------- | ------- | ----- | --- |
+| Language – JavaScript                   | 18      | 28    | 64% |
+| Framework – React JS Web                | 13      | 22    | 59% |
+| Libraries – React JS Web                | 7       | 24    | 29% |
+| Markup and Styling                      | 20      | 24    | 83% |
+| Code-Based Testing – React JS Web       | 11      | 12    | 92% |
+| Design                                  | 9       | 13    | 69% |
+| Development Environments – React JS Web | 8       | 15    | 53% |
+| Cloud Environments                      | 0       | 4     | 0%  |
+| Project Process                         | 0       | 10    | 0%  |
+| Technical Process                       | 0       | 4     | 0%  |
+| Expertise Contribution                  | 0       | 11    | 0%  |
+| Generative AI                           | 0       | 14    | 0%  |
 
 ## Mandatory KEY topics not yet covered
 
-These 8 KEY topics still require coverage through code PRs.
+These 6 KEY topics still require coverage through code PRs.
 
 ### Network / API — one full-stack app covers all three
 
@@ -77,10 +77,10 @@ These 8 KEY topics still require coverage through code PRs.
 - **[Libraries · Middle]** Troubleshoots network using tools and libraries
 - **[Libraries · Middle]** Uses HTTP clients for API communication
 
-### Browser storage — any app using localStorage or sessionStorage
+### Browser storage — covered by saved searches feature
 
-- **[Libraries · Junior]** Simplifies access to browsers storage using tools or libraries
-- **[Language · Middle]** Accesses and stores data in a client-side storage
+- ~~**[Libraries · Junior]** Simplifies access to browsers storage using tools or libraries~~ ✅
+- ~~**[Language · Middle]** Accesses and stores data in a client-side storage~~ ✅
 
 ### Security
 
@@ -103,12 +103,9 @@ These 8 KEY topics still require coverage through code PRs.
 
 ## Recommended next steps
 
-### Three features to close the remaining KEY gaps
+### Two features to close the remaining KEY gaps
 
-1. **Persist user preferences to localStorage** (e.g. theme toggle or saved
-   searches). Covers 2 KEY topics:
-   - [Libraries · Junior] Simplifies access to browsers storage using tools or libraries
-   - [Language · Middle] Accesses and stores data in a client-side storage
+1. ~~**Persist user preferences to localStorage** — implemented as saved searches feature~~ ✅
 
 2. **Fetch data from a remote API with security hardening** (e.g. load topics
    from a JSON endpoint via `fetch`/Axios, add CSP headers, sanitize inputs).
@@ -124,8 +121,8 @@ These 8 KEY topics still require coverage through code PRs.
    - [Libraries · Middle] Handles different types of localization and text processing
    - [Libraries · Middle] Handles and resolves new versions of the packages
 
-All three together close every remaining KEY gap at Trainee, Junior, and Middle
-levels.
+Features 2 and 3 together close every remaining KEY gap at Trainee, Junior, and
+Middle levels.
 
 ### Broader threshold coverage
 

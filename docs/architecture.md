@@ -100,6 +100,19 @@ The flow is:
 4. Clear and `Escape` bypass the delay, reset both the visible input and active search immediately, and return focus to the search field.
 5. Browser `popstate` events read from the URL and immediately rehydrate both the visible input and the applied search.
 
+## Saved searches
+
+Users can save the current search query as a chip for quick reuse. Saved
+searches are persisted to `localStorage` via a typed wrapper in
+[`src/lib/storage.ts`](../src/lib/storage.ts) and managed through a
+[`useSavedSearches`](../src/lib/use-saved-searches.ts) hook.
+
+- Saved queries appear as always-visible chips between the search bar and results.
+- Clicking a chip applies the search immediately (bypasses debounce).
+- Each chip has a remove button.
+- Duplicates are prevented (case-insensitive).
+- The list is capped at 20 entries.
+
 ## Performance notes
 
 The current UI is optimized for smooth typing without adding architectural

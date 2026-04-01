@@ -1,12 +1,14 @@
 import { type FC, useEffect, useMemo, useRef, useState } from 'react'
 
 import { EmptyState } from '@/components/EmptyState'
+import { SavedSearches } from '@/components/SavedSearches'
 import { SearchControls } from '@/components/SearchControls'
 import { TopicTable } from '@/components/TopicTable'
 import { topics } from '@/data/topics'
 import { searchTopics } from '@/lib/search'
 import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
 import { useDebouncedValue } from '@/lib/use-debounced-value'
+import { useSavedSearches } from '@/lib/use-saved-searches'
 
 const SEARCH_DEBOUNCE_MS = 250
 const ANNOUNCE_DELAY_MS = 1000
@@ -66,12 +68,30 @@ export const App: FC = () => {
     setQueryInUrl(activeQuery)
   }, [activeQuery])
 
+  const { searches, save, remove } = useSavedSearches()
+
   const handleClear = () => {
     setCountAnnouncement('')
     setInputQuery('')
     flush('')
     searchInputRef.current?.focus()
   }
+
+  const handleSave = () => {
+    save(inputQuery)
+  }
+
+  const handleApplySaved = (query: string) => {
+    setInputQuery(query)
+    flush(query)
+    searchInputRef.current?.focus()
+  }
+
+  const isSaveDisabled =
+    inputQuery.trim().length === 0 ||
+    searches.some(
+      (s) => s.toLowerCase() === inputQuery.trim().toLowerCase(),
+    )
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-330 flex-col px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
@@ -107,9 +127,17 @@ export const App: FC = () => {
 
           <SearchControls
             inputRef={searchInputRef}
+            isSaveDisabled={isSaveDisabled}
             query={inputQuery}
-            onQueryChange={setInputQuery}
             onClear={handleClear}
+            onQueryChange={setInputQuery}
+            onSave={handleSave}
+          />
+
+          <SavedSearches
+            searches={searches}
+            onApply={handleApplySaved}
+            onRemove={remove}
           />
 
           <section aria-labelledby="results-heading" className="space-y-5">

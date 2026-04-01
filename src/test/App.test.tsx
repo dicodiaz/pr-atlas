@@ -44,6 +44,7 @@ describe('App', () => {
       vi.runOnlyPendingTimers()
     })
     vi.useRealTimers()
+    localStorage.clear()
   })
 
   it('hydrates the search input from the url query parameter', () => {
@@ -272,5 +273,103 @@ describe('App', () => {
         name: /uses version control tools for development/i,
       }),
     ).toBeInTheDocument()
+  })
+
+  it('saves a search as a chip when clicking Save search', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /save search/i }))
+
+    expect(
+      screen.getByRole('button', {
+        name: /apply saved search: metaprogramming/i,
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('applies a saved search when clicking a chip', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /save search/i }))
+    fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
+
+    expect(getSearchInput()).toHaveValue('')
+
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: /apply saved search: metaprogramming/i,
+      }),
+    )
+
+    expect(getSearchInput()).toHaveValue('metaprogramming')
+
+    advanceDebounce()
+
+    expect(
+      screen.getByRole('rowheader', {
+        name: /uses language metaprogramming techniques/i,
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('removes a saved search chip when clicking the remove button', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /save search/i }))
+
+    expect(
+      screen.getByRole('button', {
+        name: /apply saved search: metaprogramming/i,
+      }),
+    ).toBeInTheDocument()
+
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: /remove saved search: metaprogramming/i,
+      }),
+    )
+
+    expect(
+      screen.queryByRole('button', {
+        name: /apply saved search: metaprogramming/i,
+      }),
+    ).not.toBeInTheDocument()
+  })
+
+  it('disables the Save search button when the query is empty', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    expect(screen.getByRole('button', { name: /save search/i })).toBeDisabled()
+  })
+
+  it('disables the Save search button when the query is already saved', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /save search/i }))
+
+    expect(screen.getByRole('button', { name: /save search/i })).toBeDisabled()
   })
 })

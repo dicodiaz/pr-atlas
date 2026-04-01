@@ -14,9 +14,11 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 - `src/data/topics.ts` — pull requests, PR↔topic mappings, and `buildTopics` (update here when adding a PR)
 - `src/lib/search.ts` — token-based search (lowercase, collapsed whitespace, all-terms match)
 - `src/lib/highlight.ts` — text highlighting for matched terms
+- `src/lib/storage.ts` — typed localStorage wrapper (get/set/remove with JSON serialization)
+- `src/lib/use-saved-searches.ts` — saved searches hook (persist, deduplicate, cap at 20)
 - `src/lib/url-state.ts` — `?q=` query-string parsing and updates
 - `src/lib/use-debounced-value.ts` — 250ms debounce hook (two-layer state: `inputQuery` / `activeQuery`)
-- `src/components/` — `SearchControls`, `TopicTable`, `HighlightText`, `EmptyState`
+- `src/components/` — `SearchControls`, `SavedSearches`, `TopicTable`, `HighlightText`, `EmptyState`
 - `src/types/topics.ts` — shared TypeScript models
 - `src/index.css` — Tailwind `@theme`, custom utilities (`panel-surface`, `fade-up`, `data-row`, `search-input`)
 
@@ -28,7 +30,9 @@ Tests live in `src/test/` and are split by responsibility:
 - `highlight.test.ts` — highlight segmentation and edge cases
 - `url-state.test.ts` — query-string parsing and URL updates
 - `use-debounced-value.test.tsx` — debounce timing and flush
-- `App.test.tsx` — integration: URL hydration, debounced results, clear, focus management, empty state
+- `storage.test.ts` — localStorage wrapper edge cases
+- `use-saved-searches.test.tsx` — saved searches hook behavior
+- `App.test.tsx` — integration: URL hydration, debounced results, clear, focus management, empty state, saved searches
 
 ## Tailwind conventions
 

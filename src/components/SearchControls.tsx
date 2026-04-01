@@ -2,15 +2,19 @@ import { type FC, type KeyboardEvent, type RefObject, useId } from 'react'
 
 interface SearchControlsProps {
   inputRef?: RefObject<HTMLInputElement | null>
+  isSaveDisabled: boolean
   onClear: () => void
   onQueryChange: (value: string) => void
+  onSave: () => void
   query: string
 }
 
 export const SearchControls: FC<SearchControlsProps> = ({
   inputRef,
+  isSaveDisabled,
   onClear,
   onQueryChange,
+  onSave,
   query,
 }) => {
   const searchId = useId()
@@ -44,7 +48,15 @@ export const SearchControls: FC<SearchControlsProps> = ({
           />
         </div>
       </div>
-      <div className="flex shrink-0 lg:self-end">
+      <div className="flex shrink-0 gap-2 lg:self-end">
+        <button
+          type="button"
+          onClick={onSave}
+          disabled={isSaveDisabled}
+          className="text-secondary border-strong focus-ring-page hover:text-primary w-full rounded-2xl border bg-transparent px-4 py-4 text-sm font-medium transition hover:border-(--color-accent) disabled:cursor-not-allowed disabled:opacity-45 lg:w-auto"
+        >
+          Save search
+        </button>
         <button
           type="button"
           onClick={onClear}
