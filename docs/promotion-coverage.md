@@ -119,9 +119,54 @@ These 4 KEY topics still require coverage through code PRs.
 
 Feature 2 closes every remaining KEY gap at Trainee, Junior, and Middle levels.
 
-### Broader threshold coverage
+### Senior threshold coverage (17 / 59 → 32 / 59)
 
-**Cloud Environments, Project Process, Generative AI, and Expertise
-Contribution** categories (39 total topics) are all at 0% — picking up a
-few easy ones from each is the fastest way to close the Senior 50%
-threshold.
+11 of 23 Senior KEY topics remain uncovered. 3 of those cannot be covered
+by FE features (client-server network protocols requires backend work;
+the two Expertise Contribution topics require interviewer/reviewer
+activity). The following 3 features cover the remaining 8 KEY topics plus
+7 non-key topics, bringing Senior from 29% to 54% (threshold: 50%).
+
+4. **Coverage analytics dashboard** (user-centric). Add an interactive
+   dashboard view with bar charts by category, donut chart by seniority
+   level, and threshold progress bars. Lazy-load the dashboard via
+   `React.lazy()` + `Suspense`. Add meta tags and OpenGraph data for rich
+   link previews on the deployed Netlify site.
+   Covers 1 KEY + 2 non-key:
+   - [Framework · Senior · KEY] Optimizes application with code-splitting techniques
+   - [Libraries · Senior] Provides data visualizations through visualization tools
+   - [Markup and Styling · Senior] Optimises applications for search engines
+
+5. **Enhanced search with autocomplete and performance logging**
+   (user-centric). Replace the linear search scan with a pre-built
+   inverted index, run indexing and queries in a Web Worker, add
+   autocomplete suggestions as the user types, and add a structured
+   logging library with an opt-in debug mode toggle. Validate the
+   experience with a Playwright E2E suite.
+   Covers 1 KEY + 3 non-key:
+   - [Libraries · Senior · KEY] Uses libraries for logging data
+   - [Language · Senior] Manages and implements complex data structures
+   - [Language · Senior] Synchronises concurrent operations by using language capabilities
+   - [Code-Based Testing · Senior] Creates and organises end-to-end tests
+
+6. **CI/CD pipeline and project process documentation** (dev/process).
+   Add GitHub Actions CI, contribution workflow (CONTRIBUTING.md,
+   CODEOWNERS, PR template), a formal SRS with Mermaid diagrams, a
+   technical debt policy, and a requirements elicitation process document.
+   Covers 6 KEY + 2 non-key:
+   - [Dev Environments · Senior · KEY] Set-ups code review process to achieve the quality of the application
+   - [Design · Senior · KEY] Uses modelling techniques for requirements analysis
+   - [Project Process · Senior · KEY] Creates and maintains documentation for software requirements specification
+   - [Project Process · Senior · KEY] Establishes or refines a technical debt policy
+   - [Project Process · Senior · KEY] Establishes or refines requirements elicitation process
+   - [Technical Process · Senior · KEY] Manages workload based on requirements
+   - [Dev Environments · Senior] Configures contribution workflow using version control tools
+   - [Dev Environments · Senior] Configures integration process using CI tools
+
+### 3 Senior KEY topics requiring external evidence
+
+These cannot be covered by FE features in this project:
+
+- **[Language · Senior · KEY]** Builds client-server applications using network protocols — requires backend/network work
+- **[Expertise Contribution · Senior · KEY]** Conducts evaluations in Job Interview events — requires interviewer activity
+- **[Expertise Contribution · Senior · KEY]** Conducts evaluations in Performance Review events — requires reviewer activity
