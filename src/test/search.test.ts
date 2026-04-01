@@ -12,58 +12,37 @@ describe('search utilities', () => {
   })
 
   it('matches by topic name', () => {
-    const results = searchTopics(topics, 'Observability')
+    const results = searchTopics(topics, 'metaprogramming')
 
-    expect(results.map((topic) => topic.name)).toContain('Observability')
+    expect(results.map((topic) => topic.name)).toContain(
+      'Uses language metaprogramming techniques',
+    )
   })
 
   it('matches by tag', () => {
-    const results = searchTopics(topics, 'screen reader')
+    const results = searchTopics(topics, 'JavaScript')
 
-    expect(results.map((topic) => topic.name)).toContain('Accessibility')
-  })
-
-  it('matches by PR title', () => {
-    const results = searchTopics(topics, 'bundle budget checks')
-
-    expect(results.map((topic) => topic.name)).toContain('Client Performance')
-  })
-
-  it('includes a topic when only a PR title matches', () => {
-    const architectureTopic = topics.find(
-      (topic) => topic.name === 'Frontend Architecture',
-    )
-
-    expect(architectureTopic).toBeDefined()
-    expect(matchesTopic(architectureTopic!, 'shared query primitives')).toBe(
+    expect(results.length).toBeGreaterThan(0)
+    expect(results.every((topic) => topic.tags.includes('JavaScript'))).toBe(
       true,
     )
   })
 
-  it('is case-insensitive and whitespace-tolerant', () => {
-    const results = searchTopics(topics, '   REQUEST     Tracing ')
+  it('matches by level tag', () => {
+    const results = searchTopics(topics, 'Trainee')
 
-    expect(results.map((topic) => topic.name)).toEqual(
-      expect.arrayContaining([
-        'Observability',
-        'Incident Response',
-        'Debugging',
-      ]),
-    )
+    expect(results.length).toBeGreaterThan(0)
+    expect(results.every((topic) => topic.tags.includes('Trainee'))).toBe(true)
   })
 
-  it('returns every topic that shares a PR when searching by that PR title', () => {
-    const results = searchTopics(
-      topics,
-      'Standardize rollback notes and follow-up tasks after production incidents',
-    )
+  it('is case-insensitive and whitespace-tolerant', () => {
+    const results = searchTopics(topics, '   VERSION     CONTROL ')
 
     expect(results.map((topic) => topic.name)).toEqual(
       expect.arrayContaining([
-        'Incident Response',
-        'Observability',
-        'Testing',
-        'Debugging',
+        'Uses version control tools for development',
+        'Distributes work using version control tools',
+        'Configures contribution workflow using version control tools',
       ]),
     )
   })
@@ -122,5 +101,14 @@ describe('search utilities', () => {
         ],
       },
     ])
+  })
+
+  it('includes a topic when it matches multiple search tokens', () => {
+    const topic = topics.find(
+      (t) => t.name === 'Uses language metaprogramming techniques',
+    )
+
+    expect(topic).toBeDefined()
+    expect(matchesTopic(topic!, 'language metaprogramming')).toBe(true)
   })
 })

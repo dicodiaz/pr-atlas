@@ -14,17 +14,19 @@
 
 The local dataset lives in [`src/data/topics.ts`](../src/data/topics.ts). It uses:
 
-- a shared pull request catalog keyed by PR id
-- a topic seed array grouped by topic for maintainability
-- small data helpers that resolve each topic's `prExampleIds` into full PR objects
-- a final exported `topics` array built from those helpers
+- a compact **section-based seed format** that groups topics by category, technology, and seniority level
+- a `slugify` helper that auto-generates topic IDs from the topic name
+- an `expandSections` function that flattens sections into `TopicSeed[]` with derived tag arrays
+- a shared pull request catalog keyed by PR id (currently empty — ready to receive real PR data)
+- `buildTopics` and `resolvePullRequests` helpers that resolve each topic's `prExampleIds` into full PR objects
+- a runtime duplicate-ID check that throws if two topics produce the same slug
 
 Each topic includes:
 
-- `id`
-- `name`
-- `tags`
-- `prExamples`
+- `id` — auto-slugified from the topic name
+- `name` — the human-readable competency description
+- `tags` — derived array containing category (e.g. "Language"), technology (e.g. "JavaScript"), level (e.g. "Senior"), and optionally "Key"
+- `prExamples` — resolved PR objects (empty until PRs are assigned)
 
 Each PR example includes:
 
@@ -32,7 +34,7 @@ Each PR example includes:
 - `title`
 - `url`
 
-This keeps authoring topic-centric while still allowing the same PR to appear in multiple topics without duplicating the PR metadata everywhere.
+The section format keeps authoring compact (one entry per topic instead of a full object) while the expand step guarantees consistent tag structure. PRs can still be shared across multiple topics without duplicating metadata.
 
 ## Search strategy
 
@@ -116,10 +118,11 @@ complexity.
 
 ## Why this supports later PR-data refinement
 
-Later, you can replace the placeholder PR catalog entries and topic seed data in
-[`src/data/topics.ts`](../src/data/topics.ts) without changing the rendering or search architecture.
+To add real PR examples, populate `pullRequestCatalog` in
+[`src/data/topics.ts`](../src/data/topics.ts) and add PR IDs to individual topic entries
+in the `sections` array. No changes to rendering or search architecture are needed.
 
-- topic-level authoring remains easy to maintain
-- shared PR relationships already exist
+- the compact section format makes bulk topic edits easy
+- shared PR relationships already exist via the catalog
 - UI components stay data-agnostic
 - search behavior continues to work as long as topics and PRs preserve the same typed shape

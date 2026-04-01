@@ -10,7 +10,7 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 ## Key paths
 
 - `src/app/App.tsx` — root component: debounced search, URL sync, focus management, layout
-- `src/data/topics.ts` — local dataset with shared PR catalog keyed by ID
+- `src/data/topics.ts` — 180+ topics in compact section format; empty PR catalog ready for real data
 - `src/lib/search.ts` — token-based search (lowercase, collapsed whitespace, all-terms match)
 - `src/lib/highlight.ts` — text highlighting for matched terms
 - `src/lib/url-state.ts` — `?q=` query-string parsing and updates

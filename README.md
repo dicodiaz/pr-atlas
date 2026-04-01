@@ -1,6 +1,6 @@
 # PR Atlas
 
-PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search technology topics and immediately see matching GitHub pull request examples, with support for shared PRs across multiple topics.
+PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned.
 
 ## Stack
 
@@ -17,7 +17,7 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 
 The local dataset lives in [`src/data/topics.ts`](./src/data/topics.ts).
 
-When you are ready to swap in your real interview examples, update the placeholder PR catalog and topic seed data in that file. The data model already supports shared PRs across multiple topics.
+Topics are defined in a compact section-based format that auto-generates slugified IDs and tag arrays from category, technology, level, and key-skill metadata. The PR catalog is ready to receive real pull request examples — just add entries to `pullRequestCatalog` and reference them by ID in each section's topic entries.
 
 ## Commands
 
@@ -91,13 +91,13 @@ A short architecture overview lives in [`docs/architecture.md`](./docs/architect
 
 Highlights:
 
-- `src/data/topics.ts` keeps authoring grouped by topic while sharing PR definitions
+- `src/data/topics.ts` defines topics in a compact section-based format with auto-generated IDs and tag arrays
 - `src/lib/search.ts` contains pure search logic that matches topic names, tags, and PR titles
 - `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/components` handles focused rendering concerns
 - the UI renders one row per topic, stacks PR links inside the same table cell, syncs the applied query to `?q=`, and returns focus to the search field after clearing
 
-That structure is intentionally simple, interview-friendly, and easy to refine later as your real PR data becomes more detailed.
+Each topic carries tags for its category (e.g. Language), technology (e.g. JavaScript), seniority level (Trainee / Junior / Middle / Senior), and an optional Key marker — all searchable.
 
 ## Testing approach
 

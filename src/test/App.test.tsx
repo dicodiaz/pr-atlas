@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, within } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { App } from '@/app/App'
@@ -47,13 +47,15 @@ describe('App', () => {
   })
 
   it('hydrates the search input from the url query parameter', () => {
-    window.history.replaceState(null, '', '/?q=rollback%20notes')
+    window.history.replaceState(null, '', '/?q=metaprogramming')
 
     render(<App />)
 
-    expect(getSearchInput()).toHaveValue('rollback notes')
+    expect(getSearchInput()).toHaveValue('metaprogramming')
     expect(
-      screen.getByRole('rowheader', { name: /incident response/i }),
+      screen.getByRole('rowheader', {
+        name: /uses language metaprogramming techniques/i,
+      }),
     ).toBeInTheDocument()
   })
 
@@ -65,40 +67,29 @@ describe('App', () => {
     expect(screen.getAllByRole('row')).toHaveLength(topics.length + 1)
   })
 
-  it('renders multiple PR links within the same topic row', () => {
-    window.history.replaceState(null, '', '/')
-
-    render(<App />)
-
-    const topicCell = screen.getByRole('rowheader', { name: /^observability/i })
-    const row = topicCell.closest('tr')
-
-    expect(row).not.toBeNull()
-    expect(within(row!).getAllByRole('link')).toHaveLength(3)
-  })
-
   it('applies debounced results only after the delay', () => {
     window.history.replaceState(null, '', '/')
 
     render(<App />)
 
-    fireEvent.change(getSearchInput(), { target: { value: 'bundle budget' } })
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
 
-    expect(getSearchInput()).toHaveValue('bundle budget')
+    expect(getSearchInput()).toHaveValue('metaprogramming')
     expect(
-      screen.getByRole('rowheader', { name: /^Accessibility\b/i }),
+      screen.getByRole('rowheader', { name: /^Manages collections/i }),
     ).toBeInTheDocument()
 
     advanceDebounce()
 
     expect(
-      screen.getByRole('rowheader', { name: /client performance/i }),
+      screen.getByRole('rowheader', {
+        name: /uses language metaprogramming techniques/i,
+      }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('rowheader', { name: /performance budgeting/i }),
-    ).toBeInTheDocument()
-    expect(
-      screen.queryByRole('rowheader', { name: /^Accessibility\b/i }),
+      screen.queryByRole('rowheader', { name: /^Manages collections/i }),
     ).not.toBeInTheDocument()
   })
 
@@ -109,11 +100,9 @@ describe('App', () => {
 
     const searchInput = getSearchInput()
 
-    fireEvent.change(searchInput, { target: { value: 'circuit breaker' } })
+    fireEvent.change(searchInput, { target: { value: 'version control' } })
 
-    expect(getVisibleCount()).toHaveTextContent(
-      `${topics.length} topics shown`,
-    )
+    expect(getVisibleCount()).toHaveTextContent(`${topics.length} topics shown`)
 
     advanceDebounce()
 
@@ -122,9 +111,7 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
 
     expect(searchInput).toHaveValue('')
-    expect(getVisibleCount()).toHaveTextContent(
-      `${topics.length} topics shown`,
-    )
+    expect(getVisibleCount()).toHaveTextContent(`${topics.length} topics shown`)
     expect(window.location.search).toBe('')
   })
 
@@ -135,7 +122,7 @@ describe('App', () => {
 
     const searchInput = getSearchInput()
 
-    fireEvent.change(searchInput, { target: { value: 'observability' } })
+    fireEvent.change(searchInput, { target: { value: 'metaprogramming' } })
     advanceDebounce()
 
     fireEvent.click(screen.getByRole('button', { name: /clear search/i }))
@@ -148,13 +135,17 @@ describe('App', () => {
 
     render(<App />)
 
-    fireEvent.change(getSearchInput(), { target: { value: 'ops readiness' } })
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
 
     advanceDebounce()
 
     expect(getVisibleCount()).toHaveTextContent('1 topic shown')
     expect(
-      screen.getByRole('rowheader', { name: /incident response/i }),
+      screen.getByRole('rowheader', {
+        name: /uses language metaprogramming techniques/i,
+      }),
     ).toBeInTheDocument()
   })
 
@@ -165,14 +156,12 @@ describe('App', () => {
 
     const searchInput = getSearchInput()
 
-    fireEvent.change(searchInput, { target: { value: 'observability' } })
+    fireEvent.change(searchInput, { target: { value: 'metaprogramming' } })
     advanceDebounce()
     fireEvent.keyDown(searchInput, { key: 'Escape', code: 'Escape' })
 
     expect(searchInput).toHaveValue('')
-    expect(getVisibleCount()).toHaveTextContent(
-      `${topics.length} topics shown`,
-    )
+    expect(getVisibleCount()).toHaveTextContent(`${topics.length} topics shown`)
     expect(window.location.search).toBe('')
   })
 
@@ -186,9 +175,7 @@ describe('App', () => {
     fireEvent.keyDown(searchInput, { key: 'Escape', code: 'Escape' })
 
     expect(searchInput).toHaveValue('')
-    expect(getVisibleCount()).toHaveTextContent(
-      `${topics.length} topics shown`,
-    )
+    expect(getVisibleCount()).toHaveTextContent(`${topics.length} topics shown`)
   })
 
   it('announces showing all topics without search cleared for whitespace-only input', () => {
@@ -218,18 +205,20 @@ describe('App', () => {
       `Search cleared. Showing all ${topics.length} topics.`,
     )
 
-    fireEvent.change(getSearchInput(), { target: { value: 'ops readiness' } })
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
     advanceDebounce()
 
     expect(getVisibleCount()).toHaveTextContent('1 topic shown')
     expect(liveRegion).not.toHaveTextContent(
-      '1 topic shown for ops readiness.',
+      '1 topic shown for metaprogramming.',
     )
 
     advanceAnnounce()
 
     expect(liveRegion).toHaveTextContent(
-      '1 topic shown for ops readiness. Tab to navigate to the results.',
+      '1 topic shown for metaprogramming. Tab to navigate to the results.',
     )
   })
 
@@ -256,28 +245,32 @@ describe('App', () => {
 
     render(<App />)
 
-    fireEvent.change(getSearchInput(), { target: { value: 'bundle budget' } })
+    fireEvent.change(getSearchInput(), {
+      target: { value: 'metaprogramming' },
+    })
 
     expect(window.location.search).toBe('')
 
     advanceDebounce()
 
-    expect(window.location.search).toBe('?q=bundle+budget')
+    expect(window.location.search).toBe('?q=metaprogramming')
   })
 
   it('updates the search state when navigating with browser history', async () => {
-    window.history.replaceState(null, '', '/?q=observability')
+    window.history.replaceState(null, '', '/?q=metaprogramming')
 
     render(<App />)
 
     await act(async () => {
-      window.history.pushState(null, '', '/?q=rollback%20notes')
+      window.history.pushState(null, '', '/?q=version+control')
       window.dispatchEvent(new PopStateEvent('popstate'))
     })
 
-    expect(getSearchInput()).toHaveValue('rollback notes')
+    expect(getSearchInput()).toHaveValue('version control')
     expect(
-      screen.getByRole('rowheader', { name: /incident response/i }),
+      screen.getByRole('rowheader', {
+        name: /uses version control tools for development/i,
+      }),
     ).toBeInTheDocument()
   })
 })
