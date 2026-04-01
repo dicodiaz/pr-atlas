@@ -1,4 +1,5 @@
 import { memo, type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { HighlightText } from '@/components/HighlightText'
 import type { Topic } from '@/types/topics'
@@ -9,6 +10,8 @@ interface TopicTableProps {
 }
 
 const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
+  const { t } = useTranslation()
+
   return (
     <div className="border-default fade-up overflow-hidden rounded-3xl border bg-[rgba(8,14,24,0.84)] shadow-(--shadow-panel)">
       <div className="overflow-x-auto">
@@ -19,13 +22,13 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                 scope="col"
                 className="text-secondary px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
               >
-                Topic
+                {t('table.topic')}
               </th>
               <th
                 scope="col"
                 className="text-secondary px-6 py-4 text-xs font-semibold tracking-[0.18em] uppercase"
               >
-                PR Examples
+                {t('table.prExamples')}
               </th>
             </tr>
           </thead>
@@ -60,7 +63,9 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                           target="_blank"
                           rel="noreferrer noopener"
                           className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-start gap-2 rounded-xl px-3 py-2 text-sm leading-6"
-                          aria-label={`${pr.title} (opens in a new tab)`}
+                          aria-label={t('table.opensNewTab', {
+                            title: pr.title,
+                          })}
                         >
                           <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
                           <span>

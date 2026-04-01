@@ -39,7 +39,7 @@ each threshold are:
 PR Atlas (this project) is a React SPA that demonstrates accessible search with
 debounced filtering, responsive layout, semantic HTML, comprehensive test
 coverage, documented architecture, and localStorage-backed saved searches. It
-covers **86 of 181 topics** across eight categories.
+covers **88 of 181 topics** across eight categories.
 
 ### Coverage by level
 
@@ -47,7 +47,7 @@ covers **86 of 181 topics** across eight categories.
 | ------- | ------- | ----------- | ------- | --------------------------- |
 | Trainee | 17 / 20 | 14 / 15     | 1       | 80% threshold met (17 ≥ 16) |
 | Junior  | 29 / 42 | 23 / 25     | 2       | Not yet (29 < 34)           |
-| Middle  | 23 / 60 | 18 / 25     | 7       | Not yet (23 < 48)           |
+| Middle  | 25 / 60 | 20 / 25     | 5       | Not yet (25 < 48)           |
 | Senior  | 17 / 59 | —           | —       | Not yet (17 < 30)           |
 
 ### Coverage by category
@@ -56,7 +56,7 @@ covers **86 of 181 topics** across eight categories.
 | --------------------------------------- | ------- | ----- | --- |
 | Language – JavaScript                   | 18      | 28    | 64% |
 | Framework – React JS Web                | 13      | 22    | 59% |
-| Libraries – React JS Web                | 7       | 24    | 29% |
+| Libraries – React JS Web                | 9       | 24    | 38% |
 | Markup and Styling                      | 20      | 24    | 83% |
 | Code-Based Testing – React JS Web       | 11      | 12    | 92% |
 | Design                                  | 9       | 13    | 69% |
@@ -69,7 +69,7 @@ covers **86 of 181 topics** across eight categories.
 
 ## Mandatory KEY topics not yet covered
 
-These 6 KEY topics still require coverage through code PRs.
+These 4 KEY topics still require coverage through code PRs.
 
 ### Network / API — one full-stack app covers all three
 
@@ -86,13 +86,13 @@ These 6 KEY topics still require coverage through code PRs.
 
 - **[Framework · Middle]** Applies security practices and approaches to protect application
 
-### Internationalization
+### Internationalization — covered by i18n feature (react-i18next EN/ES)
 
-- **[Libraries · Middle]** Handles different types of localization and text processing
+- ~~**[Libraries · Middle]** Handles different types of localization and text processing~~ ✅
 
-### Dependency management
+### Dependency management — covered by i18n feature (react-i18next + i18next install + pnpm audit)
 
-- **[Libraries · Middle]** Handles and resolves new versions of the packages
+- ~~**[Libraries · Middle]** Handles and resolves new versions of the packages~~ ✅
 
 ### Process / organizational — passed
 
@@ -103,7 +103,7 @@ These 6 KEY topics still require coverage through code PRs.
 
 ## Recommended next steps
 
-### Two features to close the remaining KEY gaps
+### Features to close the remaining KEY gaps
 
 1. ~~**Persist user preferences to localStorage** — implemented as saved searches feature~~ ✅
 
@@ -115,14 +115,9 @@ These 6 KEY topics still require coverage through code PRs.
    - [Libraries · Middle] Uses HTTP clients for API communication
    - [Framework · Middle] Applies security practices and approaches to protect application
 
-3. **Add i18n support with a dependency upgrade workflow** (e.g. integrate
-   `react-i18next`, document a dependency audit and version bump PR). Covers
-   2 KEY topics:
-   - [Libraries · Middle] Handles different types of localization and text processing
-   - [Libraries · Middle] Handles and resolves new versions of the packages
+3. ~~**Add i18n support with a dependency upgrade workflow** — implemented with react-i18next EN/ES, pnpm audit~~ ✅
 
-Features 2 and 3 together close every remaining KEY gap at Trainee, Junior, and
-Middle levels.
+Feature 2 closes every remaining KEY gap at Trainee, Junior, and Middle levels.
 
 ### Broader threshold coverage
 

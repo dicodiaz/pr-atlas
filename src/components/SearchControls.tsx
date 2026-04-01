@@ -1,4 +1,5 @@
 import { type FC, type KeyboardEvent, type RefObject, useId } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface SearchControlsProps {
   inputRef?: RefObject<HTMLInputElement | null>
@@ -17,6 +18,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
   onSave,
   query,
 }) => {
+  const { t } = useTranslation()
   const searchId = useId()
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -33,7 +35,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
           className="text-secondary mb-2 block text-sm font-medium"
           htmlFor={searchId}
         >
-          Search by topic, keyword, or PR title.
+          {t('search.label')}
         </label>
         <div className="border-strong flex rounded-2xl border bg-(--color-panel) shadow-(--shadow-row)">
           <input
@@ -43,7 +45,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Try: circuit breaker, observability, or bundle budget."
+            placeholder={t('search.placeholder')}
             className="search-input text-primary placeholder:text-muted focus-ring-panel min-w-0 flex-1 rounded-2xl border-0 bg-transparent px-5 py-4 text-base outline-none"
           />
         </div>
@@ -55,7 +57,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
           disabled={isSaveDisabled}
           className="text-secondary border-strong focus-ring-page hover:text-primary w-full rounded-2xl border bg-transparent px-4 py-4 text-sm font-medium transition hover:border-(--color-accent) disabled:cursor-not-allowed disabled:opacity-45 lg:w-auto"
         >
-          Save search
+          {t('search.save')}
         </button>
         <button
           type="button"
@@ -63,7 +65,7 @@ export const SearchControls: FC<SearchControlsProps> = ({
           disabled={query.length === 0}
           className="text-secondary border-strong focus-ring-page hover:text-primary w-full rounded-2xl border bg-transparent px-4 py-4 text-sm font-medium transition hover:border-(--color-accent) disabled:cursor-not-allowed disabled:opacity-45 lg:w-auto"
         >
-          Clear search
+          {t('search.clear')}
         </button>
       </div>
     </div>

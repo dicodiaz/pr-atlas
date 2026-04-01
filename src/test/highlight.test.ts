@@ -14,13 +14,13 @@ describe('getHighlightSegments', () => {
   })
 
   it('highlights matches case-insensitively and escapes regex characters', () => {
-    expect(getHighlightSegments('C++ gateway hardening', 'c++ gateway')).toEqual(
-      [
-        { text: 'C++', isMatch: true },
-        { text: ' ', isMatch: false },
-        { text: 'gateway', isMatch: true },
-        { text: ' hardening', isMatch: false },
-      ],
-    )
+    expect(
+      getHighlightSegments('C++ gateway hardening', 'c++ gateway'),
+    ).toEqual([
+      { text: 'C++', isMatch: true },
+      { text: ' ', isMatch: false },
+      { text: 'gateway', isMatch: true },
+      { text: ' hardening', isMatch: false },
+    ])
   })
 })

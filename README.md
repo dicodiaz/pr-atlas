@@ -1,6 +1,6 @@
 # PR Atlas
 
-PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned. Frequently used searches can be saved as persistent chips for quick reuse.
+PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned. Frequently used searches can be saved as persistent chips for quick reuse. The UI is available in English and Spanish.
 
 ## Stack
 
@@ -8,6 +8,7 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 - Vite
 - TypeScript
 - Tailwind CSS
+- react-i18next (EN/ES)
 - Vitest
 - React Testing Library
 - ESLint
@@ -18,6 +19,12 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 Topics are defined in [`src/data/sections.ts`](./src/data/sections.ts) using a compact section-based format grouped by category, technology, and seniority level. This file is the source of truth and rarely changes.
 
 Pull requests and their topic mappings live in [`src/data/topics.ts`](./src/data/topics.ts). To add a new PR, add an entry to `pullRequests` and map it to topics in `prTopicMappings` — no other files need to change.
+
+## Internationalization
+
+The app ships with English (`en`) and Spanish (`es`) translations. On first visit the browser language is detected; the user can switch manually via the language dropdown in the header. The preference is persisted to localStorage.
+
+To add a new language, create `src/i18n/locales/<code>.json` using `en.json` as a template, register it in `src/i18n/index.ts`, and add the option to `src/components/LanguageSwitcher.tsx`.
 
 ## Commands
 

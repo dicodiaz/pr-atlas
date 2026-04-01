@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { App } from '@/app/App'
 import { topics } from '@/data/topics'
+import i18n from '@/test/i18n-setup'
 
 const debounceMs = 250
 const announceMs = 1000
@@ -45,6 +46,7 @@ describe('App', () => {
     })
     vi.useRealTimers()
     localStorage.clear()
+    i18n.changeLanguage('en')
   })
 
   it('hydrates the search input from the url query parameter', () => {
@@ -371,5 +373,40 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /save search/i }))
 
     expect(screen.getByRole('button', { name: /save search/i })).toBeDisabled()
+  })
+
+  it('switches UI text to Spanish when changing language', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    expect(screen.getByText('Personal Interview Demo')).toBeInTheDocument()
+
+    act(() => {
+      i18n.changeLanguage('es')
+    })
+
+    expect(screen.getByText('Demo de entrevista personal')).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /guardar búsqueda/i }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /limpiar búsqueda/i }),
+    ).toBeInTheDocument()
+  })
+
+  it('persists language preference to localStorage', () => {
+    window.history.replaceState(null, '', '/')
+
+    render(<App />)
+
+    const langSelect = screen.getByRole('combobox', {
+      name: /language|idioma/i,
+    })
+
+    fireEvent.change(langSelect, { target: { value: 'es' } })
+
+    expect(localStorage.getItem('pr-atlas:language')).toBe('"es"')
+    expect(screen.getByText('Demo de entrevista personal')).toBeInTheDocument()
   })
 })

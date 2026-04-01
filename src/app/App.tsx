@@ -1,6 +1,8 @@
 import { type FC, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { EmptyState } from '@/components/EmptyState'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { SavedSearches } from '@/components/SavedSearches'
 import { SearchControls } from '@/components/SearchControls'
 import { TopicTable } from '@/components/TopicTable'
@@ -14,6 +16,7 @@ const SEARCH_DEBOUNCE_MS = 250
 const ANNOUNCE_DELAY_MS = 1000
 
 export const App: FC = () => {
+  const { t } = useTranslation()
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
   const [countAnnouncement, setCountAnnouncement] = useState('')
   const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -33,22 +36,22 @@ export const App: FC = () => {
     let delay: number
 
     if (activeQuery.length === 0) {
-      text = `Search cleared. Showing all ${topics.length} topics.`
+      text = t('announce.cleared', { count: topics.length })
       delay = 0
     } else if (trimmed.length === 0) {
-      text = `Showing all ${topics.length} topics.`
+      text = t('announce.showingAll', { count: topics.length })
       delay = 0
     } else if (results.length > 0) {
-      text = `${results.length} ${results.length === 1 ? 'topic' : 'topics'} shown for ${trimmed}. Tab to navigate to the results.`
+      text = t('announce.results', { count: results.length, query: trimmed })
       delay = ANNOUNCE_DELAY_MS
     } else {
-      text = `No matching topics found for ${trimmed}.`
+      text = t('announce.noResults', { query: trimmed })
       delay = ANNOUNCE_DELAY_MS
     }
 
     const id = setTimeout(() => setCountAnnouncement(text), delay)
     return () => clearTimeout(id)
-  }, [activeQuery, results.length])
+  }, [activeQuery, results.length, t])
 
   useEffect(() => {
     const handlePopState = () => {
@@ -89,9 +92,7 @@ export const App: FC = () => {
 
   const isSaveDisabled =
     inputQuery.trim().length === 0 ||
-    searches.some(
-      (s) => s.toLowerCase() === inputQuery.trim().toLowerCase(),
-    )
+    searches.some((s) => s.toLowerCase() === inputQuery.trim().toLowerCase())
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-330 flex-col px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
@@ -99,28 +100,28 @@ export const App: FC = () => {
         <div className="flex flex-col gap-8">
           <header className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-end">
             <div>
-              <p className="text-accent text-sm tracking-[0.2em] uppercase">
-                Personal Interview Demo
-              </p>
+              <div className="flex items-center gap-3">
+                <p className="text-accent text-sm tracking-[0.2em] uppercase">
+                  {t('header.badge')}
+                </p>
+                <LanguageSwitcher />
+              </div>
               <h1 className="text-primary font-display mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-                PR Atlas for technology topics and GitHub examples
+                {t('header.title')}
               </h1>
               <p className="text-secondary mt-4 max-w-3xl text-base leading-8 sm:text-lg">
-                Search 30+ interview-ready topics and jump straight to the pull
-                request stories that back them up. The dataset is local, typed,
-                and structured for easy refinement before live demos.
+                {t('header.subtitle')}
               </p>
             </div>
             <div className="border-default rounded-3xl border bg-[rgba(10,18,30,0.86)] p-5 shadow-(--shadow-row)">
               <p className="text-muted text-xs tracking-[0.18em] uppercase">
-                Dataset snapshot
+                {t('snapshot.label')}
               </p>
               <p className="text-primary font-display mt-3 text-3xl font-semibold">
                 {topics.length}
               </p>
               <p className="text-secondary mt-2 text-sm leading-6">
-                seeded topics with reusable PR references for interview prep and
-                structured walkthroughs.
+                {t('snapshot.description')}
               </p>
             </div>
           </header>
@@ -147,15 +148,14 @@ export const App: FC = () => {
                   id="results-heading"
                   className="text-primary font-display text-2xl font-semibold outline-none"
                 >
-                  Topic results
+                  {t('results.heading')}
                 </h2>
                 <p className="text-secondary mt-2 text-sm leading-6">
-                  One row per topic, with linked PR examples stacked inside the
-                  same result cell for fast scanning.
+                  {t('results.description')}
                 </p>
               </div>
               <p className="text-secondary text-sm font-medium">
-                {`${results.length} ${results.length === 1 ? 'topic' : 'topics'} shown`}
+                {t('results.count', { count: results.length })}
               </p>
               <p aria-live="polite" aria-atomic="true" className="sr-only">
                 {countAnnouncement}

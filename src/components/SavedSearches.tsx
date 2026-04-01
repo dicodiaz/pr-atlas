@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface SavedSearchesProps {
   searches: string[]
@@ -11,12 +12,18 @@ export const SavedSearches: FC<SavedSearchesProps> = ({
   onApply,
   onRemove,
 }) => {
+  const { t } = useTranslation()
+
   if (searches.length === 0) {
     return null
   }
 
   return (
-    <div aria-label="Saved searches" role="region" className="flex flex-wrap gap-2">
+    <div
+      aria-label={t('saved.region')}
+      role="region"
+      className="flex flex-wrap gap-2"
+    >
       {searches.map((query) => (
         <span
           key={query}
@@ -25,7 +32,7 @@ export const SavedSearches: FC<SavedSearchesProps> = ({
           <button
             type="button"
             onClick={() => onApply(query)}
-            aria-label={`Apply saved search: ${query}`}
+            aria-label={t('saved.apply', { query })}
             className="text-secondary hover:text-primary focus-ring cursor-pointer rounded-sm transition"
           >
             {query}
@@ -33,7 +40,7 @@ export const SavedSearches: FC<SavedSearchesProps> = ({
           <button
             type="button"
             onClick={() => onRemove(query)}
-            aria-label={`Remove saved search: ${query}`}
+            aria-label={t('saved.remove', { query })}
             className="text-muted hover:text-primary focus-ring cursor-pointer rounded-full p-0.5 transition"
           >
             <svg

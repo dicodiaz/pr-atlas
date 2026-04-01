@@ -5,7 +5,7 @@ alwaysApply: true
 
 # PR Atlas
 
-Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology topics and shows matching GitHub PR examples. Uses pnpm, Tailwind CSS v4 (via `@tailwindcss/vite`, no JS config), Vitest 4, React Testing Library, ESLint 9, and Prettier with Tailwind class sorting.
+Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology topics and shows matching GitHub PR examples. Uses pnpm, Tailwind CSS v4 (via `@tailwindcss/vite`, no JS config), react-i18next (EN/ES), Vitest 4, React Testing Library, ESLint 9, and Prettier with Tailwind class sorting.
 
 ## Key paths
 
@@ -18,7 +18,9 @@ Vite 8 + React 19 + TypeScript 5.9 SPA for interview prep. Searches technology t
 - `src/lib/use-saved-searches.ts` — saved searches hook (persist, deduplicate, cap at 20)
 - `src/lib/url-state.ts` — `?q=` query-string parsing and updates
 - `src/lib/use-debounced-value.ts` — 250ms debounce hook (two-layer state: `inputQuery` / `activeQuery`)
-- `src/components/` — `SearchControls`, `SavedSearches`, `TopicTable`, `HighlightText`, `EmptyState`
+- `src/i18n/index.ts` — i18next configuration (language detection, localStorage persistence, bundled translations)
+- `src/i18n/locales/en.json` / `es.json` — English and Spanish translation files
+- `src/components/` — `SearchControls`, `SavedSearches`, `TopicTable`, `HighlightText`, `EmptyState`, `LanguageSwitcher`
 - `src/types/topics.ts` — shared TypeScript models
 - `src/index.css` — Tailwind `@theme`, custom utilities (`panel-surface`, `fade-up`, `data-row`, `search-input`)
 
@@ -32,7 +34,8 @@ Tests live in `src/test/` and are split by responsibility:
 - `use-debounced-value.test.tsx` — debounce timing and flush
 - `storage.test.ts` — localStorage wrapper edge cases
 - `use-saved-searches.test.tsx` — saved searches hook behavior
-- `App.test.tsx` — integration: URL hydration, debounced results, clear, focus management, empty state, saved searches
+- `i18n-setup.ts` — test helper that initializes i18n with English bundle
+- `App.test.tsx` — integration: URL hydration, debounced results, clear, focus management, empty state, saved searches, language switching
 
 ## Tailwind conventions
 

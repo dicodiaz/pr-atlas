@@ -113,6 +113,19 @@ searches are persisted to `localStorage` via a typed wrapper in
 - Duplicates are prevented (case-insensitive).
 - The list is capped at 20 entries.
 
+## Internationalization
+
+The app supports English and Spanish via [react-i18next](https://react.i18next.com/).
+
+- Translation files live in `src/i18n/locales/en.json` and `src/i18n/locales/es.json`.
+- `src/i18n/index.ts` initializes i18next with bundled translations (no lazy loading), browser language detection on first visit, and fallback to English.
+- The chosen language is persisted to localStorage via the existing `storage` wrapper (`pr-atlas:language` key).
+- A `<LanguageSwitcher>` component in the header provides a `<select>` dropdown to switch between EN and ES.
+- All UI strings use `t()` from `useTranslation()`. Pluralization uses i18next's `_one`/`_other` suffix convention. The `<Trans>` component handles inline markup in translated strings (e.g. the empty state suggestion text).
+- Topic names, tags, and PR titles remain untranslated — they are proper competency names from the data layer.
+
+To add a new language, create a new JSON file in `src/i18n/locales/`, add it to the `resources` object in `src/i18n/index.ts`, and add an option to the `LANGUAGES` array in `LanguageSwitcher.tsx`.
+
 ## Performance notes
 
 The current UI is optimized for smooth typing without adding architectural
