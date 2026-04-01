@@ -53,21 +53,18 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                 </th>
                 <td className="px-6 py-5">
                   <ul className="space-y-3">
-                    {topic.prExamples.map((prExample) => (
-                      <li key={prExample.id}>
+                    {topic.prs.map((pr) => (
+                      <li key={pr.id}>
                         <a
-                          href={prExample.url}
+                          href={pr.url}
                           target="_blank"
                           rel="noreferrer noopener"
                           className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-start gap-2 rounded-xl px-3 py-2 text-sm leading-6"
-                          aria-label={`${prExample.title} (opens in a new tab)`}
+                          aria-label={`${pr.title} (opens in a new tab)`}
                         >
                           <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
                           <span>
-                            <HighlightText
-                              query={query}
-                              text={prExample.title}
-                            />
+                            <HighlightText query={query} text={pr.title} />
                           </span>
                         </a>
                       </li>

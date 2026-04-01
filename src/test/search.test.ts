@@ -1,4 +1,4 @@
-import { buildTopics, resolvePullRequests, topics } from '@/data/topics'
+import { topics } from '@/data/topics'
 import { getHighlightSegments } from '@/lib/highlight'
 import { matchesTopic, normalizeText, searchTopics } from '@/lib/search'
 
@@ -35,6 +35,12 @@ describe('search utilities', () => {
     expect(results.every((topic) => topic.tags.includes('Trainee'))).toBe(true)
   })
 
+  it('matches by PR title', () => {
+    const results = searchTopics(topics, 'debounced search')
+
+    expect(results.length).toBeGreaterThan(0)
+  })
+
   it('is case-insensitive and whitespace-tolerant', () => {
     const results = searchTopics(topics, '   VERSION     CONTROL ')
 
@@ -50,56 +56,6 @@ describe('search utilities', () => {
   it('returns a safe non-match segment for empty highlight input', () => {
     expect(getHighlightSegments('', 'api')).toEqual([
       { text: '', isMatch: false },
-    ])
-  })
-
-  it('throws when a topic references a missing PR id', () => {
-    expect(() =>
-      resolvePullRequests(
-        {
-          known: {
-            id: 'known',
-            title: 'Known PR',
-            url: 'https://github.com/example/repo/pull/1',
-          },
-        },
-        'missing',
-      ),
-    ).toThrow('Missing pull request seed for id "missing"')
-  })
-
-  it('builds topics from seed data and a shared PR catalog', () => {
-    const builtTopics = buildTopics(
-      [
-        {
-          id: 'demo-topic',
-          name: 'Demo Topic',
-          tags: ['demo'],
-          prExampleIds: ['shared-pr'],
-        },
-      ],
-      {
-        'shared-pr': {
-          id: 'shared-pr',
-          title: 'Shared PR',
-          url: 'https://github.com/example/repo/pull/2',
-        },
-      },
-    )
-
-    expect(builtTopics).toEqual([
-      {
-        id: 'demo-topic',
-        name: 'Demo Topic',
-        tags: ['demo'],
-        prExamples: [
-          {
-            id: 'shared-pr',
-            title: 'Shared PR',
-            url: 'https://github.com/example/repo/pull/2',
-          },
-        ],
-      },
     ])
   })
 
