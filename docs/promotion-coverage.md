@@ -69,7 +69,7 @@ eight categories.
 
 ## Mandatory KEY topics not yet covered
 
-These 12 KEY topics require other projects or process documentation.
+These 8 KEY topics still require coverage through code PRs.
 
 ### Network / API — one full-stack app covers all three
 
@@ -94,23 +94,42 @@ These 12 KEY topics require other projects or process documentation.
 
 - **[Libraries · Middle]** Handles and resolves new versions of the packages
 
-### Process / organizational — documented through workflow, not code
+### Process / organizational — passed
 
-- **[Expertise Contribution · Trainee]** Passes onboarding into Engineering and Technology Expertise including specialisation or practice
-- **[Technical Process · Junior]** Estimates tasks based on requirements
-- **[Expertise Contribution · Junior]** Passes Performance Review according to the process definition and requirements
-- **[Technical Process · Middle]** Manages technical debt based on priorities
+- ~~**[Expertise Contribution · Trainee]** Passes onboarding into Engineering and Technology Expertise including specialisation or practice~~ ✅
+- ~~**[Technical Process · Junior]** Estimates tasks based on requirements~~ ✅
+- ~~**[Expertise Contribution · Junior]** Passes Performance Review according to the process definition and requirements~~ ✅
+- ~~**[Technical Process · Middle]** Manages technical debt based on priorities~~ ✅
 
 ## Recommended next steps
 
-1. **One full-stack React app** with API calls, auth, localStorage, i18n, and
-   routing would cover nearly all 12 remaining KEY gaps plus dozens of threshold
-   topics across Libraries, Framework, and Language.
+### Three features to close the remaining KEY gaps
 
-2. **Process topics** (estimation, tech debt, performance review, onboarding)
-   are proven through documentation and workflow — no code PR is needed.
+1. **Persist user preferences to localStorage** (e.g. theme toggle or saved
+   searches). Covers 2 KEY topics:
+   - [Libraries · Junior] Simplifies access to browsers storage using tools or libraries
+   - [Language · Middle] Accesses and stores data in a client-side storage
 
-3. **Cloud Environments, Project Process, Generative AI, and Expertise
-   Contribution** categories (39 total topics) are all at 0% — picking up a
-   few easy ones from each is the fastest way to close the Senior 50%
-   threshold.
+2. **Fetch data from a remote API with security hardening** (e.g. load topics
+   from a JSON endpoint via `fetch`/Axios, add CSP headers, sanitize inputs).
+   Covers 4 KEY topics:
+   - [Language · Middle] Sends and retrieves data through a network using language capabilities
+   - [Libraries · Middle] Troubleshoots network using tools and libraries
+   - [Libraries · Middle] Uses HTTP clients for API communication
+   - [Framework · Middle] Applies security practices and approaches to protect application
+
+3. **Add i18n support with a dependency upgrade workflow** (e.g. integrate
+   `react-i18next`, document a dependency audit and version bump PR). Covers
+   2 KEY topics:
+   - [Libraries · Middle] Handles different types of localization and text processing
+   - [Libraries · Middle] Handles and resolves new versions of the packages
+
+All three together close every remaining KEY gap at Trainee, Junior, and Middle
+levels.
+
+### Broader threshold coverage
+
+**Cloud Environments, Project Process, Generative AI, and Expertise
+Contribution** categories (39 total topics) are all at 0% — picking up a
+few easy ones from each is the fastest way to close the Senior 50%
+threshold.
