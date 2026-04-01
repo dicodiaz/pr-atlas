@@ -15,9 +15,9 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 
 ## Local dataset
 
-The local dataset lives in [`src/data/topics.ts`](./src/data/topics.ts).
+Topics are defined in [`src/data/sections.ts`](./src/data/sections.ts) using a compact section-based format grouped by category, technology, and seniority level. This file is the source of truth and rarely changes.
 
-Topics are defined in a compact section-based format that auto-generates slugified IDs and tag arrays from category, technology, level, and key-skill metadata. The PR catalog is ready to receive real pull request examples — just add entries to `pullRequestCatalog` and reference them by ID in each section's topic entries.
+Pull requests and their topic mappings live in [`src/data/topics.ts`](./src/data/topics.ts). To add a new PR, add an entry to `pullRequests` and map it to topics in `prTopicMappings` — no other files need to change.
 
 ## Commands
 
@@ -91,7 +91,8 @@ A short architecture overview lives in [`docs/architecture.md`](./docs/architect
 
 Highlights:
 
-- `src/data/topics.ts` defines topics in a compact section-based format with auto-generated IDs and tag arrays
+- `src/data/sections.ts` defines topics in a compact section-based format (source of truth)
+- `src/data/topics.ts` holds pull requests, PR↔topic mappings, and the `buildTopics` function
 - `src/lib/search.ts` contains pure search logic that matches topic names, tags, and PR titles
 - `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/components` handles focused rendering concerns

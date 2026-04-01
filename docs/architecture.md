@@ -12,29 +12,25 @@
 
 ## Data model
 
-The local dataset lives in [`src/data/topics.ts`](../src/data/topics.ts). It uses:
+The dataset is split across two files:
 
-- a compact **section-based seed format** that groups topics by category, technology, and seniority level
-- a `slugify` helper that auto-generates topic IDs from the topic name
-- an `expandSections` function that flattens sections into `TopicSeed[]` with derived tag arrays
-- a shared pull request catalog keyed by PR id (currently empty — ready to receive real PR data)
-- `buildTopics` and `resolvePullRequests` helpers that resolve each topic's `prExampleIds` into full PR objects
-- a runtime duplicate-ID check that throws if two topics produce the same slug
+- [`src/data/sections.ts`](../src/data/sections.ts) — the **source of truth** for topics, grouped by category, technology, and seniority level. Each topic entry carries an explicit `TopicId` enum value, a human-readable name, and an optional `key` flag. This file rarely changes.
+- [`src/data/topics.ts`](../src/data/topics.ts) — pull requests, PR↔topic mappings, and the `buildTopics` function that assembles the final `Topic[]` array. **This is the only file to update when adding a new PR.**
 
-Each topic includes:
+To add a new pull request:
 
-- `id` — auto-slugified from the topic name
-- `name` — the human-readable competency description
-- `tags` — derived array containing category (e.g. "Language"), technology (e.g. "JavaScript"), level (e.g. "Senior"), and optionally "Key"
-- `prExamples` — resolved PR objects (empty until PRs are assigned)
+1. Add a member to the `PullRequestId` enum in `src/types/topics.ts`.
+2. Add an entry to the `pullRequests` array in `src/data/topics.ts`.
+3. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates.
 
-Each PR example includes:
+Type definitions live in [`src/types/topics.ts`](../src/types/topics.ts):
 
-- `id`
-- `title`
-- `url`
+- `PullRequestId` enum — identifies each PR
+- `TopicId` enum — identifies each topic (181 members, one per competency)
+- `PullRequest` interface — `id`, `title`, `url`
+- `Topic` interface — `id`, `name`, `tags`, `prs`
 
-The section format keeps authoring compact (one entry per topic instead of a full object) while the expand step guarantees consistent tag structure. PRs can still be shared across multiple topics without duplicating metadata.
+Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. PRs can be shared across multiple topics without duplicating metadata.
 
 ## Search strategy
 
@@ -118,11 +114,9 @@ complexity.
 
 ## Why this supports later PR-data refinement
 
-To add real PR examples, populate `pullRequestCatalog` in
-[`src/data/topics.ts`](../src/data/topics.ts) and add PR IDs to individual topic entries
-in the `sections` array. No changes to rendering or search architecture are needed.
+To add a new PR, add it to the `pullRequests` array and map it to topics in `prTopicMappings` — both in [`src/data/topics.ts`](../src/data/topics.ts). No changes to sections, rendering, or search architecture are needed.
 
-- the compact section format makes bulk topic edits easy
-- shared PR relationships already exist via the catalog
+- the section source of truth is stable and separate from PR assignment
+- shared PR relationships are handled by `prTopicMappings`
 - UI components stay data-agnostic
 - search behavior continues to work as long as topics and PRs preserve the same typed shape
