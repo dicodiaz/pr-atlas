@@ -1,5 +1,6 @@
 export enum PullRequestId {
   PR_ATLAS = 'pr-atlas',
+  PROCESS_EVIDENCE = 'process-evidence',
 }
 
 export const PR_FEATURES = {
@@ -14,6 +15,9 @@ export const PR_FEATURES = {
     'Architecture',
     'Build and tooling',
     'Coverage dashboard',
+  ],
+  [PullRequestId.PROCESS_EVIDENCE]: [
+    'Onboarding and reviews',
   ],
 } as const satisfies Record<PullRequestId, readonly string[]>
 

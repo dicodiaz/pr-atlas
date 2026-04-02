@@ -20,6 +20,11 @@ const pullRequests: PullRequest[] = [
     title: 'PR Atlas',
     url: 'https://github.com/dicodiaz/pr-atlas',
   },
+  {
+    id: PullRequestId.PROCESS_EVIDENCE,
+    title: 'Process evidence (pending confirmation)',
+    url: '#',
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -436,6 +441,22 @@ const prTopicMappings: PrTopicMappings = {
     {
       topicId: TopicId.OPTIMISES_APPLICATIONS_FOR_SEARCH_ENGINES,
       feature: 'Coverage dashboard',
+    },
+  ],
+  [PullRequestId.PROCESS_EVIDENCE]: [
+    {
+      topicId:
+        TopicId.PASSES_ONBOARDING_INTO_ENGINEERING_AND_TECHNOLOGY_EXPERTISE_INCLUDING_SPECIALISATION_OR_PRACTICE,
+      feature: 'Onboarding and reviews',
+    },
+    {
+      topicId:
+        TopicId.PASSES_PERFORMANCE_REVIEW_ACCORDING_TO_THE_PROCESS_DEFINITION_AND_REQUIREMENTS,
+      feature: 'Onboarding and reviews',
+    },
+    {
+      topicId: TopicId.ESTIMATES_TASKS_BASED_ON_REQUIREMENTS,
+      feature: 'Onboarding and reviews',
     },
   ],
 }
