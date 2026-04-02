@@ -8,9 +8,7 @@ import {
   computeThresholds,
 } from '@/lib/coverage'
 
-const makeTopic = (
-  overrides: Partial<Topic> & { tags: string[] },
-): Topic => ({
+const makeTopic = (overrides: Partial<Topic> & { tags: string[] }): Topic => ({
   id: TopicId.MANAGES_COLLECTIONS_OF_DATA_USING_LANGUAGE,
   name: 'Test topic',
   prs: [],
@@ -114,7 +112,7 @@ describe('coverage utilities', () => {
 
     const catStats = computeCategoryStats(synthetic)
     expect(catStats).toHaveLength(1)
-    expect(catStats[0].category).toBe('Unknown')
+    expect(catStats[0]!.category).toBe('Unknown')
 
     const levelStats = computeLevelStats(synthetic)
     expect(levelStats).toHaveLength(0)

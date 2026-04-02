@@ -15,10 +15,11 @@ export const PR_FEATURES = {
     'Architecture',
     'Build and tooling',
     'Coverage dashboard',
+    'Enhanced search',
+    'Logging',
+    'E2E tests',
   ],
-  [PullRequestId.PROCESS_EVIDENCE]: [
-    'Onboarding and reviews',
-  ],
+  [PullRequestId.PROCESS_EVIDENCE]: ['Onboarding and reviews'],
 } as const satisfies Record<PullRequestId, readonly string[]>
 
 export enum TopicId {

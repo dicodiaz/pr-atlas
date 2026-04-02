@@ -1,6 +1,6 @@
 # PR Atlas
 
-PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts. The UI is available in English and Spanish.
+PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned. Search is powered by a trigram inverted index running in a Web Worker, with inline ghost-text autocomplete. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts. The UI is available in English and Spanish. Structured logging via consola is available in debug mode (Ctrl+Shift+D).
 
 ## Stack
 
@@ -10,9 +10,11 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 - Tailwind CSS
 - react-router
 - Recharts
+- consola
 - react-i18next (EN/ES)
 - Vitest
 - React Testing Library
+- Playwright
 - ESLint
 - Prettier
 
@@ -52,6 +54,12 @@ Run tests in watch mode:
 
 ```bash
 pnpm test:watch
+```
+
+Run E2E tests (requires a production build):
+
+```bash
+pnpm build && pnpm test:e2e
 ```
 
 Run linting:
@@ -102,7 +110,11 @@ Highlights:
 
 - `src/data/sections.ts` defines topics in a compact section-based format (source of truth)
 - `src/data/topics.ts` holds pull requests, PR↔topic mappings, and the `buildTopics` function
-- `src/lib/search.ts` contains pure search logic that matches topic names, tags, and PR titles
+- `src/lib/search-index.ts` implements a trigram inverted index for fast substring matching
+- `src/lib/search-worker.ts` offloads search to a Web Worker
+- `src/lib/autocomplete.ts` provides inline ghost-text suggestions via sorted dictionary + binary search
+- `src/lib/logger.ts` provides structured logging with consola and a debug mode toggle
+- `src/lib/search.ts` contains pure search logic (fallback and testing)
 - `src/lib/coverage.ts` computes coverage stats for the dashboard charts
 - `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/pages/SearchPage.tsx` renders the topic search and results table at `/`
@@ -120,10 +132,11 @@ The test suite is intentionally split by responsibility:
 - `src/test/highlight.test.ts`: highlight segmentation and edge cases
 - `src/test/url-state.test.ts`: query-string parsing and URL update behavior
 - `src/test/use-debounced-value.test.tsx`: debounce timing and immediate flush behavior
-- `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, clear behavior, focus management, and empty-state rendering
+- `src/test/search-index.test.ts`: trigram index construction, search, and parity with linear search
+- `src/test/autocomplete.test.ts`: dictionary building and prefix suggestion logic
+- `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, clear behavior, focus management, empty-state rendering, autocomplete, and debug toggle
+- `e2e/`: Playwright E2E tests covering search, saved searches, dashboard, and i18n
 
 This keeps pure logic tests focused and fast while reserving the app-level tests
-for behavior that only matters when the pieces are wired together.
-
-The current testing split also helps preserve strong branch coverage without
-stuffing every edge case into the top-level app test file.
+for behavior that only matters when the pieces are wired together. E2E tests
+validate full user workflows in a real browser.

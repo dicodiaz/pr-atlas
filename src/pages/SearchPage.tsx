@@ -6,10 +6,12 @@ import { SavedSearches } from '@/components/SavedSearches'
 import { SearchControls } from '@/components/SearchControls'
 import { TopicTable } from '@/components/TopicTable'
 import { topics } from '@/data/topics'
-import { searchTopics } from '@/lib/search'
+import { buildDictionary } from '@/lib/autocomplete'
+import { logger } from '@/lib/logger'
 import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
 import { useDebouncedValue } from '@/lib/use-debounced-value'
 import { useSavedSearches } from '@/lib/use-saved-searches'
+import { useSearchWorker } from '@/lib/use-search-worker'
 
 const SEARCH_DEBOUNCE_MS = 250
 const ANNOUNCE_DELAY_MS = 1000
@@ -23,10 +25,14 @@ export const SearchPage: FC = () => {
     inputQuery,
     SEARCH_DEBOUNCE_MS,
   )
-  const results = useMemo(
-    () => searchTopics(topics, activeQuery),
-    [activeQuery],
-  )
+
+  const results = useSearchWorker(topics, activeQuery)
+
+  const dictionary = useMemo(() => buildDictionary(topics), [])
+
+  useEffect(() => {
+    logger.debug(`Search: "${activeQuery.trim()}" → ${results.length} results`)
+  }, [activeQuery, results.length])
 
   useEffect(() => {
     const trimmed = activeQuery.trim()
@@ -121,6 +127,7 @@ export const SearchPage: FC = () => {
       </header>
 
       <SearchControls
+        dictionary={dictionary}
         inputRef={searchInputRef}
         isSaveDisabled={isSaveDisabled}
         query={inputQuery}

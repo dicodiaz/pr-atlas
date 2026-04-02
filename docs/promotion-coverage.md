@@ -36,33 +36,33 @@ each threshold are:
 
 ## Current coverage
 
-PR Atlas plus process evidence covers **94 of 181 topics**.
+PR Atlas plus process evidence covers **98 of 181 topics**.
 
 ### Coverage by level
 
-| Level   | Covered | KEY covered | KEY gap | Threshold met?                         |
-| ------- | ------- | ----------- | ------- | -------------------------------------- |
-| Trainee | 18 / 20 | 15 / 15     | 0       | KEY ✅ — 80% threshold met (18 ≥ 16)  |
-| Junior  | 31 / 42 | 25 / 25     | 0       | KEY ✅ — Not yet total (31 < 34)       |
-| Middle  | 25 / 60 | 20 / 25     | 5       | Not yet (25 < 48)                      |
-| Senior  | 20 / 59 | —           | —       | Not yet (20 < 30)                      |
+| Level   | Covered | KEY covered | KEY gap | Threshold met?                       |
+| ------- | ------- | ----------- | ------- | ------------------------------------ |
+| Trainee | 18 / 20 | 15 / 15     | 0       | KEY ✅ — 80% threshold met (18 ≥ 16) |
+| Junior  | 31 / 42 | 25 / 25     | 0       | KEY ✅ — Not yet total (31 < 34)     |
+| Middle  | 25 / 60 | 20 / 25     | 5       | Not yet (25 < 48)                    |
+| Senior  | 24 / 59 | —           | —       | Not yet (24 < 30)                    |
 
 ### Coverage by category
 
-| Category                                | Covered | Total | %   |
-| --------------------------------------- | ------- | ----- | --- |
-| Language – JavaScript                   | 18      | 28    | 64% |
-| Framework – React JS Web               | 13      | 22    | 59% |
-| Libraries – React JS Web               | 9       | 24    | 38% |
-| Markup and Styling                      | 20      | 24    | 83% |
-| Code-Based Testing – React JS Web      | 11      | 12    | 92% |
-| Design                                  | 9       | 13    | 69% |
-| Development Environments – React JS Web | 8       | 15    | 53% |
-| Cloud Environments                      | 0       | 4     | 0%  |
-| Project Process                         | 0       | 10    | 0%  |
-| Technical Process                       | 1       | 4     | 25% |
-| Expertise Contribution                  | 2       | 11    | 18% |
-| Generative AI                           | 0       | 14    | 0%  |
+| Category                                | Covered | Total | %    |
+| --------------------------------------- | ------- | ----- | ---- |
+| Language – JavaScript                   | 20      | 28    | 71%  |
+| Framework – React JS Web                | 13      | 22    | 59%  |
+| Libraries – React JS Web                | 10      | 24    | 42%  |
+| Markup and Styling                      | 20      | 24    | 83%  |
+| Code-Based Testing – React JS Web       | 12      | 12    | 100% |
+| Design                                  | 9       | 13    | 69%  |
+| Development Environments – React JS Web | 8       | 15    | 53%  |
+| Cloud Environments                      | 0       | 4     | 0%   |
+| Project Process                         | 0       | 10    | 0%   |
+| Technical Process                       | 1       | 4     | 25%  |
+| Expertise Contribution                  | 2       | 11    | 18%  |
+| Generative AI                           | 0       | 14    | 0%   |
 
 ## Mandatory KEY topics not yet covered
 
@@ -116,7 +116,7 @@ These 4 KEY topics still require coverage through code PRs.
 
 Feature 2 closes every remaining KEY gap at Trainee, Junior, and Middle levels.
 
-### Senior threshold coverage (20 / 59 → 35 / 59)
+### Senior threshold coverage (24 / 59 → 35 / 59)
 
 11 of 23 Senior KEY topics remain uncovered. 3 of those cannot be covered
 by FE features (client-server network protocols requires backend work;
@@ -130,17 +130,12 @@ activity). The following 2 features cover the remaining 8 KEY topics plus
    - ~~[Libraries · Senior] Provides data visualizations through visualization tools~~ ✅
    - ~~[Markup and Styling · Senior] Optimises applications for search engines~~ ✅
 
-5. **Enhanced search with autocomplete and performance logging**
-   (user-centric). Replace the linear search scan with a pre-built
-   inverted index, run indexing and queries in a Web Worker, add
-   autocomplete suggestions as the user types, and add a structured
-   logging library with an opt-in debug mode toggle. Validate the
-   experience with a Playwright E2E suite.
-   Covers 1 KEY + 3 non-key:
-   - [Libraries · Senior · KEY] Uses libraries for logging data
-   - [Language · Senior] Manages and implements complex data structures
-   - [Language · Senior] Synchronises concurrent operations by using language capabilities
-   - [Code-Based Testing · Senior] Creates and organises end-to-end tests
+5. ~~**Enhanced search with autocomplete and performance logging** — implemented with trigram inverted index, Web Worker, inline ghost-text autocomplete, consola logging with debug toggle, and Playwright E2E suite~~ ✅
+   Covered 1 KEY + 3 non-key:
+   - ~~[Libraries · Senior · KEY] Uses libraries for logging data~~ ✅
+   - ~~[Language · Senior] Manages and implements complex data structures~~ ✅
+   - ~~[Language · Senior] Synchronises concurrent operations by using language capabilities~~ ✅
+   - ~~[Code-Based Testing · Senior] Creates and organises end-to-end tests~~ ✅
 
 6. **CI/CD pipeline and project process documentation** (dev/process).
    Add GitHub Actions CI, contribution workflow (CONTRIBUTING.md,

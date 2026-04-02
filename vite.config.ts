@@ -15,6 +15,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './vitest.setup.ts',
+    exclude: ['node_modules/**', 'e2e/**', '.pnpm-store/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -24,6 +25,10 @@ export default defineConfig({
         'src/i18n/**',
         'src/types/**',
         'src/components/charts/**',
+        'src/lib/search-worker.ts',
+        'src/lib/search-worker-protocol.ts',
+        'src/lib/use-search-worker.ts',
+        'src/lib/logger.ts',
       ],
     },
   },

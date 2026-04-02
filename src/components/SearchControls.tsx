@@ -1,7 +1,10 @@
 import { type FC, type KeyboardEvent, type RefObject, useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { GhostInput } from '@/components/GhostInput'
+
 interface SearchControlsProps {
+  dictionary: string[]
   inputRef?: RefObject<HTMLInputElement | null>
   isSaveDisabled: boolean
   onClear: () => void
@@ -11,6 +14,7 @@ interface SearchControlsProps {
 }
 
 export const SearchControls: FC<SearchControlsProps> = ({
+  dictionary,
   inputRef,
   isSaveDisabled,
   onClear,
@@ -38,15 +42,14 @@ export const SearchControls: FC<SearchControlsProps> = ({
           {t('search.label')}
         </label>
         <div className="border-strong flex rounded-2xl border bg-(--color-panel) shadow-(--shadow-row)">
-          <input
-            ref={inputRef}
+          <GhostInput
+            inputRef={inputRef}
             id={searchId}
-            type="search"
             value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
+            onChange={onQueryChange}
             onKeyDown={handleKeyDown}
             placeholder={t('search.placeholder')}
-            className="search-input text-primary placeholder:text-muted focus-ring-panel min-w-0 flex-1 rounded-2xl border-0 bg-transparent px-5 py-4 text-base outline-none"
+            dictionary={dictionary}
           />
         </div>
       </div>

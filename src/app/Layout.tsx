@@ -1,11 +1,30 @@
-import type { FC } from 'react'
+import { type FC, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router'
 
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { isDebugEnabled, logger, toggleDebug } from '@/lib/logger'
 
 export const Layout: FC = () => {
   const { t } = useTranslation()
+  const [debug, setDebug] = useState(isDebugEnabled)
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+        event.preventDefault()
+        const next = toggleDebug()
+        setDebug(next)
+        logger.info(next ? t('debug.enabled') : t('debug.disabled'))
+      }
+    },
+    [t],
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [handleKeyDown])
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `focus-ring cursor-pointer rounded-xl px-3 py-2 text-sm font-medium transition ${
@@ -26,6 +45,11 @@ export const Layout: FC = () => {
               <NavLink to="/dashboard" className={linkClass}>
                 {t('nav.dashboard')}
               </NavLink>
+              {debug && (
+                <span className="ml-2 rounded-md bg-amber-500/20 px-2 py-0.5 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+                  {t('debug.badge')}
+                </span>
+              )}
             </div>
             <LanguageSwitcher />
           </nav>

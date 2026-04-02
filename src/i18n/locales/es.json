@@ -36,5 +36,9 @@
   "dashboard.thresholds": "Umbrales de promoción",
   "dashboard.met": "cumplido",
   "dashboard.remaining_one": "{{count}} restante",
-  "dashboard.remaining_other": "{{count}} restantes"
+  "dashboard.remaining_other": "{{count}} restantes",
+  "search.acceptSuggestion": "Sugerencia: {{suggestion}}. Presiona Tab o Flecha Derecha para aceptar.",
+  "debug.badge": "DEBUG",
+  "debug.enabled": "Modo depuración activado",
+  "debug.disabled": "Modo depuración desactivado"
 }

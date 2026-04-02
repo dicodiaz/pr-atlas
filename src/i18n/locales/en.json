@@ -36,5 +36,9 @@
   "dashboard.thresholds": "Promotion thresholds",
   "dashboard.met": "met",
   "dashboard.remaining_one": "{{count}} remaining",
-  "dashboard.remaining_other": "{{count}} remaining"
+  "dashboard.remaining_other": "{{count}} remaining",
+  "search.acceptSuggestion": "Suggestion: {{suggestion}}. Press Tab or Right Arrow to accept.",
+  "debug.badge": "DEBUG",
+  "debug.enabled": "Debug mode enabled",
+  "debug.disabled": "Debug mode disabled"
 }

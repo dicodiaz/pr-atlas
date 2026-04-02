@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -433,6 +427,51 @@ describe('App', () => {
 
     expect(screen.getByRole('link', { name: /search/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /dashboard/i })).toBeInTheDocument()
+  })
+
+  it('accepts autocomplete suggestion with Tab key', () => {
+    window.history.replaceState(null, '', '/')
+
+    renderApp()
+
+    const input = getSearchInput()
+
+    fireEvent.change(input, { target: { value: 'deboun' } })
+
+    fireEvent.keyDown(input, { key: 'Tab' })
+
+    expect(input).toHaveValue('debounced search')
+  })
+
+  it('accepts autocomplete suggestion with ArrowRight at end of input', () => {
+    window.history.replaceState(null, '', '/')
+
+    renderApp()
+
+    const input = getSearchInput() as HTMLInputElement
+
+    fireEvent.change(input, { target: { value: 'deboun' } })
+
+    Object.defineProperty(input, 'selectionStart', { value: 6, writable: true })
+    fireEvent.keyDown(input, { key: 'ArrowRight' })
+
+    expect(input).toHaveValue('debounced search')
+  })
+
+  it('toggles debug mode with Ctrl+Shift+D', () => {
+    window.history.replaceState(null, '', '/')
+
+    renderApp()
+
+    expect(screen.queryByText('DEBUG')).not.toBeInTheDocument()
+
+    fireEvent.keyDown(window, { key: 'D', ctrlKey: true, shiftKey: true })
+
+    expect(screen.getByText('DEBUG')).toBeInTheDocument()
+
+    fireEvent.keyDown(window, { key: 'D', ctrlKey: true, shiftKey: true })
+
+    expect(screen.queryByText('DEBUG')).not.toBeInTheDocument()
   })
 
   it('lazy-loads the dashboard page at /dashboard', async () => {

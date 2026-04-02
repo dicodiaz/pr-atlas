@@ -7,8 +7,9 @@
 - `src/components`: focused UI building blocks
 - `src/components/charts`: Recharts visualizations for the dashboard
 - `src/data`: local topic and PR seed data
-- `src/lib`: pure utilities for search, highlighting, and coverage stats
+- `src/lib`: pure utilities for search, highlighting, coverage stats, autocomplete, logging, and Web Worker orchestration
 - `src/test`: Vitest and React Testing Library coverage split by responsibility
+- `e2e`: Playwright end-to-end tests (search, saved searches, dashboard, i18n)
 - `src/types`: shared TypeScript models
 - `docs`: supporting project documentation
 
@@ -41,30 +42,31 @@ Each topic's `tags` array is derived at build time from the section's category, 
 
 ## Search strategy
 
-Search logic lives in [`src/lib/search.ts`](../src/lib/search.ts).
+Search is powered by two layers:
 
-- input is normalized to lowercase with collapsed whitespace
-- queries are tokenized into space-separated terms
-- each topic builds a search index from its name, tags, PR titles, and PR feature names
-- a topic matches when every query token appears somewhere in that topic index
+1. **Trigram inverted index** ([`src/lib/search-index.ts`](../src/lib/search-index.ts)) — a `TrigramIndex` class that pre-computes a `Map<string, Set<number>>` mapping every 3-character substring to the topic indices that contain it. At query time, trigram sets for each token are intersected to narrow candidates, then a full substring verification eliminates false positives. Tokens shorter than 3 characters fall back to linear scan.
 
-That approach keeps the behavior simple, testable, and tolerant of casing, extra spaces, and partial phrase searches.
+2. **Web Worker** ([`src/lib/search-worker.ts`](../src/lib/search-worker.ts)) — a module worker that imports the topics data, builds the trigram index on load, and handles search queries via `postMessage`. This moves indexing and querying off the main thread.
 
-## Search limitations
+The [`useSearchWorker`](../src/lib/use-search-worker.ts) hook manages the worker lifecycle and falls back to synchronous search (via [`src/lib/search.ts`](../src/lib/search.ts)) when Workers are unavailable (e.g. in jsdom tests).
 
-The current search intentionally favors predictability over complexity.
+The original linear search in `src/lib/search.ts` is retained as a fallback and for unit testing.
 
-- matching is token-based rather than fuzzy-ranked
-- search is case-insensitive
-- extra whitespace is collapsed before matching
-- partial substring matches are allowed within the normalized topic index
-- results are not typo-tolerant
-- results are not ranked by relevance; matching topics keep their data order
+## Autocomplete
 
-This is a good fit for a small local interview-prep dataset. If the dataset
-grows substantially or relevance becomes more important, the next iteration
-could introduce a precomputed search index or fuzzy-ranking layer without
-changing the table-oriented rendering model.
+Inline ghost-text autocomplete is implemented via:
+
+- [`src/lib/autocomplete.ts`](../src/lib/autocomplete.ts) — builds a sorted, deduplicated dictionary from topic names, tags, PR titles, and feature names. Uses binary search to find the first dictionary entry matching the user's typed prefix.
+- [`src/components/GhostInput.tsx`](../src/components/GhostInput.tsx) — renders a transparent input over a mirror div showing the suggestion in muted text. Tab or Right Arrow (at end of input) accepts the suggestion.
+
+## Structured logging
+
+The app uses [consola](https://github.com/unjs/consola) for structured, level-based logging ([`src/lib/logger.ts`](../src/lib/logger.ts)).
+
+- Log level defaults to `1` (warnings/errors only).
+- An opt-in debug mode (Ctrl+Shift+D) raises the level to `4` (debug), persisted to localStorage via the `pr-atlas:debug` key.
+- When debug mode is active, a "DEBUG" badge appears in the nav bar.
+- Key events are logged: search queries, worker lifecycle, and autocomplete acceptance.
 
 ## Routing
 
@@ -106,8 +108,11 @@ through the top-level app screen.
 - helper tests cover search-adjacent utilities such as highlighting and URL query state
 - hook tests cover debounce timing and flush behavior in isolation
 - coverage utility tests verify category/level grouping and threshold math
+- search index tests verify trigram-based matching against known queries
+- autocomplete tests verify dictionary building and prefix suggestion logic
 - app tests cover integration points such as hydration, debounced filtering,
-  result rendering, clear behavior, empty states, and router navigation
+  result rendering, clear behavior, empty states, router navigation, autocomplete acceptance, and debug toggle
+- Playwright E2E tests (`e2e/`) validate full-app workflows: search with ghost-text autocomplete, saved searches, dashboard navigation, and language switching
 
 That split keeps the app-level suite meaningful while still covering smaller
 branches where they naturally belong.
@@ -158,13 +163,14 @@ To add a new language, create a new JSON file in `src/i18n/locales/`, add it to 
 The current UI is optimized for smooth typing without adding architectural
 complexity.
 
+- search queries are offloaded to a Web Worker via a trigram inverted index, keeping the main thread free for UI rendering
+- the worker is code-split by Vite into its own chunk, loaded only once on first render
 - filtered results are memoized in the app layer
 - the topic table is memoized so it does not rerender on every keystroke before
   the debounced query changes
 - debounce behavior is isolated in a small hook in `src/lib`
 - the dashboard page is code-split with `React.lazy()` + `Suspense` so the Recharts bundle only loads on demand
-- current optimizations are intentionally lightweight because the dataset is still local and relatively small
-- the next likely optimization, if the dataset grows substantially, would be precomputing topic search text in the data layer rather than rebuilding it during every filter pass
+- the autocomplete dictionary is built once via `useMemo` and reused across renders
 
 ## Why this supports later PR-data refinement
 

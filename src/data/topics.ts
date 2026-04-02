@@ -442,6 +442,27 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.OPTIMISES_APPLICATIONS_FOR_SEARCH_ENGINES,
       feature: 'Coverage dashboard',
     },
+
+    // Enhanced search
+    {
+      topicId: TopicId.MANAGES_AND_IMPLEMENTS_COMPLEX_DATA_STRUCTURES,
+      feature: 'Enhanced search',
+    },
+    {
+      topicId:
+        TopicId.SYNCHRONISES_CONCURRENT_OPERATIONS_BY_USING_LANGUAGE_CAPABILITIES,
+      feature: 'Enhanced search',
+    },
+    {
+      topicId: TopicId.CREATES_AND_ORGANISES_END_TO_END_TESTS,
+      feature: 'E2E tests',
+    },
+
+    // Logging
+    {
+      topicId: TopicId.USES_LIBRARIES_FOR_LOGGING_DATA,
+      feature: 'Logging',
+    },
   ],
   [PullRequestId.PROCESS_EVIDENCE]: [
     {
