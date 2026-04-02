@@ -1,4 +1,11 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react'
+import { BrowserRouter } from 'react-router'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { App } from '@/app/App'
@@ -7,6 +14,13 @@ import i18n from '@/test/i18n-setup'
 
 const debounceMs = 250
 const announceMs = 1000
+
+const renderApp = () =>
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+  )
 
 const advanceTimers = (ms: number) => {
   act(() => {
@@ -41,10 +55,12 @@ describe('App', () => {
   })
 
   afterEach(() => {
-    act(() => {
-      vi.runOnlyPendingTimers()
-    })
-    vi.useRealTimers()
+    if (vi.isFakeTimers()) {
+      act(() => {
+        vi.runOnlyPendingTimers()
+      })
+      vi.useRealTimers()
+    }
     localStorage.clear()
     i18n.changeLanguage('en')
   })
@@ -52,7 +68,7 @@ describe('App', () => {
   it('hydrates the search input from the url query parameter', () => {
     window.history.replaceState(null, '', '/?q=metaprogramming')
 
-    render(<App />)
+    renderApp()
 
     expect(getSearchInput()).toHaveValue('metaprogramming')
     expect(
@@ -65,7 +81,7 @@ describe('App', () => {
   it('renders one row per topic by default', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     expect(screen.getAllByRole('row')).toHaveLength(topics.length + 1)
   })
@@ -73,7 +89,7 @@ describe('App', () => {
   it('applies debounced results only after the delay', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -99,7 +115,7 @@ describe('App', () => {
   it('clears the search and restores the full topic list', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     const searchInput = getSearchInput()
 
@@ -121,7 +137,7 @@ describe('App', () => {
   it('returns focus to the search input after clicking Clear', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     const searchInput = getSearchInput()
 
@@ -136,7 +152,7 @@ describe('App', () => {
   it('renders singular result count for one matching topic', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -155,7 +171,7 @@ describe('App', () => {
   it('clears the search immediately on Escape', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     const searchInput = getSearchInput()
 
@@ -171,7 +187,7 @@ describe('App', () => {
   it('does not clear the search when Escape is pressed on an empty input', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     const searchInput = getSearchInput()
 
@@ -184,7 +200,7 @@ describe('App', () => {
   it('announces showing all topics without search cleared for whitespace-only input', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), { target: { value: '   ' } })
     advanceDebounce()
@@ -199,7 +215,7 @@ describe('App', () => {
   it('delays the screen reader announcement until after the announce delay', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
     advanceTimers(0)
 
     const liveRegion = getLiveRegion()
@@ -228,7 +244,7 @@ describe('App', () => {
   it('shows an empty state when no results match', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'quantum compiler dragons' },
@@ -246,7 +262,7 @@ describe('App', () => {
   it('writes the debounced query into the url', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -262,7 +278,7 @@ describe('App', () => {
   it('updates the search state when navigating with browser history', async () => {
     window.history.replaceState(null, '', '/?q=metaprogramming')
 
-    render(<App />)
+    renderApp()
 
     await act(async () => {
       window.history.pushState(null, '', '/?q=version+control')
@@ -280,7 +296,7 @@ describe('App', () => {
   it('saves a search as a chip when clicking Save search', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -298,7 +314,7 @@ describe('App', () => {
   it('applies a saved search when clicking a chip', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -328,7 +344,7 @@ describe('App', () => {
   it('removes a saved search chip when clicking the remove button', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -357,7 +373,7 @@ describe('App', () => {
   it('disables the Save search button when the query is empty', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     expect(screen.getByRole('button', { name: /save search/i })).toBeDisabled()
   })
@@ -365,7 +381,7 @@ describe('App', () => {
   it('disables the Save search button when the query is already saved', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     fireEvent.change(getSearchInput(), {
       target: { value: 'metaprogramming' },
@@ -378,7 +394,7 @@ describe('App', () => {
   it('switches UI text to Spanish when changing language', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     expect(screen.getByText('Personal Interview Demo')).toBeInTheDocument()
 
@@ -398,7 +414,7 @@ describe('App', () => {
   it('persists language preference to localStorage', () => {
     window.history.replaceState(null, '', '/')
 
-    render(<App />)
+    renderApp()
 
     const langSelect = screen.getByRole('combobox', {
       name: /language|idioma/i,
@@ -408,5 +424,26 @@ describe('App', () => {
 
     expect(localStorage.getItem('pr-atlas:language')).toBe('"es"')
     expect(screen.getByText('Demo de entrevista personal')).toBeInTheDocument()
+  })
+
+  it('renders nav links for search and dashboard', () => {
+    window.history.replaceState(null, '', '/')
+
+    renderApp()
+
+    expect(screen.getByRole('link', { name: /search/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /dashboard/i })).toBeInTheDocument()
+  })
+
+  it('lazy-loads the dashboard page at /dashboard', async () => {
+    vi.useRealTimers()
+
+    window.history.replaceState(null, '', '/dashboard')
+
+    renderApp()
+
+    await waitFor(() => {
+      expect(screen.getByText(/coverage analytics/i)).toBeInTheDocument()
+    })
   })
 })

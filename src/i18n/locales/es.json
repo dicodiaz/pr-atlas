@@ -1,4 +1,6 @@
 {
+  "nav.search": "Búsqueda",
+  "nav.dashboard": "Panel",
   "header.badge": "Demo de entrevista personal",
   "header.title": "PR Atlas para temas de tecnología y ejemplos de GitHub",
   "header.subtitle": "Busca más de 180 temas de ingeniería front-end en cuatro niveles de seniority y accede directamente a los ejemplos de pull requests que los respaldan.",
@@ -26,5 +28,13 @@
   "table.topic": "Tema",
   "table.prExamples": "Ejemplos de PR",
   "table.opensNewTab": "{{title}} (se abre en una nueva pestaña)",
-  "language.label": "Idioma"
+  "language.label": "Idioma",
+  "dashboard.title": "Análisis de cobertura",
+  "dashboard.subtitle": "{{covered}} de {{total}} temas cubiertos por pull requests enlazados.",
+  "dashboard.byCategory": "Cobertura por categoría",
+  "dashboard.byLevel": "Cobertura por nivel",
+  "dashboard.thresholds": "Umbrales de promoción",
+  "dashboard.met": "cumplido",
+  "dashboard.remaining_one": "{{count}} restante",
+  "dashboard.remaining_other": "{{count}} restantes"
 }

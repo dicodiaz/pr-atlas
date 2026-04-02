@@ -13,6 +13,7 @@ export const PR_FEATURES = {
     'Data modeling',
     'Architecture',
     'Build and tooling',
+    'Coverage dashboard',
   ],
 } as const satisfies Record<PullRequestId, readonly string[]>
 

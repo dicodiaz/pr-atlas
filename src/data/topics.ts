@@ -423,6 +423,20 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.CONTROLS_CODE_QUALITY_WITH_MEASUREMENT_TOOLS,
       feature: 'Build and tooling',
     },
+
+    // Coverage dashboard
+    {
+      topicId: TopicId.OPTIMIZES_APPLICATION_WITH_CODE_SPLITTING_TECHNIQUES,
+      feature: 'Coverage dashboard',
+    },
+    {
+      topicId: TopicId.PROVIDES_DATA_VISUALIZATIONS_THROUGH_VISUALIZATION_TOOLS,
+      feature: 'Coverage dashboard',
+    },
+    {
+      topicId: TopicId.OPTIMISES_APPLICATIONS_FOR_SEARCH_ENGINES,
+      feature: 'Coverage dashboard',
+    },
   ],
 }
 

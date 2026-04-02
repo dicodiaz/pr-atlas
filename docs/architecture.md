@@ -2,10 +2,12 @@
 
 ## Folder structure
 
-- `src/app`: top-level app composition
+- `src/app`: top-level app composition (router, layout)
+- `src/pages`: route-level page components
 - `src/components`: focused UI building blocks
+- `src/components/charts`: Recharts visualizations for the dashboard
 - `src/data`: local topic and PR seed data
-- `src/lib`: pure utilities for search and highlighting
+- `src/lib`: pure utilities for search, highlighting, and coverage stats
 - `src/test`: Vitest and React Testing Library coverage split by responsibility
 - `src/types`: shared TypeScript models
 - `docs`: supporting project documentation
@@ -64,11 +66,20 @@ grows substantially or relevance becomes more important, the next iteration
 could introduce a precomputed search index or fuzzy-ranking layer without
 changing the table-oriented rendering model.
 
+## Routing
+
+The app uses [react-router](https://reactrouter.com/) v7 with `BrowserRouter` for client-side navigation. The router is set up in `src/main.tsx` and routes are defined in `src/app/App.tsx`:
+
+- `/` — search page (topic search and results table)
+- `/dashboard` — coverage analytics dashboard (lazy-loaded via `React.lazy` + `Suspense`)
+
+A shared `Layout` component (`src/app/Layout.tsx`) provides the common shell: a nav bar with active-link styling and the language switcher. Each page renders inside the layout's `<Outlet>`.
+
+The dashboard page and its Recharts dependency are code-split so they only download when the user navigates to `/dashboard`. A skeleton fallback is shown during the load.
+
 ## Rendering strategy
 
-The app stays as a single SPA screen with no routing.
-
-- the main app owns the immediate search input state
+- the search page owns the immediate search input state
 - a debounced query drives filtering and URL sync through `?q=`
 - filtered results are derived from pure data and utility functions
 - the table renders one row per topic
@@ -77,6 +88,16 @@ The app stays as a single SPA screen with no routing.
 - browser back/forward navigation rehydrates the search from the URL immediately
 - clear and Escape return focus to the search input for keyboard-driven workflows
 
+## Coverage dashboard
+
+The `/dashboard` route displays coverage analytics computed from the topic data:
+
+- **Bar chart** — coverage by category (covered vs total per category, via Recharts)
+- **Donut chart** — coverage by seniority level (Trainee / Junior / Middle / Senior)
+- **Progress bars** — threshold progress toward each promotion requirement
+
+Stats are computed by pure functions in [`src/lib/coverage.ts`](../src/lib/coverage.ts) and passed to chart components in `src/components/charts/`.
+
 ## Testing strategy
 
 The suite intentionally layers confidence instead of pushing every assertion
@@ -84,8 +105,9 @@ through the top-level app screen.
 
 - helper tests cover search-adjacent utilities such as highlighting and URL query state
 - hook tests cover debounce timing and flush behavior in isolation
+- coverage utility tests verify category/level grouping and threshold math
 - app tests cover integration points such as hydration, debounced filtering,
-  result rendering, clear behavior, and empty states
+  result rendering, clear behavior, empty states, and router navigation
 
 That split keeps the app-level suite meaningful while still covering smaller
 branches where they naturally belong.
@@ -125,7 +147,7 @@ The app supports English and Spanish via [react-i18next](https://react.i18next.c
 - Translation files live in `src/i18n/locales/en.json` and `src/i18n/locales/es.json`.
 - `src/i18n/index.ts` initializes i18next with bundled translations (no lazy loading), browser language detection on first visit, and fallback to English.
 - The chosen language is persisted to localStorage via the existing `storage` wrapper (`pr-atlas:language` key).
-- A `<LanguageSwitcher>` component in the header provides a `<select>` dropdown to switch between EN and ES.
+- A `<LanguageSwitcher>` component in the shared nav bar provides a `<select>` dropdown to switch between EN and ES.
 - All UI strings use `t()` from `useTranslation()`. Pluralization uses i18next's `_one`/`_other` suffix convention. The `<Trans>` component handles inline markup in translated strings (e.g. the empty state suggestion text).
 - Topic names, tags, and PR titles remain untranslated — they are proper competency names from the data layer.
 
@@ -140,6 +162,7 @@ complexity.
 - the topic table is memoized so it does not rerender on every keystroke before
   the debounced query changes
 - debounce behavior is isolated in a small hook in `src/lib`
+- the dashboard page is code-split with `React.lazy()` + `Suspense` so the Recharts bundle only loads on demand
 - current optimizations are intentionally lightweight because the dataset is still local and relatively small
 - the next likely optimization, if the dataset grows substantially, would be precomputing topic search text in the data layer rather than rebuilding it during every filter pass
 
