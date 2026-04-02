@@ -34,37 +34,34 @@ each threshold are:
 - **Middle**: 23 non-key (out of 35 available)
 - **Senior**: 30 total (any mix)
 
-## PR Atlas coverage
+## Current coverage
 
-PR Atlas (this project) is a React SPA that demonstrates accessible search with
-debounced filtering, responsive layout, semantic HTML, comprehensive test
-coverage, documented architecture, and localStorage-backed saved searches. It
-covers **88 of 181 topics** across eight categories.
+PR Atlas plus process evidence covers **94 of 181 topics**.
 
 ### Coverage by level
 
-| Level   | Covered | KEY covered | KEY gap | Threshold met?              |
-| ------- | ------- | ----------- | ------- | --------------------------- |
-| Trainee | 17 / 20 | 14 / 15     | 1       | 80% threshold met (17 ≥ 16) |
-| Junior  | 29 / 42 | 23 / 25     | 2       | Not yet (29 < 34)           |
-| Middle  | 25 / 60 | 20 / 25     | 5       | Not yet (25 < 48)           |
-| Senior  | 17 / 59 | —           | —       | Not yet (17 < 30)           |
+| Level   | Covered | KEY covered | KEY gap | Threshold met?                         |
+| ------- | ------- | ----------- | ------- | -------------------------------------- |
+| Trainee | 18 / 20 | 15 / 15     | 0       | KEY ✅ — 80% threshold met (18 ≥ 16)  |
+| Junior  | 31 / 42 | 25 / 25     | 0       | KEY ✅ — Not yet total (31 < 34)       |
+| Middle  | 25 / 60 | 20 / 25     | 5       | Not yet (25 < 48)                      |
+| Senior  | 20 / 59 | —           | —       | Not yet (20 < 30)                      |
 
 ### Coverage by category
 
 | Category                                | Covered | Total | %   |
 | --------------------------------------- | ------- | ----- | --- |
 | Language – JavaScript                   | 18      | 28    | 64% |
-| Framework – React JS Web                | 13      | 22    | 59% |
-| Libraries – React JS Web                | 9       | 24    | 38% |
+| Framework – React JS Web               | 13      | 22    | 59% |
+| Libraries – React JS Web               | 9       | 24    | 38% |
 | Markup and Styling                      | 20      | 24    | 83% |
-| Code-Based Testing – React JS Web       | 11      | 12    | 92% |
+| Code-Based Testing – React JS Web      | 11      | 12    | 92% |
 | Design                                  | 9       | 13    | 69% |
 | Development Environments – React JS Web | 8       | 15    | 53% |
 | Cloud Environments                      | 0       | 4     | 0%  |
 | Project Process                         | 0       | 10    | 0%  |
-| Technical Process                       | 0       | 4     | 0%  |
-| Expertise Contribution                  | 0       | 11    | 0%  |
+| Technical Process                       | 1       | 4     | 25% |
+| Expertise Contribution                  | 2       | 11    | 18% |
 | Generative AI                           | 0       | 14    | 0%  |
 
 ## Mandatory KEY topics not yet covered
@@ -94,7 +91,7 @@ These 4 KEY topics still require coverage through code PRs.
 
 - ~~**[Libraries · Middle]** Handles and resolves new versions of the packages~~ ✅
 
-### Process / organizational — passed
+### Process / organizational — covered by process evidence
 
 - ~~**[Expertise Contribution · Trainee]** Passes onboarding into Engineering and Technology Expertise including specialisation or practice~~ ✅
 - ~~**[Technical Process · Junior]** Estimates tasks based on requirements~~ ✅
@@ -119,23 +116,19 @@ These 4 KEY topics still require coverage through code PRs.
 
 Feature 2 closes every remaining KEY gap at Trainee, Junior, and Middle levels.
 
-### Senior threshold coverage (17 / 59 → 32 / 59)
+### Senior threshold coverage (20 / 59 → 35 / 59)
 
 11 of 23 Senior KEY topics remain uncovered. 3 of those cannot be covered
 by FE features (client-server network protocols requires backend work;
 the two Expertise Contribution topics require interviewer/reviewer
-activity). The following 3 features cover the remaining 8 KEY topics plus
-7 non-key topics, bringing Senior from 29% to 54% (threshold: 50%).
+activity). The following 2 features cover the remaining 8 KEY topics plus
+7 non-key topics, bringing Senior from 34% to 59% (threshold: 50%).
 
-4. **Coverage analytics dashboard** (user-centric). Add an interactive
-   dashboard view with bar charts by category, donut chart by seniority
-   level, and threshold progress bars. Lazy-load the dashboard via
-   `React.lazy()` + `Suspense`. Add meta tags and OpenGraph data for rich
-   link previews on the deployed Netlify site.
-   Covers 1 KEY + 2 non-key:
-   - [Framework · Senior · KEY] Optimizes application with code-splitting techniques
-   - [Libraries · Senior] Provides data visualizations through visualization tools
-   - [Markup and Styling · Senior] Optimises applications for search engines
+4. ~~**Coverage analytics dashboard** — implemented with react-router, Recharts, React.lazy + Suspense, and OpenGraph meta tags~~ ✅
+   Covered 1 KEY + 2 non-key:
+   - ~~[Framework · Senior · KEY] Optimizes application with code-splitting techniques~~ ✅
+   - ~~[Libraries · Senior] Provides data visualizations through visualization tools~~ ✅
+   - ~~[Markup and Styling · Senior] Optimises applications for search engines~~ ✅
 
 5. **Enhanced search with autocomplete and performance logging**
    (user-centric). Replace the linear search scan with a pre-built
