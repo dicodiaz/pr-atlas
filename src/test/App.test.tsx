@@ -32,7 +32,7 @@ const advanceAnnounce = () => {
 
 const getSearchInput = () =>
   screen.getByRole('searchbox', {
-    name: /search by topic, keyword, or pr title/i,
+    name: /search by topic, pr title, repo, or feature/i,
   })
 
 const getVisibleCount = () =>
@@ -425,8 +425,10 @@ describe('App', () => {
 
     renderApp()
 
-    expect(screen.getByRole('link', { name: /search/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /dashboard/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /^search$/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /^dashboard$/i }),
+    ).toBeInTheDocument()
   })
 
   it('accepts autocomplete suggestion with Tab key', () => {
@@ -456,6 +458,21 @@ describe('App', () => {
     fireEvent.keyDown(input, { key: 'ArrowRight' })
 
     expect(input).toHaveValue('debounced search')
+  })
+
+  it('does not accept suggestion when ArrowRight is pressed mid-input', () => {
+    window.history.replaceState(null, '', '/')
+
+    renderApp()
+
+    const input = getSearchInput() as HTMLInputElement
+
+    fireEvent.change(input, { target: { value: 'deboun' } })
+
+    Object.defineProperty(input, 'selectionStart', { value: 3, writable: true })
+    fireEvent.keyDown(input, { key: 'ArrowRight' })
+
+    expect(input).toHaveValue('deboun')
   })
 
   it('toggles debug mode with Ctrl+Shift+D', () => {

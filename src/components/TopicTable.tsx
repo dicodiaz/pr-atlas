@@ -2,7 +2,11 @@ import { memo, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { HighlightText } from '@/components/HighlightText'
-import type { Topic } from '@/types/topics'
+import { RepoId } from '@/types/topics'
+import type { Topic, TopicPr } from '@/types/topics'
+
+const showTags = (pr: TopicPr): boolean =>
+  pr.repoId !== RepoId.PR_ATLAS && pr.repoId !== RepoId.EXTERNAL_EVIDENCE
 
 interface TopicTableProps {
   query: string
@@ -57,21 +61,42 @@ const TopicTableComponent: FC<TopicTableProps> = ({ query, topics }) => {
                 <td className="px-6 py-5">
                   <ul className="space-y-3">
                     {topic.prs.map((pr) => (
-                      <li key={pr.id}>
+                      <li key={`${pr.id}-${pr.contribution}`}>
                         <a
                           href={pr.url}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm leading-6"
+                          className="text-secondary focus-ring interactive-soft group hover:text-primary inline-flex items-start gap-2 rounded-xl px-3 py-2 text-sm leading-6"
                           aria-label={t('table.opensNewTab', {
                             title: pr.title,
                           })}
                         >
-                          <span className="h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
+                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-accent) transition group-hover:bg-(--color-accent-strong)" />
                           <span>
                             <HighlightText query={query} text={pr.title} />
+                            {showTags(pr) && (
+                              <span className="mt-1 flex flex-wrap gap-1.5">
+                                <span className="inline-flex rounded-full bg-white/5 px-2 py-0.5 text-xs text-white/50">
+                                  <HighlightText
+                                    query={query}
+                                    text={pr.repoName}
+                                  />
+                                </span>
+                                {pr.parentFeature && (
+                                  <span className="inline-flex rounded-full bg-(--color-accent)/10 px-2 py-0.5 text-xs text-(--color-accent)">
+                                    <HighlightText
+                                      query={query}
+                                      text={pr.parentFeature}
+                                    />
+                                  </span>
+                                )}
+                              </span>
+                            )}
                             <span className="text-muted block text-xs">
-                              <HighlightText query={query} text={pr.feature} />
+                              <HighlightText
+                                query={query}
+                                text={pr.contribution}
+                              />
                             </span>
                           </span>
                         </a>

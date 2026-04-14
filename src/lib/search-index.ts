@@ -16,7 +16,9 @@ const buildSearchIndex = (topic: Topic): string =>
       topic.name,
       ...topic.tags,
       ...topic.prs.map((pr) => pr.title),
-      ...topic.prs.map((pr) => pr.feature),
+      ...topic.prs.map((pr) => pr.contribution),
+      ...topic.prs.map((pr) => pr.repoName),
+      ...topic.prs.filter((pr) => pr.parentFeature).map((pr) => pr.parentFeature!),
     ].join(' '),
   )
 

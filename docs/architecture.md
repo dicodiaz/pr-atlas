@@ -23,22 +23,23 @@ The dataset is split across two files:
 To add a new pull request:
 
 1. Add a member to the `PullRequestId` enum in `src/types/topics.ts`.
-2. Add the PR's allowed feature names to `PR_FEATURES` in `src/types/topics.ts`.
-3. Add an entry to the `pullRequests` array in `src/data/topics.ts`.
-4. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates and which feature covers each topic.
+2. Add an entry to the `pullRequests` array in `src/data/topics.ts` with a `repoId`.
+3. Optionally add the PR to a parent feature in `PARENT_FEATURE_PRS`.
+4. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates and a `contribution` string for each.
 
 Type definitions live in [`src/types/topics.ts`](../src/types/topics.ts):
 
-- `PullRequestId` enum — identifies each PR
+- `RepoId` enum — identifies each repository (11 members)
+- `ParentFeature` enum — identifies each business initiative (9 members)
+- `PullRequestId` enum — identifies each PR (57 members)
 - `TopicId` enum — identifies each topic (181 members, one per competency)
-- `PullRequest` interface — `id`, `title`, `url`
-- `PR_FEATURES` const — maps each `PullRequestId` to its allowed feature strings (single source of truth)
-- `Feature` type — union of all feature strings across all PRs
-- `PrTopicMappings` type — mapped type constraining each PR's mapping entries to its own features via `FeatureOf<K>`
-- `TopicPr` interface — extends `PullRequest` with a `feature` field
+- `Repo` interface — `id`, `name`, `url`
+- `PullRequest` interface — `id`, `repoId`, `title`, `url`
+- `PrTopicMappings` type — mapped type constraining each PR's mapping entries to `{ topicId, contribution }`
+- `TopicPr` interface — extends `PullRequest` with `contribution`, `repoName`, and optional `parentFeature` (denormalized by `buildTopics`)
 - `Topic` interface — `id`, `name`, `tags`, `prs: TopicPr[]`
 
-Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. Each PR-topic mapping carries a `feature` label indicating which feature of the PR demonstrates that topic. PRs can be shared across multiple topics without duplicating metadata.
+Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. Each PR-topic mapping carries a `contribution` label describing the technical problem solved. `repoName` and `parentFeature` are denormalized by `buildTopics` from the `repos` array and `PARENT_FEATURE_PRS` mapping respectively.
 
 ## Search strategy
 
@@ -56,7 +57,7 @@ The original linear search in `src/lib/search.ts` is retained as a fallback and 
 
 Inline ghost-text autocomplete is implemented via:
 
-- [`src/lib/autocomplete.ts`](../src/lib/autocomplete.ts) — builds a sorted, deduplicated dictionary from topic names, tags, PR titles, and feature names. Uses binary search to find the first dictionary entry matching the user's typed prefix.
+- [`src/lib/autocomplete.ts`](../src/lib/autocomplete.ts) — builds a sorted, deduplicated dictionary from topic names, tags, PR titles, contribution names, repo names, and parent feature names. Uses binary search to find the first dictionary entry matching the user's typed prefix.
 - [`src/components/GhostInput.tsx`](../src/components/GhostInput.tsx) — renders a transparent input over a mirror div showing the suggestion in muted text. Tab or Right Arrow (at end of input) accepts the suggestion.
 
 ## Structured logging
@@ -174,7 +175,7 @@ complexity.
 
 ## Why this supports later PR-data refinement
 
-To add a new PR, add its ID and feature list to [`src/types/topics.ts`](../src/types/topics.ts), then add it to the `pullRequests` array and map it to topics (with feature labels) in `prTopicMappings` — both in [`src/data/topics.ts`](../src/data/topics.ts). No changes to sections, rendering, or search architecture are needed.
+To add a new PR, add its ID to the `PullRequestId` enum in [`src/types/topics.ts`](../src/types/topics.ts), then add it to the `pullRequests` array (with `repoId`), optionally to `PARENT_FEATURE_PRS`, and map it to topics (with `contribution` strings) in `prTopicMappings` — all in [`src/data/topics.ts`](../src/data/topics.ts). No changes to sections, rendering, or search architecture are needed.
 
 - the section source of truth is stable and separate from PR assignment
 - shared PR relationships are handled by `prTopicMappings`

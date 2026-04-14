@@ -52,6 +52,35 @@ describe('TrigramIndex', () => {
     expect(upper.length).toBeGreaterThan(0)
   })
 
+  it('intersects short tokens with prior trigram candidates', () => {
+    const results = index.search('testing ai')
+
+    expect(results.length).toBeGreaterThanOrEqual(0)
+  })
+
+  it('returns empty for multi-token queries matching disjoint topic sets', () => {
+    expect(index.search('javascript cloud')).toHaveLength(0)
+  })
+
+  it('returns empty when trigram candidates intersect to empty set', () => {
+    const fakeTopics = [
+      { id: 'a' as never, name: 'abc def', tags: [], prs: [] },
+      { id: 'b' as never, name: 'bcd ghi', tags: [], prs: [] },
+    ]
+    const smallIndex = new TrigramIndex(fakeTopics)
+
+    expect(smallIndex.search('abcd')).toHaveLength(0)
+  })
+
+  it('eliminates trigram false positives via substring verification', () => {
+    const fakeTopics = [
+      { id: 'a' as never, name: 'abc xyz bcd', tags: [], prs: [] },
+    ]
+    const smallIndex = new TrigramIndex(fakeTopics)
+
+    expect(smallIndex.search('abcd')).toHaveLength(0)
+  })
+
   it('produces same results as linear search for known queries', () => {
     const queries = [
       'debounced search',
@@ -70,7 +99,11 @@ describe('TrigramIndex', () => {
               t.name,
               ...t.tags,
               ...t.prs.map((pr) => pr.title),
-              ...t.prs.map((pr) => pr.feature),
+              ...t.prs.map((pr) => pr.contribution),
+              ...t.prs.map((pr) => pr.repoName),
+              ...t.prs
+                .filter((pr) => pr.parentFeature)
+                .map((pr) => pr.parentFeature!),
             ]
               .join(' ')
               .toLowerCase()

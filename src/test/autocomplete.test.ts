@@ -23,7 +23,7 @@ describe('buildDictionary', () => {
     expect(dictionary).toContain('javascript')
   })
 
-  it('contains normalized feature names', () => {
+  it('contains normalized contribution names', () => {
     expect(dictionary).toContain('debounced search')
   })
 

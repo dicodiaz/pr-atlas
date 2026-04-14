@@ -37,24 +37,20 @@ export const GhostInput: FC<GhostInputProps> = ({
     [value, dictionary],
   )
 
-  const acceptSuggestion = () => {
-    if (!suggestion) return
-    logger.debug(`Autocomplete accepted: "${suggestion}"`)
-    onChange(suggestion)
-  }
-
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (suggestion) {
       if (event.key === 'Tab') {
         event.preventDefault()
-        acceptSuggestion()
+        logger.debug(`Autocomplete accepted: "${suggestion}"`)
+        onChange(suggestion)
         return
       }
 
       const input = event.currentTarget
       if (event.key === 'ArrowRight' && input.selectionStart === value.length) {
         event.preventDefault()
-        acceptSuggestion()
+        logger.debug(`Autocomplete accepted: "${suggestion}"`)
+        onChange(suggestion)
         return
       }
     }

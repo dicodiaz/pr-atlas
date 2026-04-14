@@ -1,26 +1,102 @@
+export enum RepoId {
+  PR_ATLAS = 'pr-atlas',
+  EXTERNAL_EVIDENCE = 'external-evidence',
+  SHOPPING_PWA = 'shopping-pwa',
+  SHARED_UI_WEB = 'shared-ui-web',
+  EGDS_COMPONENTS_REACT = 'egds-components-react',
+  PRODUCT_DETAILS_API = 'product-details-experience-api',
+  EXP_API_LODGING_OFFERS = 'experience-api-lodging-offers',
+  EXP_API_LODGING_SEARCH = 'experience-api-lodging-search',
+  EXP_API_LODGING_REVIEWS = 'experience-api-lodging-reviews',
+  EXP_API_LODGING_PROPERTY = 'experience-api-lodging-property',
+  SHARED_GRAPHQL = 'shared-graphql',
+}
+
+export enum ParentFeature {
+  SORT_AND_FILTER = 'Sort and Filter',
+  AI_SEARCH = 'AI Search',
+  LOVED_BY_GUESTS = 'Loved By Guests',
+  CAROUSEL = 'Carousel',
+  TYPEAHEAD = 'Typeahead',
+  GREAT_FIND = 'Great Find',
+  SIGNALS = 'Signals',
+  ABOUT_THE_HOST = 'About The Host',
+  INQUIRY = 'Inquiry',
+}
+
 export enum PullRequestId {
   PR_ATLAS = 'pr-atlas',
   PROCESS_EVIDENCE = 'process-evidence',
-}
 
-export const PR_FEATURES = {
-  [PullRequestId.PR_ATLAS]: [
-    'Debounced search',
-    'Responsive layout',
-    'Accessibility',
-    'Saved searches',
-    'Internationalization',
-    'Testing suite',
-    'Data modeling',
-    'Architecture',
-    'Build and tooling',
-    'Coverage dashboard',
-    'Enhanced search',
-    'Logging',
-    'E2E tests',
-  ],
-  [PullRequestId.PROCESS_EVIDENCE]: ['Onboarding and reviews'],
-} as const satisfies Record<PullRequestId, readonly string[]>
+  // shopping-pwa
+  SHOPPING_PWA_17433 = 'shopping-pwa-17433',
+  SHOPPING_PWA_17074 = 'shopping-pwa-17074',
+  SHOPPING_PWA_15411 = 'shopping-pwa-15411',
+  SHOPPING_PWA_15079 = 'shopping-pwa-15079',
+  SHOPPING_PWA_15012 = 'shopping-pwa-15012',
+  SHOPPING_PWA_14925 = 'shopping-pwa-14925',
+  SHOPPING_PWA_14816 = 'shopping-pwa-14816',
+  SHOPPING_PWA_14732 = 'shopping-pwa-14732',
+  SHOPPING_PWA_13017 = 'shopping-pwa-13017',
+  SHOPPING_PWA_12834 = 'shopping-pwa-12834',
+  SHOPPING_PWA_12257 = 'shopping-pwa-12257',
+  SHOPPING_PWA_11779 = 'shopping-pwa-11779',
+  SHOPPING_PWA_8704 = 'shopping-pwa-8704',
+  SHOPPING_PWA_8403 = 'shopping-pwa-8403',
+
+  // shared-ui-web
+  SHARED_UI_WEB_37156 = 'shared-ui-web-37156',
+  SHARED_UI_WEB_36900 = 'shared-ui-web-36900',
+  SHARED_UI_WEB_35481 = 'shared-ui-web-35481',
+  SHARED_UI_WEB_35318 = 'shared-ui-web-35318',
+  SHARED_UI_WEB_35144 = 'shared-ui-web-35144',
+  SHARED_UI_WEB_33436 = 'shared-ui-web-33436',
+  SHARED_UI_WEB_31599 = 'shared-ui-web-31599',
+  SHARED_UI_WEB_30536 = 'shared-ui-web-30536',
+  SHARED_UI_WEB_21664 = 'shared-ui-web-21664',
+  SHARED_UI_WEB_19577 = 'shared-ui-web-19577',
+  SHARED_UI_WEB_18919 = 'shared-ui-web-18919',
+  SHARED_UI_WEB_18503 = 'shared-ui-web-18503',
+  SHARED_UI_WEB_17571 = 'shared-ui-web-17571',
+  SHARED_UI_WEB_17220 = 'shared-ui-web-17220',
+  SHARED_UI_WEB_16805 = 'shared-ui-web-16805',
+  SHARED_UI_WEB_15935 = 'shared-ui-web-15935',
+  SHARED_UI_WEB_15745 = 'shared-ui-web-15745',
+  SHARED_UI_WEB_14474 = 'shared-ui-web-14474',
+  SHARED_UI_WEB_14227 = 'shared-ui-web-14227',
+  SHARED_UI_WEB_12593 = 'shared-ui-web-12593',
+  SHARED_UI_WEB_11332 = 'shared-ui-web-11332',
+  SHARED_UI_WEB_10735 = 'shared-ui-web-10735',
+
+  // egds-components-react
+  EGDS_COMPONENTS_REACT_1898 = 'egds-components-react-1898',
+  EGDS_COMPONENTS_REACT_1011 = 'egds-components-react-1011',
+  EGDS_COMPONENTS_REACT_956 = 'egds-components-react-956',
+  EGDS_COMPONENTS_REACT_797 = 'egds-components-react-797',
+  EGDS_COMPONENTS_REACT_759 = 'egds-components-react-759',
+  EGDS_COMPONENTS_REACT_735 = 'egds-components-react-735',
+  EGDS_COMPONENTS_REACT_720 = 'egds-components-react-720',
+  EGDS_COMPONENTS_REACT_712 = 'egds-components-react-712',
+
+  // product-details-experience-api
+  PRODUCT_DETAILS_API_3590 = 'product-details-api-3590',
+  PRODUCT_DETAILS_API_3572 = 'product-details-api-3572',
+  PRODUCT_DETAILS_API_3527 = 'product-details-api-3527',
+  PRODUCT_DETAILS_API_3360 = 'product-details-api-3360',
+  PRODUCT_DETAILS_API_3350 = 'product-details-api-3350',
+  PRODUCT_DETAILS_API_3225 = 'product-details-api-3225',
+  PRODUCT_DETAILS_API_3218 = 'product-details-api-3218',
+
+  // experience-api-lodging-offers
+  EXP_API_LODGING_OFFERS_10403 = 'exp-api-lodging-offers-10403',
+  EXP_API_LODGING_OFFERS_10243 = 'exp-api-lodging-offers-10243',
+
+  // experience-api-lodging-property
+  EXP_API_LODGING_PROPERTY_3221 = 'exp-api-lodging-property-3221',
+
+  // shared-graphql
+  SHARED_GRAPHQL_8231 = 'shared-graphql-8231',
+}
 
 export enum TopicId {
   MANAGES_COLLECTIONS_OF_DATA_USING_LANGUAGE = 'manages-collections-of-data-using-language',
@@ -206,24 +282,27 @@ export enum TopicId {
   CONTRIBUTE_TO_GENERATIVE_AI_EXPERTISE_DEVELOPMENT_WITHIN_THE_COMPANY_TO_EXTEND_CORPORATE_KNOWLEDGE_BASE = 'contribute-to-generative-ai-expertise-development-within-the-company-to-extend-corporate-knowledge-base',
 }
 
+export interface Repo {
+  id: RepoId
+  name: string
+  url: string
+}
+
 export interface PullRequest {
   id: PullRequestId
+  repoId: RepoId
   title: string
   url: string
 }
 
-type PrFeatures = typeof PR_FEATURES
-
-type FeatureOf<T extends PullRequestId> = PrFeatures[T][number]
-
-export type Feature = FeatureOf<PullRequestId>
-
 export type PrTopicMappings = {
-  [K in PullRequestId]: { topicId: TopicId; feature: FeatureOf<K> }[]
+  [K in PullRequestId]: { topicId: TopicId; contribution: string }[]
 }
 
 export interface TopicPr extends PullRequest {
-  feature: Feature
+  contribution: string
+  repoName: string
+  parentFeature?: ParentFeature
 }
 
 export interface Topic {

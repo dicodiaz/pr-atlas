@@ -26,8 +26,8 @@ match in wrong order).
 
 The constructor receives all topics and, for each one:
 
-1. Builds a search text string from the topic name, tags, PR titles, and
-   feature names (line 13-21, `buildSearchIndex`).
+1. Builds a search text string from the topic name, tags, PR titles,
+   contribution names, repo names, and parent feature names (line 13-22, `buildSearchIndex`).
 2. Extracts every 3-character substring from that text (line 5-11,
    `extractTrigrams`).
 3. Stores a mapping from each trigram to the set of topic indices that

@@ -68,10 +68,12 @@ describe('search utilities', () => {
     expect(matchesTopic(topic!, 'language metaprogramming')).toBe(true)
   })
 
-  it('matches by PR feature name', () => {
+  it('matches by PR contribution', () => {
     const results = searchTopics(topics, 'saved searches')
     const coveredIds = results.flatMap((t) =>
-      t.prs.filter((pr) => pr.feature === 'Saved searches').map(() => t.id),
+      t.prs
+        .filter((pr) => pr.contribution === 'Saved searches')
+        .map(() => t.id),
     )
 
     expect(coveredIds.length).toBeGreaterThan(0)

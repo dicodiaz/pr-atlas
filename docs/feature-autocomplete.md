@@ -14,7 +14,7 @@ fills the input.
 ### 1. Dictionary construction (`src/lib/autocomplete.ts`, lines 4-15)
 
 `buildDictionary(topics)` collects every searchable string — topic names,
-tags, PR titles, and feature names — normalises them to lowercase, dedupes
+tags, PR titles, contribution names, repo names, and parent feature names — normalises them to lowercase, dedupes
 via a `Set`, and returns a **sorted array**. The sorted order is critical
 because it enables binary search.
 

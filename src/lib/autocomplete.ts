@@ -8,7 +8,9 @@ export const buildDictionary = (topics: Topic[]): string[] => {
     for (const tag of topic.tags) entries.add(normalizeText(tag))
     for (const pr of topic.prs) {
       entries.add(normalizeText(pr.title))
-      entries.add(normalizeText(pr.feature))
+      entries.add(normalizeText(pr.contribution))
+      entries.add(normalizeText(pr.repoName))
+      if (pr.parentFeature) entries.add(normalizeText(pr.parentFeature))
     }
   }
   return [...entries].filter(Boolean).sort()
