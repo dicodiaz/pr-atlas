@@ -36,28 +36,28 @@ each threshold are:
 
 ## Current coverage
 
-PR Atlas, process evidence, and corporate PRs cover **119 of 181 topics**.
+PR Atlas, process evidence, and corporate PRs cover **125 of 181 topics**.
 
 ### Coverage by level
 
 | Level   | Covered | KEY covered | KEY gap | Threshold met?                        |
 | ------- | ------- | ----------- | ------- | ------------------------------------- |
 | Trainee | 18 / 20 | 15 / 15     | 0       | KEY ✅ — 80% threshold met (18 ≥ 16)  |
-| Junior  | 31 / 42 | 25 / 25     | 0       | KEY ✅ — Not yet total (31 < 34)      |
+| Junior  | 34 / 42 | 25 / 25     | 0       | KEY ✅ — 80% threshold met (34 ≥ 34) ✅ |
 | Middle  | 44 / 60 | 25 / 25     | 0       | KEY ✅ — Not yet total (44 < 48)      |
-| Senior  | 26 / 59 | —           | —       | Not yet (26 < 30)                     |
+| Senior  | 29 / 59 | —           | —       | Not yet (29 < 30)                     |
 
 ### Coverage by category
 
 | Category                                | Covered | Total | %    |
 | --------------------------------------- | ------- | ----- | ---- |
-| Language – JavaScript                   | 24      | 28    | 86%  |
-| Framework – React JS Web                | 18      | 22    | 82%  |
+| Language – JavaScript                   | 25      | 28    | 89%  |
+| Framework – React JS Web               | 20      | 22    | 91%  |
 | Libraries – React JS Web                | 16      | 24    | 67%  |
-| Markup and Styling                      | 22      | 24    | 92%  |
+| Markup and Styling                      | 23      | 24    | 96%  |
 | Code-Based Testing – React JS Web       | 12      | 12    | 100% |
 | Design                                  | 11      | 13    | 85%  |
-| Development Environments – React JS Web | 8       | 15    | 53%  |
+| Development Environments – React JS Web | 10      | 15    | 67%  |
 | Cloud Environments                      | 0       | 4     | 0%   |
 | Project Process                         | 0       | 10    | 0%   |
 | Technical Process                       | 2       | 4     | 50%  |
@@ -88,9 +88,20 @@ All KEY topics at Trainee, Junior, and Middle levels are now fully covered.
 
 ## Corporate PR coverage — newly added topics
 
-21 topics are now covered by 55 corporate PRs across 11 repositories,
-grouped under 9 parent features (Sort and Filter, AI Search, Loved By Guests,
-Carousel, Typeahead, Great Find, Signals, About The Host, Inquiry).
+Corporate PRs cover 63 topics (fully or partially) across
+11 repositories, grouped under 9 parent features (Sort and Filter, AI Search,
+Loved By Guests, Carousel, Typeahead, Great Find, Signals, About The Host,
+Inquiry). A score-based ranking system automatically selects the 3 most
+relevant PRs per topic, displacing lower-scored PR Atlas entries when
+enough corporate evidence exists.
+
+### Junior non-key topics (3 newly covered)
+
+| # | Topic | Parent features / repos |
+|---|-------|------------------------|
+| 1 | Interacts with API and handles request metadata | Loved By Guests, Sort and Filter (Shared UI Web, Shopping PWA) |
+| 2 | Uses basic router capability for building navigation | Sort and Filter (Shopping PWA) |
+| 3 | Debugs markups and styles | Sort and Filter (Shopping PWA, Shared UI Web) |
 
 ### Middle non-key topics (14 newly covered)
 
@@ -111,12 +122,24 @@ Carousel, Typeahead, Great Find, Signals, About The Host, Inquiry).
 | 13 | Collects data using requirements elicitation | AI Search (Shared UI Web) |
 | 14 | Uses different requirement sources | About The Host, Loved By Guests (Product Details API, Shopping PWA) |
 
-### Senior topics (2 newly covered)
+### Senior topics (5 newly covered)
 
 | # | Topic | Parent features / repos |
 |---|-------|------------------------|
 | 1 | Creates and maintains component library | Carousel, Typeahead (EGDS Components React) |
 | 2 | Uses language metaprogramming techniques | Sort and Filter, Carousel (Shared UI Web, EGDS Components React) |
+| 3 | Secures network interaction using a programming language | AI Search, Sort and Filter, About The Host (Shopping PWA, Product Details API) |
+| 4 | Creates ecosystem for application state monitoring | Sort and Filter, AI Search, Carousel (Shared UI Web, EGDS Components React) |
+| 5 | Handles environment variables and secrets | Sort and Filter, About The Host (Shopping PWA, Product Details API) |
+
+### Score-based ranking
+
+Every PR-topic mapping has a relevance `score` (1-100). `buildTopics`
+sorts each topic's PRs by score descending and keeps only the top 3.
+PR Atlas entries (score 20) serve as fallback evidence — they are
+automatically displaced when 3 or more higher-scoring corporate PRs
+exist for a topic. See [architecture.md](architecture.md#relevance-scoring)
+for the full scoring rubric.
 
 ## Data model changes
 
@@ -124,10 +147,11 @@ The data model was redesigned to support granular corporate PR tracking:
 
 - **`RepoId` enum** — 11 repositories (including PR Atlas and External Evidence)
 - **`ParentFeature` enum** — 9 business initiatives
-- **`PullRequestId` enum** — 57 entries (55 corporate + PR Atlas + Process Evidence)
+- **`PullRequestId` enum** — 75 entries (73 corporate + PR Atlas + Process Evidence)
 - **`PARENT_FEATURE_PRS` mapping** — groups PRs by parent feature, inverted by `buildTopics`
 - **`contribution` field** — free-form string replacing the old `feature` field
-- **`TopicPr` interface** — denormalized with `repoName` and optional `parentFeature`
+- **`score` field** — relevance score (1-100) on every PR-topic mapping entry; `buildTopics` sorts by score descending and keeps only the top 3 PRs per topic (see [architecture.md](architecture.md#relevance-scoring) for the full scoring rubric)
+- **`TopicPr` interface** — denormalized with `contribution`, `score`, `repoName`, and optional `parentFeature`
 - **UI** — `TopicTable` displays repo and parent feature tag chips per PR row
 - **Search index** — includes `repoName` and `parentFeature` for filtering
 
@@ -145,9 +169,9 @@ The data model was redesigned to support granular corporate PR tracking:
 
 | Gap | Count | Notes |
 |-----|-------|-------|
-| Junior total | 3 short (31/34) | 3 more non-key Junior topics needed |
+| Junior total | ✅ met (34/34) | Closed by corporate PRs |
 | Middle total | 4 short (44/48) | 4 more non-key Middle topics needed |
-| Senior total | 4 short (26/30) | 4 more Senior topics needed |
+| Senior total | 1 short (29/30) | 1 more Senior topic needed |
 
 ### Suggestion 6: CI/CD pipeline and project process documentation
 

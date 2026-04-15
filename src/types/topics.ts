@@ -38,11 +38,15 @@ export enum PullRequestId {
   SHOPPING_PWA_14816 = 'shopping-pwa-14816',
   SHOPPING_PWA_14732 = 'shopping-pwa-14732',
   SHOPPING_PWA_13017 = 'shopping-pwa-13017',
+  SHOPPING_PWA_12865 = 'shopping-pwa-12865',
   SHOPPING_PWA_12834 = 'shopping-pwa-12834',
+  SHOPPING_PWA_12802 = 'shopping-pwa-12802',
   SHOPPING_PWA_12257 = 'shopping-pwa-12257',
   SHOPPING_PWA_11779 = 'shopping-pwa-11779',
   SHOPPING_PWA_8704 = 'shopping-pwa-8704',
   SHOPPING_PWA_8403 = 'shopping-pwa-8403',
+  SHOPPING_PWA_8297 = 'shopping-pwa-8297',
+  SHOPPING_PWA_7538 = 'shopping-pwa-7538',
 
   // shared-ui-web
   SHARED_UI_WEB_37156 = 'shared-ui-web-37156',
@@ -51,10 +55,16 @@ export enum PullRequestId {
   SHARED_UI_WEB_35318 = 'shared-ui-web-35318',
   SHARED_UI_WEB_35144 = 'shared-ui-web-35144',
   SHARED_UI_WEB_33436 = 'shared-ui-web-33436',
+  SHARED_UI_WEB_31860 = 'shared-ui-web-31860',
   SHARED_UI_WEB_31599 = 'shared-ui-web-31599',
+  SHARED_UI_WEB_31486 = 'shared-ui-web-31486',
   SHARED_UI_WEB_30536 = 'shared-ui-web-30536',
+  SHARED_UI_WEB_24809 = 'shared-ui-web-24809',
+  SHARED_UI_WEB_22700 = 'shared-ui-web-22700',
+  SHARED_UI_WEB_22591 = 'shared-ui-web-22591',
   SHARED_UI_WEB_21664 = 'shared-ui-web-21664',
   SHARED_UI_WEB_19577 = 'shared-ui-web-19577',
+  SHARED_UI_WEB_18981 = 'shared-ui-web-18981',
   SHARED_UI_WEB_18919 = 'shared-ui-web-18919',
   SHARED_UI_WEB_18503 = 'shared-ui-web-18503',
   SHARED_UI_WEB_17571 = 'shared-ui-web-17571',
@@ -63,12 +73,18 @@ export enum PullRequestId {
   SHARED_UI_WEB_15935 = 'shared-ui-web-15935',
   SHARED_UI_WEB_15745 = 'shared-ui-web-15745',
   SHARED_UI_WEB_14474 = 'shared-ui-web-14474',
+  SHARED_UI_WEB_14409 = 'shared-ui-web-14409',
+  SHARED_UI_WEB_14370 = 'shared-ui-web-14370',
   SHARED_UI_WEB_14227 = 'shared-ui-web-14227',
   SHARED_UI_WEB_12593 = 'shared-ui-web-12593',
   SHARED_UI_WEB_11332 = 'shared-ui-web-11332',
   SHARED_UI_WEB_10735 = 'shared-ui-web-10735',
+  SHARED_UI_WEB_9518 = 'shared-ui-web-9518',
+  SHARED_UI_WEB_5329 = 'shared-ui-web-5329',
 
   // egds-components-react
+  EGDS_COMPONENTS_REACT_2463 = 'egds-components-react-2463',
+  EGDS_COMPONENTS_REACT_2326 = 'egds-components-react-2326',
   EGDS_COMPONENTS_REACT_1898 = 'egds-components-react-1898',
   EGDS_COMPONENTS_REACT_1011 = 'egds-components-react-1011',
   EGDS_COMPONENTS_REACT_956 = 'egds-components-react-956',
@@ -84,6 +100,8 @@ export enum PullRequestId {
   PRODUCT_DETAILS_API_3527 = 'product-details-api-3527',
   PRODUCT_DETAILS_API_3360 = 'product-details-api-3360',
   PRODUCT_DETAILS_API_3350 = 'product-details-api-3350',
+  PRODUCT_DETAILS_API_3339 = 'product-details-api-3339',
+  PRODUCT_DETAILS_API_3285 = 'product-details-api-3285',
   PRODUCT_DETAILS_API_3225 = 'product-details-api-3225',
   PRODUCT_DETAILS_API_3218 = 'product-details-api-3218',
 
@@ -295,12 +313,19 @@ export interface PullRequest {
   url: string
 }
 
+export interface PrTopicEntry {
+  topicId: TopicId
+  contribution: string
+  score: number
+}
+
 export type PrTopicMappings = {
-  [K in PullRequestId]: { topicId: TopicId; contribution: string }[]
+  [K in PullRequestId]: PrTopicEntry[]
 }
 
 export interface TopicPr extends PullRequest {
   contribution: string
+  score: number
   repoName: string
   parentFeature?: ParentFeature
 }

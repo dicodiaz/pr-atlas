@@ -25,21 +25,45 @@ To add a new pull request:
 1. Add a member to the `PullRequestId` enum in `src/types/topics.ts`.
 2. Add an entry to the `pullRequests` array in `src/data/topics.ts` with a `repoId`.
 3. Optionally add the PR to a parent feature in `PARENT_FEATURE_PRS`.
-4. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates and a `contribution` string for each.
+4. Add a mapping in `prTopicMappings` listing which `TopicId` values the PR demonstrates, a `contribution` string, and a `score` (1-100) for each.
 
 Type definitions live in [`src/types/topics.ts`](../src/types/topics.ts):
 
 - `RepoId` enum — identifies each repository (11 members)
 - `ParentFeature` enum — identifies each business initiative (9 members)
-- `PullRequestId` enum — identifies each PR (57 members)
+- `PullRequestId` enum — identifies each PR (75 members)
 - `TopicId` enum — identifies each topic (181 members, one per competency)
 - `Repo` interface — `id`, `name`, `url`
 - `PullRequest` interface — `id`, `repoId`, `title`, `url`
-- `PrTopicMappings` type — mapped type constraining each PR's mapping entries to `{ topicId, contribution }`
-- `TopicPr` interface — extends `PullRequest` with `contribution`, `repoName`, and optional `parentFeature` (denormalized by `buildTopics`)
+- `PrTopicEntry` interface — `{ topicId, contribution, score }`
+- `PrTopicMappings` type — mapped type constraining each PR's mapping entries to `PrTopicEntry[]`
+- `TopicPr` interface — extends `PullRequest` with `contribution`, `score`, `repoName`, and optional `parentFeature` (denormalized by `buildTopics`)
 - `Topic` interface — `id`, `name`, `tags`, `prs: TopicPr[]`
 
-Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. Each PR-topic mapping carries a `contribution` label describing the technical problem solved. `repoName` and `parentFeature` are denormalized by `buildTopics` from the `repos` array and `PARENT_FEATURE_PRS` mapping respectively.
+Each topic's `tags` array is derived at build time from the section's category, technology, level, and key metadata. Each PR-topic mapping carries a `contribution` label describing the technical problem solved and a `score` indicating relevance (see [Relevance scoring](#relevance-scoring) below). `repoName` and `parentFeature` are denormalized by `buildTopics` from the `repos` array and `PARENT_FEATURE_PRS` mapping respectively.
+
+## Relevance scoring
+
+Each PR-topic mapping entry has a `score` field (1-100) that ranks how directly the PR demonstrates the topic skill. `buildTopics` sorts each topic's PRs by score descending (with PR Atlas always last as a tiebreaker) and keeps only the top 3.
+
+### Scoring rubric
+
+| Range  | Label        | When to use |
+|--------|--------------|-------------|
+| 90-100 | **Primary**  | The topic IS what the PR is about. If asked "what does this PR do?", the answer directly maps to the topic. |
+| 60-89  | **Strong**   | The topic is a major aspect of the PR, clearly visible in the diff, easy to explain in a presentation. |
+| 30-59  | **Supporting** | The topic is present but secondary. The skill is used meaningfully but isn't the PR's focus. |
+| 1-29   | **Incidental** | The skill is touched but not the focus. Would require explanation to connect the dots. |
+
+### Scoring conventions
+
+- **PR Atlas** entries: always **20** (personal project, lowest priority)
+- **Process Evidence** entries: always **90** (direct evidence)
+- **Corporate PRs — primary topic** (matching the section comment header): **90**
+- **Corporate PRs — strong related**: **75-80**
+- **Corporate PRs — supporting/secondary**: **40-55**
+
+A PR can map to as many topics as applicable — the scoring system ensures only the 3 most relevant PRs surface for each topic. A unit test enforces that no topic in the built output exceeds 3 PRs.
 
 ## Search strategy
 

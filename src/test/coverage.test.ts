@@ -117,4 +117,25 @@ describe('coverage utilities', () => {
     const levelStats = computeLevelStats(synthetic)
     expect(levelStats).toHaveLength(0)
   })
+
+  it('enforces a maximum of 3 PRs per topic', () => {
+    const violations = topics
+      .filter((t) => t.prs.length > 3)
+      .map((t) => `${t.name} (${t.prs.length} PRs)`)
+
+    expect(violations, `Topics exceeding 3 PRs:\n${violations.join('\n')}`).toHaveLength(0)
+  })
+
+  it('sorts PRs by score descending within each topic', () => {
+    for (const topic of topics.filter((t) => t.prs.length >= 2)) {
+      for (let i = 1; i < topic.prs.length; i++) {
+        const prev = topic.prs[i - 1]!
+        const curr = topic.prs[i]!
+        expect(
+          prev.score >= curr.score,
+          `${topic.name}: PR "${prev.title}" (score ${prev.score}) should rank before "${curr.title}" (score ${curr.score})`,
+        ).toBe(true)
+      }
+    }
+  })
 })
