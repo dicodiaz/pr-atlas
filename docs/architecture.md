@@ -29,9 +29,9 @@ To add a new pull request:
 
 Type definitions live in [`src/types/topics.ts`](../src/types/topics.ts):
 
-- `RepoId` enum — identifies each repository (11 members)
+- `RepoId` enum — identifies each repository (14 members)
 - `ParentFeature` enum — identifies each business initiative (9 members)
-- `PullRequestId` enum — identifies each PR (75 members)
+- `PullRequestId` enum — identifies each PR (210 members)
 - `TopicId` enum — identifies each topic (181 members, one per competency)
 - `Repo` interface — `id`, `name`, `url`
 - `PullRequest` interface — `id`, `repoId`, `title`, `url`

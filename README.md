@@ -1,6 +1,6 @@
 # PR Atlas
 
-PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples once assigned. Search is powered by a trigram inverted index running in a Web Worker, with inline ghost-text autocomplete. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts. The UI is available in English and Spanish. Structured logging via consola is available in debug mode (Ctrl+Shift+D).
+PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples from 208 corporate PRs across 12 repositories. Search is powered by a trigram inverted index running in a Web Worker, with inline ghost-text autocomplete. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts. The UI is available in English and Spanish. Structured logging via consola is available in debug mode (Ctrl+Shift+D).
 
 ## Stack
 
