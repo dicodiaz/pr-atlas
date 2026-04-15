@@ -2161,6 +2161,28 @@ const prTopicMappings: PrTopicMappings = {
       contribution: 'Logging',
       score: 20,
     },
+
+    // Avatar Builder – filesystem
+    {
+      topicId: TopicId.MANAGES_FILES_WITH_LANGUAGE_FILESYSTEM_CAPABILITIES,
+      contribution: 'Blob creation, FileReader, object URL lifecycle, programmatic download',
+      score: 20,
+    },
+    {
+      topicId: TopicId.HANDLES_FILES_UPLOAD_THROUGH_LIBRARIES,
+      contribution: 'Drag-and-drop with DataTransfer API and file input validation',
+      score: 20,
+    },
+    {
+      topicId: TopicId.HANDLES_IMAGES_UPLOAD_THROUGH_TOOLS_AND_LIBRARIES,
+      contribution: 'Image upload with canvas crop, filter pipeline, and base64 encoding',
+      score: 20,
+    },
+    {
+      topicId: TopicId.USES_TOOLS_AND_LIBRARIES_FOR_IMMUTABILITY,
+      contribution: 'Immer-based reducer for immutable editor state management',
+      score: 20,
+    },
   ],
 
   [PullRequestId.PROCESS_EVIDENCE]: [

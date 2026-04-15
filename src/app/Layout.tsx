@@ -2,6 +2,7 @@ import { type FC, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router'
 
+import { AvatarPopover } from '@/components/AvatarPopover'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { isDebugEnabled, logger, toggleDebug } from '@/lib/logger'
 
@@ -51,7 +52,10 @@ export const Layout: FC = () => {
                 </span>
               )}
             </div>
-            <LanguageSwitcher />
+            <div className="flex items-center gap-2">
+              <AvatarPopover />
+              <LanguageSwitcher />
+            </div>
           </nav>
           <Outlet />
         </div>

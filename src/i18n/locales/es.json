@@ -45,5 +45,20 @@
   "search.acceptSuggestion": "Sugerencia: {{suggestion}}. Presiona Tab o Flecha Derecha para aceptar.",
   "debug.badge": "DEBUG",
   "debug.enabled": "Modo depuración activado",
-  "debug.disabled": "Modo depuración desactivado"
+  "debug.disabled": "Modo depuración desactivado",
+  "avatar.toggle": "Avatar",
+  "avatar.upload": "Subir imagen",
+  "avatar.dropHint": "Haz clic o arrastra una imagen aquí",
+  "avatar.preview": "Vista previa del avatar",
+  "avatar.save": "Guardar",
+  "avatar.export": "Exportar",
+  "avatar.clear": "Borrar",
+  "avatar.grayscale": "Escala de grises",
+  "avatar.sepia": "Sepia",
+  "avatar.blur": "Desenfoque",
+  "avatar.invert": "Invertir",
+  "avatar.brightness": "Brillo",
+  "avatar.contrast": "Contraste",
+  "avatar.fileTooLarge": "El archivo excede el límite de 5 MB.",
+  "avatar.invalidType": "Solo se aceptan PNG, JPEG, WebP y GIF."
 }

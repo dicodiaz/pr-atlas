@@ -1,6 +1,6 @@
 # PR Atlas
 
-PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples from 208 corporate PRs across 12 repositories. Search is powered by a trigram inverted index running in a Web Worker, with inline ghost-text autocomplete. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts. The UI is available in English and Spanish. Structured logging via consola is available in debug mode (Ctrl+Shift+D).
+PR Atlas is a polished personal React SPA for interview preparation and live demos. It lets you search 180+ front-end engineering competency topics across 12 categories and four seniority levels, and immediately see matching GitHub pull request examples from 208 corporate PRs across 12 repositories. Search is powered by a trigram inverted index running in a Web Worker, with inline ghost-text autocomplete. Frequently used searches can be saved as persistent chips for quick reuse. A coverage analytics dashboard visualizes progress toward promotion thresholds with interactive charts and a coverage matrix table. A personal avatar builder lets you upload, crop, filter, and export a profile image. The UI is available in English and Spanish. Structured logging via consola is available in debug mode (Ctrl+Shift+D).
 
 ## Stack
 
@@ -10,6 +10,7 @@ PR Atlas is a polished personal React SPA for interview preparation and live dem
 - Tailwind CSS
 - react-router
 - Recharts
+- Immer
 - consola
 - react-i18next (EN/ES)
 - Vitest
@@ -115,7 +116,8 @@ Highlights:
 - `src/lib/autocomplete.ts` provides inline ghost-text suggestions via sorted dictionary + binary search
 - `src/lib/logger.ts` provides structured logging with consola and a debug mode toggle
 - `src/lib/search.ts` contains pure search logic (fallback and testing)
-- `src/lib/coverage.ts` computes coverage stats for the dashboard charts
+- `src/lib/coverage.ts` computes coverage stats for the dashboard charts and coverage matrix
+- `src/lib/avatar.ts` + `src/lib/avatar-state.ts` handle image processing and Immer-based editor state for the avatar builder
 - `src/lib/use-debounced-value.ts` keeps typing responsive while delaying applied search updates
 - `src/pages/SearchPage.tsx` renders the topic search and results table at `/`
 - `src/pages/DashboardPage.tsx` renders the coverage analytics dashboard at `/dashboard` (lazy-loaded)
@@ -135,6 +137,8 @@ The test suite is intentionally split by responsibility:
 - `src/test/search-index.test.ts`: trigram index construction, search, and parity with linear search
 - `src/test/autocomplete.test.ts`: dictionary building and prefix suggestion logic
 - `src/test/App.test.tsx`: screen-level integration such as URL hydration, debounced results, clear behavior, focus management, empty-state rendering, autocomplete, and debug toggle
+- `src/test/avatar*.test.ts`, `src/test/AvatarEditor.test.tsx`, `src/test/AvatarPopover.test.tsx`, `src/test/ImageDropZone.test.tsx`: avatar builder utilities, Immer reducer, components
+- `src/test/TopicDetailModal.test.tsx`: coverage matrix modal
 - `e2e/`: Playwright E2E tests covering search, saved searches, dashboard, and i18n
 
 This keeps pure logic tests focused and fast while reserving the app-level tests

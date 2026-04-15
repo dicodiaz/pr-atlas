@@ -45,5 +45,20 @@
   "search.acceptSuggestion": "Suggestion: {{suggestion}}. Press Tab or Right Arrow to accept.",
   "debug.badge": "DEBUG",
   "debug.enabled": "Debug mode enabled",
-  "debug.disabled": "Debug mode disabled"
+  "debug.disabled": "Debug mode disabled",
+  "avatar.toggle": "Avatar",
+  "avatar.upload": "Upload image",
+  "avatar.dropHint": "Click or drag an image here",
+  "avatar.preview": "Avatar preview",
+  "avatar.save": "Save",
+  "avatar.export": "Export",
+  "avatar.clear": "Clear",
+  "avatar.grayscale": "Grayscale",
+  "avatar.sepia": "Sepia",
+  "avatar.blur": "Blur",
+  "avatar.invert": "Invert",
+  "avatar.brightness": "Bright",
+  "avatar.contrast": "Contrast",
+  "avatar.fileTooLarge": "File exceeds 5 MB limit.",
+  "avatar.invalidType": "Only PNG, JPEG, WebP, and GIF are accepted."
 }

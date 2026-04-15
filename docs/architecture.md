@@ -7,7 +7,7 @@
 - `src/components`: focused UI building blocks
 - `src/components/charts`: Recharts visualizations for the dashboard
 - `src/data`: local topic and PR seed data
-- `src/lib`: pure utilities for search, highlighting, coverage stats, autocomplete, logging, and Web Worker orchestration
+- `src/lib`: pure utilities for search, highlighting, coverage stats, autocomplete, avatar image processing, logging, and Web Worker orchestration
 - `src/test`: Vitest and React Testing Library coverage split by responsibility
 - `e2e`: Playwright end-to-end tests (search, saved searches, dashboard, i18n)
 - `src/types`: shared TypeScript models
@@ -100,7 +100,7 @@ The app uses [react-router](https://reactrouter.com/) v7 with `BrowserRouter` fo
 - `/` — search page (topic search and results table)
 - `/dashboard` — coverage analytics dashboard (lazy-loaded via `React.lazy` + `Suspense`)
 
-A shared `Layout` component (`src/app/Layout.tsx`) provides the common shell: a nav bar with active-link styling and the language switcher. Each page renders inside the layout's `<Outlet>`.
+A shared `Layout` component (`src/app/Layout.tsx`) provides the common shell: a nav bar with active-link styling, the avatar popover, and the language switcher. Each page renders inside the layout's `<Outlet>`.
 
 The dashboard page and its Recharts dependency are code-split so they only download when the user navigates to `/dashboard`. A skeleton fallback is shown during the load.
 
@@ -126,6 +126,25 @@ The `/dashboard` route displays coverage analytics computed from the topic data:
 
 Stats are computed by pure functions in [`src/lib/coverage.ts`](../src/lib/coverage.ts) (`computeCategoryStats`, `computeLevelStats`, `computeMatrixStats`, `computeThresholds`) and passed to chart components in `src/components/charts/`.
 
+## Avatar builder
+
+A personal avatar builder is accessible from a popover in the nav bar. Users can:
+
+- Upload or drag-and-drop an image (PNG, JPEG, WebP, GIF; max 5 MB)
+- Crop by dragging on the preview canvas
+- Apply preset filters (grayscale, sepia, blur, invert) and adjust brightness/contrast sliders
+- Save the result to localStorage (appears as a circular thumbnail in the nav)
+- Export the processed image as a PNG download
+
+Key files:
+
+- [`src/lib/avatar.ts`](../src/lib/avatar.ts) — pure utilities for file validation, canvas rendering, blob/base64 conversion, and programmatic file download
+- [`src/lib/avatar-state.ts`](../src/lib/avatar-state.ts) — Immer-based reducer managing editor state (original image, crop rect, filter presets, slider values)
+- [`src/lib/use-avatar.ts`](../src/lib/use-avatar.ts) — hook managing three localStorage keys: rendered thumbnail, original source image, and filter/crop settings
+- [`src/components/ImageDropZone.tsx`](../src/components/ImageDropZone.tsx) — drag-and-drop upload area with file type/size validation
+- [`src/components/AvatarEditor.tsx`](../src/components/AvatarEditor.tsx) — crop overlay, filter presets, slider controls, live canvas preview
+- [`src/components/AvatarPopover.tsx`](../src/components/AvatarPopover.tsx) — popover container rendered in the nav bar
+
 ## Testing strategy
 
 The suite intentionally layers confidence instead of pushing every assertion
@@ -136,6 +155,8 @@ through the top-level app screen.
 - coverage utility tests verify category/level grouping and threshold math
 - search index tests verify trigram-based matching against known queries
 - autocomplete tests verify dictionary building and prefix suggestion logic
+- avatar tests verify file validation, canvas rendering, Immer reducer immutability, localStorage persistence, drop zone interactions, editor UI, and popover open/close behavior
+- coverage matrix tests verify `computeMatrixStats` cell counts and the topic detail modal
 - app tests cover integration points such as hydration, debounced filtering,
   result rendering, clear behavior, empty states, router navigation, autocomplete acceptance, and debug toggle
 - Playwright E2E tests (`e2e/`) validate full-app workflows: search with ghost-text autocomplete, saved searches, dashboard navigation, and language switching
