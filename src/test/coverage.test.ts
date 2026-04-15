@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
+import { sections } from '@/data/sections'
 import { topics } from '@/data/topics'
 import { TopicId, type Topic } from '@/types/topics'
 import {
   computeCategoryStats,
   computeLevelStats,
+  computeMatrixStats,
   computeThresholds,
 } from '@/lib/coverage'
 
@@ -116,6 +118,49 @@ describe('coverage utilities', () => {
 
     const levelStats = computeLevelStats(synthetic)
     expect(levelStats).toHaveLength(0)
+  })
+
+  it('computes matrix stats with correct cell counts', () => {
+    const cells = computeMatrixStats(sections, topics)
+
+    expect(cells.length).toBeGreaterThan(0)
+
+    const totalTopics = cells.reduce((sum, c) => sum + c.total, 0)
+    expect(totalTopics).toBe(topics.length)
+
+    for (const cell of cells) {
+      expect(cell.covered).toBeLessThanOrEqual(cell.total)
+      expect(cell.keyCovered).toBeLessThanOrEqual(cell.keyTotal)
+      expect(cell.keyTotal).toBeLessThanOrEqual(cell.total)
+      expect(cell.topics).toHaveLength(cell.total)
+    }
+  })
+
+  it('produces a cell per category-level pair in sections', () => {
+    const cells = computeMatrixStats(sections, topics)
+
+    let expectedCount = 0
+    for (const section of sections) {
+      expectedCount += section.levels.length
+    }
+
+    expect(cells).toHaveLength(expectedCount)
+  })
+
+  it('returns an empty array when sections are empty', () => {
+    expect(computeMatrixStats([], topics)).toEqual([])
+  })
+
+  it('marks topics as uncovered when topics array is empty', () => {
+    const cells = computeMatrixStats(sections, [])
+
+    for (const cell of cells) {
+      expect(cell.covered).toBe(0)
+      expect(cell.keyCovered).toBe(0)
+      for (const topic of cell.topics) {
+        expect(topic.covered).toBe(false)
+      }
+    }
   })
 
   it('enforces a maximum of 3 PRs per topic', () => {

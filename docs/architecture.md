@@ -121,9 +121,10 @@ The `/dashboard` route displays coverage analytics computed from the topic data:
 
 - **Bar chart** — coverage by category (covered vs total per category, via Recharts)
 - **Donut chart** — coverage by seniority level (Trainee / Junior / Middle / Senior)
+- **Coverage matrix** — an HTML table cross-tabulating categories (rows) against seniority levels (columns). Each cell shows covered/total jobs and key jobs with a progress bar. Clicking a cell opens a `<dialog>` modal listing every topic for that category-level pair with covered/uncovered indicators and KEY badges.
 - **Progress bars** — threshold progress toward each promotion requirement
 
-Stats are computed by pure functions in [`src/lib/coverage.ts`](../src/lib/coverage.ts) and passed to chart components in `src/components/charts/`.
+Stats are computed by pure functions in [`src/lib/coverage.ts`](../src/lib/coverage.ts) (`computeCategoryStats`, `computeLevelStats`, `computeMatrixStats`, `computeThresholds`) and passed to chart components in `src/components/charts/`.
 
 ## Testing strategy
 

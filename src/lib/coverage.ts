@@ -1,3 +1,4 @@
+import type { Section } from '@/data/sections'
 import type { Topic } from '@/types/topics'
 
 export interface CategoryCoverage {
@@ -25,6 +26,23 @@ export interface ThresholdProgress {
   total: number
   percent: number
   met: boolean
+}
+
+export interface MatrixTopic {
+  name: string
+  key: boolean
+  covered: boolean
+}
+
+export interface MatrixCell {
+  category: string
+  technology?: string | undefined
+  level: string
+  covered: number
+  total: number
+  keyCovered: number
+  keyTotal: number
+  topics: MatrixTopic[]
 }
 
 const THRESHOLDS: {
@@ -143,4 +161,52 @@ export const computeThresholds = (topics: Topic[]): ThresholdProgress[] => {
   }
 
   return results
+}
+
+export const computeMatrixStats = (
+  sectionList: Section[],
+  topics: Topic[],
+): MatrixCell[] => {
+  const topicIndex = new Map(topics.map((t) => [t.id, t]))
+  const cells: MatrixCell[] = []
+
+  for (const section of sectionList) {
+    for (const levelGroup of section.levels) {
+      const matrixTopics: MatrixTopic[] = []
+      let covered = 0
+      let keyCovered = 0
+      let keyTotal = 0
+
+      for (const entry of levelGroup.topics) {
+        const resolved = topicIndex.get(entry.id)
+        const topicCovered = resolved ? resolved.prs.length > 0 : false
+        const topicKey = entry.key === true
+
+        matrixTopics.push({
+          name: entry.name,
+          key: topicKey,
+          covered: topicCovered,
+        })
+
+        if (topicCovered) covered++
+        if (topicKey) {
+          keyTotal++
+          if (topicCovered) keyCovered++
+        }
+      }
+
+      cells.push({
+        category: section.category,
+        technology: section.technology,
+        level: levelGroup.level,
+        covered,
+        total: levelGroup.topics.length,
+        keyCovered,
+        keyTotal,
+        topics: matrixTopics,
+      })
+    }
+  }
+
+  return cells
 }

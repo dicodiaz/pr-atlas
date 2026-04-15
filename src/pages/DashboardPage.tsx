@@ -2,12 +2,15 @@ import { useMemo, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { CategoryBarChart } from '@/components/charts/CategoryBarChart'
+import { CoverageMatrix } from '@/components/charts/CoverageMatrix'
 import { LevelPieChart } from '@/components/charts/LevelPieChart'
 import { ThresholdBars } from '@/components/charts/ThresholdBars'
+import { sections } from '@/data/sections'
 import { topics } from '@/data/topics'
 import {
   computeCategoryStats,
   computeLevelStats,
+  computeMatrixStats,
   computeThresholds,
 } from '@/lib/coverage'
 
@@ -16,6 +19,7 @@ const DashboardPage: FC = () => {
 
   const categoryStats = useMemo(() => computeCategoryStats(topics), [])
   const levelStats = useMemo(() => computeLevelStats(topics), [])
+  const matrixStats = useMemo(() => computeMatrixStats(sections, topics), [])
   const thresholds = useMemo(() => computeThresholds(topics), [])
 
   const totalCovered = useMemo(
@@ -52,6 +56,13 @@ const DashboardPage: FC = () => {
           <LevelPieChart data={levelStats} />
         </section>
       </div>
+
+      <section className="border-default rounded-3xl border bg-[rgba(10,18,30,0.86)] p-6">
+        <h2 className="text-primary font-display mb-4 text-lg font-semibold">
+          {t('dashboard.coverageMatrix')}
+        </h2>
+        <CoverageMatrix data={matrixStats} />
+      </section>
 
       <section className="border-default rounded-3xl border bg-[rgba(10,18,30,0.86)] p-6">
         <h2 className="text-primary font-display mb-4 text-lg font-semibold">
