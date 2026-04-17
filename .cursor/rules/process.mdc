@@ -1,0 +1,35 @@
+---
+description: PR Atlas conventions and change checklist
+alwaysApply: false
+---
+
+# PR Atlas — Process
+
+## Testing
+
+- Tests in `src/test/`
+- Includes unit, integration, and E2E
+
+## Tailwind
+
+- Follow rules in docs/tailwind-notes.md
+- Do not inline or restate full conventions
+- Load only specific rules when needed
+
+---
+
+## Change Checklist
+
+After changes:
+
+1. Update/add tests
+2. Update docs if architecture or behavior changed
+3. Keep types in sync
+4. Run lint and format
+
+---
+
+## Rule
+
+- Only apply this checklist when making or reviewing changes
+- Do not load this file for general questions

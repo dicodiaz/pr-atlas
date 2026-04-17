@@ -1,0 +1,56 @@
+---
+description: PR Atlas architecture reference
+alwaysApply: false
+---
+
+# Documentation Access
+
+## Sources
+
+- Architecture → docs/architecture.md
+- Tailwind → docs/tailwind-notes.md
+- PR Inventory → pr-inventory.md
+
+---
+
+## Section-Based Loading (CRITICAL)
+
+When context is needed:
+
+1. Identify the exact section required
+2. Load ONLY that section
+3. Ignore all unrelated content
+
+---
+
+## File-Specific Rules
+
+### Architecture
+
+- Use for: system design, data model, search, routing
+- Never load full file
+
+### Tailwind Notes
+
+- Use for: styling decisions, class conventions
+- Load only relevant rule
+
+### PR Inventory
+
+- Use for: PR analysis, classification, examples
+- Never load entire dataset
+- Always filter before using
+
+---
+
+## Never Do This
+
+- Do NOT load full documents
+- Do NOT summarize entire files
+- Do NOT include multiple sections unless strictly necessary
+
+---
+
+## If Unclear
+
+Ask which section or file is needed before loading context.

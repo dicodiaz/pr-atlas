@@ -1,0 +1,55 @@
+---
+description: Minimal project context for PR Atlas
+alwaysApply: true
+---
+
+# PR Atlas — Core Context
+
+- SPA built with Vite, React, and TypeScript
+- Uses pnpm
+- Purpose: search technology topics and display related GitHub PRs
+
+## Data
+
+- Topics taxonomy (sections)
+- PR-to-topic mappings
+
+## Search
+
+- Token-based + indexed search
+- URL-driven state (`?q=`)
+
+---
+
+## Context Strategy (CRITICAL)
+
+- Prefer loading context from docs instead of embedding it
+- Never include full documents by default
+- Only load specific sections when needed
+
+---
+
+## Documentation Sources
+
+- Architecture → `docs/architecture.md`
+- Tailwind conventions → `docs/tailwind-notes.md`
+- PR dataset → `pr-inventory.md`
+
+---
+
+## Token Optimization Rules
+
+- Prefer local execution over LLM tasks
+- Never process large datasets in a single request
+- Use small batches (5–10 items)
+- Avoid repeating data
+- Store intermediate results
+- Use compact representations (IDs over text)
+
+---
+
+## Execution Rules
+
+- If a task can be executed locally, instruct the user to run it
+- Do not simulate long-running processes inside the LLM
+- Validate commands, then delegate execution
