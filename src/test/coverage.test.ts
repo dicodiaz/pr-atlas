@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest'
 
 import { sections } from '@/data/sections'
 import { topics } from '@/data/topics'
-import { TopicId, type Topic } from '@/types/topics'
 import {
   computeCategoryStats,
   computeLevelStats,
   computeMatrixStats,
   computeThresholds,
 } from '@/lib/coverage'
+import { TopicId, type Topic } from '@/types/topics'
 
 const makeTopic = (overrides: Partial<Topic> & { tags: string[] }): Topic => ({
   id: TopicId.MANAGES_COLLECTIONS_OF_DATA_USING_LANGUAGE,
@@ -168,7 +168,10 @@ describe('coverage utilities', () => {
       .filter((t) => t.prs.length > 3)
       .map((t) => `${t.name} (${t.prs.length} PRs)`)
 
-    expect(violations, `Topics exceeding 3 PRs:\n${violations.join('\n')}`).toHaveLength(0)
+    expect(
+      violations,
+      `Topics exceeding 3 PRs:\n${violations.join('\n')}`,
+    ).toHaveLength(0)
   })
 
   it('sorts PRs by score descending within each topic', () => {

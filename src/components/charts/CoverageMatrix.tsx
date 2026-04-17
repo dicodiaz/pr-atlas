@@ -48,13 +48,13 @@ export const CoverageMatrix: FC<CoverageMatrixProps> = ({ data }) => {
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr>
-              <th className="text-primary p-3 text-left text-xs font-semibold uppercase tracking-wider">
+              <th className="text-primary p-3 text-left text-xs font-semibold tracking-wider uppercase">
                 {t('dashboard.coverageMatrix')}
               </th>
               {LEVELS.map((level) => (
                 <th
                   key={level}
-                  className="text-primary p-3 text-left text-xs font-semibold uppercase tracking-wider"
+                  className="text-primary p-3 text-left text-xs font-semibold tracking-wider uppercase"
                 >
                   {level}
                 </th>
@@ -72,10 +72,7 @@ export const CoverageMatrix: FC<CoverageMatrixProps> = ({ data }) => {
                   const cell = row.cells.get(level)
                   if (!cell) {
                     return (
-                      <td
-                        key={level}
-                        className="p-3 text-center text-white/20"
-                      >
+                      <td key={level} className="p-3 text-center text-white/20">
                         –
                       </td>
                     )

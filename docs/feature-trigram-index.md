@@ -56,10 +56,10 @@ intersection efficient.
 
 ## Files
 
-| File | Purpose |
-| ---- | ------- |
-| `src/lib/search-index.ts` | `TrigramIndex` class — index construction and search |
-| `src/lib/search.ts` | Original linear search — kept as fallback for tests and jsdom |
+| File                            | Purpose                                                                                                                             |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `src/lib/search-index.ts`       | `TrigramIndex` class — index construction and search                                                                                |
+| `src/lib/search.ts`             | Original linear search — kept as fallback for tests and jsdom                                                                       |
 | `src/test/search-index.test.ts` | 8 unit tests: empty query, name/tag matching, multi-token intersection, short tokens, case insensitivity, parity with linear search |
 
 ## How the old search still works

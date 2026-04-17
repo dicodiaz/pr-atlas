@@ -71,12 +71,12 @@ know or care whether results came from the worker or from a sync fallback.
 
 ## Files
 
-| File | Purpose |
-| ---- | ------- |
-| `src/lib/search-worker-protocol.ts` | Shared `WorkerRequest` / `WorkerResponse` types |
-| `src/lib/search-worker.ts` | Worker script — builds index, handles queries |
-| `src/lib/use-search-worker.ts` | React hook — lifecycle, message passing, fallback |
-| `src/pages/SearchPage.tsx` (line 29) | Consumer — single-line integration |
+| File                                 | Purpose                                           |
+| ------------------------------------ | ------------------------------------------------- |
+| `src/lib/search-worker-protocol.ts`  | Shared `WorkerRequest` / `WorkerResponse` types   |
+| `src/lib/search-worker.ts`           | Worker script — builds index, handles queries     |
+| `src/lib/use-search-worker.ts`       | React hook — lifecycle, message passing, fallback |
+| `src/pages/SearchPage.tsx` (line 29) | Consumer — single-line integration                |
 
 ## Why not just search on the main thread?
 

@@ -32,5 +32,11 @@ export const useAvatar = () => {
     setAvatarUrl(null)
   }, [])
 
-  return { avatarUrl, avatarOriginal, savedSettings, saveAvatar, clearAvatar } as const
+  return {
+    avatarUrl,
+    avatarOriginal,
+    savedSettings,
+    saveAvatar,
+    clearAvatar,
+  } as const
 }

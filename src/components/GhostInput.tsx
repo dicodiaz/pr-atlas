@@ -62,7 +62,7 @@ export const GhostInput: FC<GhostInputProps> = ({
     <div className="relative w-full">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center overflow-hidden text-nowrap px-5 py-4 text-base"
+        className="pointer-events-none absolute inset-0 flex items-center overflow-hidden px-5 py-4 text-base text-nowrap"
       >
         <span className="invisible">{value}</span>
         {suggestion && (

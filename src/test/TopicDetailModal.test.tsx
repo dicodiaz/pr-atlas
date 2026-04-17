@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
 import { I18nextProvider } from 'react-i18next'
+import { describe, expect, it, vi } from 'vitest'
 
 import { TopicDetailModal } from '@/components/TopicDetailModal'
 import type { MatrixCell } from '@/lib/coverage'
@@ -38,7 +38,9 @@ const renderModal = (c: MatrixCell | null, onClose = vi.fn()) =>
     </I18nextProvider>,
   )
 
-HTMLDialogElement.prototype.showModal = vi.fn(function (this: HTMLDialogElement) {
+HTMLDialogElement.prototype.showModal = vi.fn(function (
+  this: HTMLDialogElement,
+) {
   this.setAttribute('open', '')
 })
 HTMLDialogElement.prototype.close = vi.fn(function (this: HTMLDialogElement) {
@@ -54,7 +56,9 @@ describe('TopicDetailModal', () => {
 
   it('opens and shows the header with category, technology, and level', () => {
     renderModal(cell)
-    expect(screen.getByText('Language – JavaScript / Trainee')).toBeInTheDocument()
+    expect(
+      screen.getByText('Language – JavaScript / Trainee'),
+    ).toBeInTheDocument()
   })
 
   it('lists all topics with correct count', () => {
@@ -92,7 +96,9 @@ describe('TopicDetailModal', () => {
       </I18nextProvider>,
     )
 
-    expect(screen.getByText('Language – JavaScript / Trainee')).toBeInTheDocument()
+    expect(
+      screen.getByText('Language – JavaScript / Trainee'),
+    ).toBeInTheDocument()
 
     rerender(
       <I18nextProvider i18n={i18n}>
@@ -100,7 +106,9 @@ describe('TopicDetailModal', () => {
       </I18nextProvider>,
     )
 
-    expect(screen.queryByText('Language – JavaScript / Trainee')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('Language – JavaScript / Trainee'),
+    ).not.toBeInTheDocument()
   })
 
   it('does not call showModal again when rerendered with the same cell', () => {

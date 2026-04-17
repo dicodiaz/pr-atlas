@@ -8,7 +8,8 @@ import { useAvatar } from '@/lib/use-avatar'
 
 export const AvatarPopover: FC = () => {
   const { t } = useTranslation()
-  const { avatarUrl, avatarOriginal, savedSettings, saveAvatar, clearAvatar } = useAvatar()
+  const { avatarUrl, avatarOriginal, savedSettings, saveAvatar, clearAvatar } =
+    useAvatar()
   const [open, setOpen] = useState(false)
   const [editorDataUrl, setEditorDataUrl] = useState<string | null>(null)
   const popoverRef = useRef<HTMLDivElement>(null)
@@ -73,11 +74,7 @@ export const AvatarPopover: FC = () => {
         aria-expanded={open}
       >
         {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+          <img src={avatarUrl} alt="" className="h-full w-full object-cover" />
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +96,13 @@ export const AvatarPopover: FC = () => {
       </button>
 
       {open && (
-        <div className="border-default absolute right-0 top-full z-50 mt-2 w-64 rounded-xl border bg-[rgba(10,18,30,0.96)] p-4 shadow-xl">
+        <div className="border-default absolute top-full right-0 z-50 mt-2 w-64 rounded-xl border bg-[rgba(10,18,30,0.96)] p-4 shadow-xl">
           {editorDataUrl ? (
             <AvatarEditor
               imageDataUrl={editorDataUrl}
-              savedSettings={editorDataUrl === avatarOriginal ? savedSettings : null}
+              savedSettings={
+                editorDataUrl === avatarOriginal ? savedSettings : null
+              }
               onSave={handleSave}
               onClear={handleClear}
             />

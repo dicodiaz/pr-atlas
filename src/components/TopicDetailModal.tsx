@@ -78,7 +78,7 @@ export const TopicDetailModal: FC<TopicDetailModalProps> = ({
           </div>
 
           <div className="px-6 py-4">
-            <p className="text-secondary mb-3 text-xs font-semibold uppercase tracking-wider">
+            <p className="text-secondary mb-3 text-xs font-semibold tracking-wider uppercase">
               {t('dashboard.topics', { count: cell.topics.length })}
             </p>
 

@@ -44,7 +44,7 @@ The component renders two layers inside a `relative` container:
     ghost text from wrapping outside the input.
 
 - **Actual input** (lines 79-89, `z-10`): A transparent `<input
-  type="search">` layered above the mirror. Because the input background is
+type="search">` layered above the mirror. Because the input background is
   transparent, the ghost text shows through behind the typed characters.
 
 ### 4. Keyboard handling (`src/components/GhostInput.tsx`, lines 46-63)
@@ -69,13 +69,13 @@ It's passed as a prop through `SearchControls` down to `GhostInput`.
 
 ## Files
 
-| File | Purpose |
-| ---- | ------- |
-| `src/lib/autocomplete.ts` | `buildDictionary` and `getSuggestion` — pure functions, no React |
-| `src/components/GhostInput.tsx` | Visual ghost-text layer, keyboard handling, a11y |
-| `src/components/SearchControls.tsx` (lines 44-54) | Passes `dictionary` prop to `GhostInput` |
-| `src/pages/SearchPage.tsx` (lines 9, 31, 130) | Builds dictionary, passes to `SearchControls` |
-| `src/test/autocomplete.test.ts` | 10 unit tests: sorting, deduplication, prefix matching, case preservation, case insensitivity, edge cases |
-| `e2e/search.spec.ts` (lines 19-36) | E2E tests: ghost text visibility and Tab acceptance |
-| `src/i18n/locales/en.json` | `search.acceptSuggestion` — screen reader hint |
-| `src/i18n/locales/es.json` | Spanish translation of the same key |
+| File                                              | Purpose                                                                                                   |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `src/lib/autocomplete.ts`                         | `buildDictionary` and `getSuggestion` — pure functions, no React                                          |
+| `src/components/GhostInput.tsx`                   | Visual ghost-text layer, keyboard handling, a11y                                                          |
+| `src/components/SearchControls.tsx` (lines 44-54) | Passes `dictionary` prop to `GhostInput`                                                                  |
+| `src/pages/SearchPage.tsx` (lines 9, 31, 130)     | Builds dictionary, passes to `SearchControls`                                                             |
+| `src/test/autocomplete.test.ts`                   | 10 unit tests: sorting, deduplication, prefix matching, case preservation, case insensitivity, edge cases |
+| `e2e/search.spec.ts` (lines 19-36)                | E2E tests: ghost text visibility and Tab acceptance                                                       |
+| `src/i18n/locales/en.json`                        | `search.acceptSuggestion` — screen reader hint                                                            |
+| `src/i18n/locales/es.json`                        | Spanish translation of the same key                                                                       |

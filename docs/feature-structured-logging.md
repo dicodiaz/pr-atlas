@@ -26,11 +26,11 @@ Creates a `consola` instance (line 7-10) with:
 
 Exports three things:
 
-| Export | Purpose |
-| ------ | ------- |
-| `logger` | The consola instance — call `logger.debug(...)`, `logger.info(...)`, etc. |
-| `toggleDebug()` | Flips the debug flag in `localStorage` and updates `logger.level` at runtime. Returns the new value. |
-| `isDebugEnabled()` | Reads the current flag from `localStorage`. |
+| Export             | Purpose                                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `logger`           | The consola instance — call `logger.debug(...)`, `logger.info(...)`, etc.                            |
+| `toggleDebug()`    | Flips the debug flag in `localStorage` and updates `logger.level` at runtime. Returns the new value. |
+| `isDebugEnabled()` | Reads the current flag from `localStorage`.                                                          |
 
 ### 2. Global keyboard shortcut (`src/app/Layout.tsx`, lines 12-22)
 
@@ -51,31 +51,31 @@ active. When turned off, the badge disappears.
 
 ### 4. Where debug logs are emitted
 
-| Location | What it logs |
-| -------- | ------------ |
-| `src/lib/use-search-worker.ts`, line 32-34 | Worker ready time (ms) |
-| `src/lib/use-search-worker.ts`, line 41-43 | Number of results returned by worker |
-| `src/lib/use-search-worker.ts`, line 61 | Query posted to worker with request ID |
-| `src/components/GhostInput.tsx`, line 42 | Autocomplete suggestion accepted |
-| `src/pages/SearchPage.tsx`, line 34 | Active query and result count after debounce |
+| Location                                   | What it logs                                 |
+| ------------------------------------------ | -------------------------------------------- |
+| `src/lib/use-search-worker.ts`, line 32-34 | Worker ready time (ms)                       |
+| `src/lib/use-search-worker.ts`, line 41-43 | Number of results returned by worker         |
+| `src/lib/use-search-worker.ts`, line 61    | Query posted to worker with request ID       |
+| `src/components/GhostInput.tsx`, line 42   | Autocomplete suggestion accepted             |
+| `src/pages/SearchPage.tsx`, line 34        | Active query and result count after debounce |
 
 ### 5. i18n keys
 
-| Key | English | Spanish |
-| --- | ------- | ------- |
-| `debug.badge` | DEBUG | DEPURACIÓN |
-| `debug.enabled` | Debug logging enabled | Registro de depuración activado |
+| Key              | English                | Spanish                            |
+| ---------------- | ---------------------- | ---------------------------------- |
+| `debug.badge`    | DEBUG                  | DEPURACIÓN                         |
+| `debug.enabled`  | Debug logging enabled  | Registro de depuración activado    |
 | `debug.disabled` | Debug logging disabled | Registro de depuración desactivado |
 
 ## Files
 
-| File | Purpose |
-| ---- | ------- |
-| `src/lib/logger.ts` | Logger creation, `toggleDebug`, `isDebugEnabled` |
-| `src/app/Layout.tsx` (lines 10-27, 48-52) | Keyboard shortcut, debug state, badge UI |
-| `src/pages/SearchPage.tsx` (line 34) | Debug log of search queries |
-| `src/lib/use-search-worker.ts` (lines 32-34, 41-43, 61) | Debug logs for worker lifecycle |
-| `src/components/GhostInput.tsx` (line 42) | Debug log for autocomplete acceptance |
-| `src/i18n/locales/en.json` | English strings for badge and toggle messages |
-| `src/i18n/locales/es.json` | Spanish translations |
-| `src/test/App.test.tsx` | Integration test: "toggles debug mode with Ctrl+Shift+D" |
+| File                                                    | Purpose                                                  |
+| ------------------------------------------------------- | -------------------------------------------------------- |
+| `src/lib/logger.ts`                                     | Logger creation, `toggleDebug`, `isDebugEnabled`         |
+| `src/app/Layout.tsx` (lines 10-27, 48-52)               | Keyboard shortcut, debug state, badge UI                 |
+| `src/pages/SearchPage.tsx` (line 34)                    | Debug log of search queries                              |
+| `src/lib/use-search-worker.ts` (lines 32-34, 41-43, 61) | Debug logs for worker lifecycle                          |
+| `src/components/GhostInput.tsx` (line 42)               | Debug log for autocomplete acceptance                    |
+| `src/i18n/locales/en.json`                              | English strings for badge and toggle messages            |
+| `src/i18n/locales/es.json`                              | Spanish translations                                     |
+| `src/test/App.test.tsx`                                 | Integration test: "toggles debug mode with Ctrl+Shift+D" |

@@ -48,12 +48,12 @@ Each PR-topic mapping entry has a `score` field (1-100) that ranks how directly 
 
 ### Scoring rubric
 
-| Range  | Label        | When to use |
-|--------|--------------|-------------|
-| 90-100 | **Primary**  | The topic IS what the PR is about. If asked "what does this PR do?", the answer directly maps to the topic. |
-| 60-89  | **Strong**   | The topic is a major aspect of the PR, clearly visible in the diff, easy to explain in a presentation. |
-| 30-59  | **Supporting** | The topic is present but secondary. The skill is used meaningfully but isn't the PR's focus. |
-| 1-29   | **Incidental** | The skill is touched but not the focus. Would require explanation to connect the dots. |
+| Range  | Label          | When to use                                                                                                 |
+| ------ | -------------- | ----------------------------------------------------------------------------------------------------------- |
+| 90-100 | **Primary**    | The topic IS what the PR is about. If asked "what does this PR do?", the answer directly maps to the topic. |
+| 60-89  | **Strong**     | The topic is a major aspect of the PR, clearly visible in the diff, easy to explain in a presentation.      |
+| 30-59  | **Supporting** | The topic is present but secondary. The skill is used meaningfully but isn't the PR's focus.                |
+| 1-29   | **Incidental** | The skill is touched but not the focus. Would require explanation to connect the dots.                      |
 
 ### Scoring conventions
 

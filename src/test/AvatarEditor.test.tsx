@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { I18nextProvider } from 'react-i18next'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { AvatarEditor } from '@/components/AvatarEditor'
 import * as avatarLib from '@/lib/avatar'
@@ -16,10 +16,7 @@ const mockCtx = {
 
 const OriginalImage = globalThis.Image
 
-const renderEditor = (
-  onSave = vi.fn(),
-  onClear = vi.fn(),
-) =>
+const renderEditor = (onSave = vi.fn(), onClear = vi.fn()) =>
   render(
     <I18nextProvider i18n={i18n}>
       <AvatarEditor imageDataUrl={DATA_URL} onSave={onSave} onClear={onClear} />
@@ -150,7 +147,9 @@ describe('AvatarEditor', () => {
     const onSave = vi.fn()
     const fakeBlob = new Blob(['px'], { type: 'image/png' })
     vi.spyOn(avatarLib, 'canvasToBlob').mockResolvedValue(fakeBlob)
-    vi.spyOn(avatarLib, 'blobToBase64').mockResolvedValue('data:image/png;base64,saved')
+    vi.spyOn(avatarLib, 'blobToBase64').mockResolvedValue(
+      'data:image/png;base64,saved',
+    )
 
     renderEditor(onSave)
     fireEvent.click(screen.getByText('Save'))
@@ -170,7 +169,9 @@ describe('AvatarEditor', () => {
   it('triggers download when Export is clicked', async () => {
     const fakeBlob = new Blob(['px'], { type: 'image/png' })
     vi.spyOn(avatarLib, 'canvasToBlob').mockResolvedValue(fakeBlob)
-    const downloadSpy = vi.spyOn(avatarLib, 'downloadBlob').mockImplementation(() => {})
+    const downloadSpy = vi
+      .spyOn(avatarLib, 'downloadBlob')
+      .mockImplementation(() => {})
 
     renderEditor()
     fireEvent.click(screen.getByText('Export'))

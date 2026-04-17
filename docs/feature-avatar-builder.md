@@ -77,15 +77,15 @@ The reducer (`avatarReducer`, line 36) is created with `produce()` from
 Immer. Each action mutates the `draft` object directly — Immer handles
 structural sharing under the hood:
 
-| Action | Effect |
-|--------|--------|
-| `SET_ORIGINAL` | Sets the image and resets all editing state to defaults |
-| `RESTORE` | Rehydrates the editor from a saved original + `AvatarSettings` (used when reopening a previously saved avatar so filters are re-applied to the raw source) |
-| `SET_CROP` | Updates the crop rect |
-| `TOGGLE_PRESET` | Flips a single filter preset |
-| `SET_SLIDER` | Updates brightness or contrast |
-| `SET_PREVIEW` | Stores the final preview data URL |
-| `RESET` | Returns `initialState` (clears everything) |
+| Action          | Effect                                                                                                                                                     |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SET_ORIGINAL`  | Sets the image and resets all editing state to defaults                                                                                                    |
+| `RESTORE`       | Rehydrates the editor from a saved original + `AvatarSettings` (used when reopening a previously saved avatar so filters are re-applied to the raw source) |
+| `SET_CROP`      | Updates the crop rect                                                                                                                                      |
+| `TOGGLE_PRESET` | Flips a single filter preset                                                                                                                               |
+| `SET_SLIDER`    | Updates brightness or contrast                                                                                                                             |
+| `SET_PREVIEW`   | Stores the final preview data URL                                                                                                                          |
+| `RESET`         | Returns `initialState` (clears everything)                                                                                                                 |
 
 The unit tests in `avatar-state.test.ts` assert that every action produces a
 new state reference (`state !== newState`), confirming immutability is never
@@ -96,9 +96,9 @@ violated.
 The `useAvatar` hook wraps the existing `storage` utility and manages three
 keys:
 
-| Key | Content |
-|-----|---------|
-| `pr-atlas:avatar` | The rendered output (base64 PNG) — used as the nav thumbnail |
+| Key                        | Content                                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `pr-atlas:avatar`          | The rendered output (base64 PNG) — used as the nav thumbnail                                                          |
 | `pr-atlas:avatar-original` | The original source image (base64) — used to re-open the editor so filters can be re-applied to the unprocessed image |
 | `pr-atlas:avatar-settings` | `AvatarSettings` (crop rect, filter presets, brightness, contrast) — used to restore the editor to its previous state |
 
@@ -192,21 +192,21 @@ debug badge and the `<LanguageSwitcher />`, inside a flex container with
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `src/lib/avatar.ts` | File validation, canvas rendering, blob/base64 conversion, download |
-| `src/lib/avatar-state.ts` | Immer-based reducer for editor state |
-| `src/lib/use-avatar.ts` | Hook for localStorage persistence (rendered output, original source, settings) |
-| `src/components/ImageDropZone.tsx` | Drag-and-drop and click-to-browse upload |
-| `src/components/AvatarEditor.tsx` | Canvas preview, crop, filters, sliders, save/export/clear |
-| `src/components/AvatarPopover.tsx` | Nav bar popover container |
-| `src/app/Layout.tsx` (lines 5, 55-58) | Imports and renders `AvatarPopover` |
-| `src/i18n/locales/en.json` | 14 avatar-related i18n keys |
-| `src/i18n/locales/es.json` | Spanish translations |
-| `src/data/topics.ts` (lines 2175-2196) | PR Atlas topic mappings for 4 Middle topics |
-| `src/test/avatar.test.ts` | File validation, canvas rendering, blob conversion, download tests |
-| `src/test/avatar-state.test.ts` | Immer reducer tests with immutability assertions |
-| `src/test/use-avatar.test.ts` | Hook tests for load, save, clear |
-| `src/test/ImageDropZone.test.tsx` | Drop zone interaction, validation error display |
-| `src/test/AvatarEditor.test.tsx` | Preset toggles, sliders, save/export/clear |
-| `src/test/AvatarPopover.test.tsx` | Popover open/close, outside click, Escape, save flow |
+| File                                   | Purpose                                                                        |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
+| `src/lib/avatar.ts`                    | File validation, canvas rendering, blob/base64 conversion, download            |
+| `src/lib/avatar-state.ts`              | Immer-based reducer for editor state                                           |
+| `src/lib/use-avatar.ts`                | Hook for localStorage persistence (rendered output, original source, settings) |
+| `src/components/ImageDropZone.tsx`     | Drag-and-drop and click-to-browse upload                                       |
+| `src/components/AvatarEditor.tsx`      | Canvas preview, crop, filters, sliders, save/export/clear                      |
+| `src/components/AvatarPopover.tsx`     | Nav bar popover container                                                      |
+| `src/app/Layout.tsx` (lines 5, 55-58)  | Imports and renders `AvatarPopover`                                            |
+| `src/i18n/locales/en.json`             | 14 avatar-related i18n keys                                                    |
+| `src/i18n/locales/es.json`             | Spanish translations                                                           |
+| `src/data/topics.ts` (lines 2175-2196) | PR Atlas topic mappings for 4 Middle topics                                    |
+| `src/test/avatar.test.ts`              | File validation, canvas rendering, blob conversion, download tests             |
+| `src/test/avatar-state.test.ts`        | Immer reducer tests with immutability assertions                               |
+| `src/test/use-avatar.test.ts`          | Hook tests for load, save, clear                                               |
+| `src/test/ImageDropZone.test.tsx`      | Drop zone interaction, validation error display                                |
+| `src/test/AvatarEditor.test.tsx`       | Preset toggles, sliders, save/export/clear                                     |
+| `src/test/AvatarPopover.test.tsx`      | Popover open/close, outside click, Escape, save flow                           |

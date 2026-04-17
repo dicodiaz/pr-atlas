@@ -30,13 +30,19 @@ describe('useAvatar', () => {
   })
 
   it('loads an existing avatar from localStorage', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify('data:image/png;base64,abc'))
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify('data:image/png;base64,abc'),
+    )
     const { result } = renderHook(() => useAvatar())
     expect(result.current.avatarUrl).toBe('data:image/png;base64,abc')
   })
 
   it('loads an existing original from localStorage', () => {
-    localStorage.setItem(ORIGINAL_KEY, JSON.stringify('data:image/png;base64,orig'))
+    localStorage.setItem(
+      ORIGINAL_KEY,
+      JSON.stringify('data:image/png;base64,orig'),
+    )
     const { result } = renderHook(() => useAvatar())
     expect(result.current.avatarOriginal).toBe('data:image/png;base64,orig')
   })
@@ -71,8 +77,14 @@ describe('useAvatar', () => {
   })
 
   it('clears the avatar, original, and settings from localStorage and resets state', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify('data:image/png;base64,old'))
-    localStorage.setItem(ORIGINAL_KEY, JSON.stringify('data:image/png;base64,orig'))
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify('data:image/png;base64,old'),
+    )
+    localStorage.setItem(
+      ORIGINAL_KEY,
+      JSON.stringify('data:image/png;base64,orig'),
+    )
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(defaultSettings))
     const { result } = renderHook(() => useAvatar())
 
