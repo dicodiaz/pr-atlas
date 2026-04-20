@@ -1,4 +1,4 @@
-import type { Topic } from '@/types/topics'
+import type { ParentFeature, Topic } from '@/types/topics'
 
 import { normalizeText, tokenizeQuery } from '@/lib/search'
 
@@ -19,8 +19,8 @@ const buildSearchIndex = (topic: Topic): string =>
       ...topic.prs.map((pr) => pr.contribution),
       ...topic.prs.map((pr) => pr.repoName),
       ...topic.prs
-        .map((pr) => pr.parentFeature)
-        .filter((feature): feature is string => feature !== undefined),
+        .filter((pr) => pr.parentFeature !== undefined)
+        .map((pr) => pr.parentFeature as ParentFeature),
     ].join(' '),
   )
 

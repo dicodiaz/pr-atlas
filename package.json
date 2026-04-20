@@ -7,13 +7,24 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "test": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "build:if-needed:push": "node scripts/build-if-needed-push.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "**/*.{ts,tsx,js,jsx,json,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "consola": "^3.4.2",
@@ -42,7 +53,9 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.0.1",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.2",
