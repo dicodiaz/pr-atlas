@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
 import type { LevelCoverage } from '@/lib/coverage'
 
@@ -18,7 +18,10 @@ export const LevelPieChart: FC<LevelPieChartProps> = ({ data }) => (
   <ResponsiveContainer width="100%" height={300}>
     <PieChart>
       <Pie
-        data={data}
+        data={data.map((entry, index) => ({
+          ...entry,
+          fill: COLORS[index % COLORS.length] ?? 'var(--color-accent)',
+        }))}
         dataKey="covered"
         nameKey="level"
         cx="50%"
@@ -28,16 +31,10 @@ export const LevelPieChart: FC<LevelPieChartProps> = ({ data }) => (
         paddingAngle={3}
         label={(props) => {
           const entry = props as unknown as LevelCoverage
-          return `${entry.level} ${entry.covered}/${entry.total}`
+          return `${entry.level} ${String(entry.covered)}/${String(entry.total)}`
         }}
       >
-        {data.map((entry, index) => (
-          <Cell
-            key={entry.level}
-            fill={COLORS[index % COLORS.length] ?? 'var(--color-accent)'}
-            stroke="transparent"
-          />
-        ))}
+        {/* fill comes from the data entries */}
       </Pie>
       <Tooltip
         contentStyle={{
@@ -49,7 +46,7 @@ export const LevelPieChart: FC<LevelPieChartProps> = ({ data }) => (
         labelStyle={{ color: 'var(--color-text-primary)' }}
         formatter={(value, _name, props) => {
           const { total } = props.payload as LevelCoverage
-          return [`${value} / ${total}`, 'Covered']
+          return [`${String(value)} / ${String(total)}`, 'Covered']
         }}
       />
     </PieChart>

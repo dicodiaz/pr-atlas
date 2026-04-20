@@ -109,8 +109,10 @@ export const computeLevelStats = (topics: Topic[]): LevelCoverage[] => {
     groups.set(level, entry)
   }
 
-  return LEVEL_ORDER.filter((l) => groups.has(l)).map((level) => {
-    const { covered, total, keyCovered, keyTotal } = groups.get(level)!
+  return LEVEL_ORDER.map((level) => {
+    const entry = groups.get(level)
+    if (!entry) return null
+    const { covered, total, keyCovered, keyTotal } = entry
     return {
       level,
       covered,
@@ -119,7 +121,7 @@ export const computeLevelStats = (topics: Topic[]): LevelCoverage[] => {
       keyTotal,
       percent: Math.round((covered / total) * 100),
     }
-  })
+  }).filter((value): value is LevelCoverage => value !== null)
 }
 
 export const computeThresholds = (topics: Topic[]): ThresholdProgress[] => {

@@ -31,7 +31,9 @@ export const SearchPage: FC = () => {
   const dictionary = useMemo(() => buildDictionary(topics), [])
 
   useEffect(() => {
-    logger.debug(`Search: "${activeQuery.trim()}" → ${results.length} results`)
+    logger.debug(
+      `Search: "${activeQuery.trim()}" → ${String(results.length)} results`,
+    )
   }, [activeQuery, results.length])
 
   useEffect(() => {
@@ -54,8 +56,12 @@ export const SearchPage: FC = () => {
       delay = ANNOUNCE_DELAY_MS
     }
 
-    const id = setTimeout(() => setCountAnnouncement(text), delay)
-    return () => clearTimeout(id)
+    const id = setTimeout(() => {
+      setCountAnnouncement(text)
+    }, delay)
+    return () => {
+      clearTimeout(id)
+    }
   }, [activeQuery, results.length, t])
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import es from './locales/es.json'
 
 const LANG_KEY = 'pr-atlas:language'
 
-i18n.use(initReactI18next).init({
+void i18n.use(initReactI18next).init({
   resources: { en: { translation: en }, es: { translation: es } },
   lng: storage.get(LANG_KEY, navigator.language.startsWith('es') ? 'es' : 'en'),
   fallbackLng: 'en',

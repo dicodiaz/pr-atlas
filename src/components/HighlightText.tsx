@@ -13,7 +13,7 @@ export const HighlightText: FC<HighlightTextProps> = ({ query, text }) => {
   return (
     <>
       {segments.map((segment, index) => (
-        <Fragment key={`${segment.text}-${index}`}>
+        <Fragment key={`${segment.text}-${String(index)}`}>
           {segment.isMatch ? (
             <mark className="text-accent rounded-sm bg-(--color-hover) px-1 py-0.5">
               {segment.text}

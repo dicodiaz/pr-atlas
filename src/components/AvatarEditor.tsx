@@ -94,7 +94,9 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
 
   const handleCropStart = useCallback(
     (e: ReactMouseEvent<HTMLCanvasElement>) => {
-      const rect = canvasRef.current!.getBoundingClientRect()
+      const canvas = canvasRef.current
+      if (!canvas) return
+      const rect = canvas.getBoundingClientRect()
       cropStartRef.current = {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
@@ -128,7 +130,8 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
   }, [])
 
   const handleSave = useCallback(async () => {
-    const canvas = canvasRef.current!
+    const canvas = canvasRef.current
+    if (!canvas) return
     const blob = await canvasToBlob(canvas)
     const base64 = await blobToBase64(blob)
     dispatch({ type: 'SET_PREVIEW', dataUrl: base64 })
@@ -136,7 +139,9 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
   }, [onSave, state])
 
   const handleExport = useCallback(async () => {
-    const blob = await canvasToBlob(canvasRef.current!)
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const blob = await canvasToBlob(canvas)
     downloadBlob(blob, 'avatar.png')
   }, [])
 
@@ -162,7 +167,9 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
           <button
             key={preset}
             type="button"
-            onClick={() => dispatch({ type: 'TOGGLE_PRESET', preset })}
+            onClick={() => {
+              dispatch({ type: 'TOGGLE_PRESET', preset })
+            }}
             className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
               state.presets[preset]
                 ? 'bg-(--color-accent) text-white'
@@ -182,13 +189,13 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
             min={50}
             max={150}
             value={state.brightness}
-            onChange={(e) =>
+            onChange={(e) => {
               dispatch({
                 type: 'SET_SLIDER',
                 key: 'brightness',
                 value: Number(e.target.value),
               })
-            }
+            }}
             className="flex-1"
           />
           <span className="w-8 text-right">{state.brightness}</span>
@@ -200,13 +207,13 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
             min={50}
             max={150}
             value={state.contrast}
-            onChange={(e) =>
+            onChange={(e) => {
               dispatch({
                 type: 'SET_SLIDER',
                 key: 'contrast',
                 value: Number(e.target.value),
               })
-            }
+            }}
             className="flex-1"
           />
           <span className="w-8 text-right">{state.contrast}</span>
@@ -216,14 +223,18 @@ export const AvatarEditor: FC<AvatarEditorProps> = ({
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={handleSave}
+          onClick={() => {
+            void handleSave()
+          }}
           className="flex-1 cursor-pointer rounded-lg bg-(--color-accent) px-3 py-1.5 text-xs font-medium text-white transition hover:opacity-90"
         >
           {t('avatar.save')}
         </button>
         <button
           type="button"
-          onClick={handleExport}
+          onClick={() => {
+            void handleExport()
+          }}
           className="flex-1 cursor-pointer rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/20"
         >
           {t('avatar.export')}

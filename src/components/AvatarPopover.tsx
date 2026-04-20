@@ -21,15 +21,18 @@ export const AvatarPopover: FC = () => {
     })
   }, [avatarOriginal])
 
-  const handleFileSelected = useCallback(async (file: File) => {
+  const handleFileSelected = useCallback((file: File) => {
     const reader = new FileReader()
-    reader.onload = () => setEditorDataUrl(reader.result as string)
+    reader.onload = () => {
+      setEditorDataUrl(reader.result as string)
+    }
     reader.readAsDataURL(file)
   }, [])
 
   const handleSave = useCallback(
     (base64: string, settings: AvatarSettings) => {
-      saveAvatar(base64, editorDataUrl!, settings)
+      if (!editorDataUrl) return
+      saveAvatar(base64, editorDataUrl, settings)
       setOpen(false)
     },
     [saveAvatar, editorDataUrl],
@@ -53,7 +56,9 @@ export const AvatarPopover: FC = () => {
     }
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+      }
     }
 
     document.addEventListener('mousedown', handleClickOutside)

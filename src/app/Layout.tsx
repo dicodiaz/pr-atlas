@@ -24,7 +24,9 @@ export const Layout: FC = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [handleKeyDown])
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>

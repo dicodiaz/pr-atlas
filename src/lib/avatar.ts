@@ -60,8 +60,9 @@ const buildFilterString = (filters: FilterOptions): string => {
   if (filters.blur) parts.push('blur(2px)')
   if (filters.invert) parts.push('invert(100%)')
   if (filters.brightness !== 100)
-    parts.push(`brightness(${filters.brightness}%)`)
-  if (filters.contrast !== 100) parts.push(`contrast(${filters.contrast}%)`)
+    parts.push(`brightness(${String(filters.brightness)}%)`)
+  if (filters.contrast !== 100)
+    parts.push(`contrast(${String(filters.contrast)}%)`)
   return parts.join(' ')
 }
 
@@ -111,8 +112,12 @@ export const canvasToBlob = (canvas: HTMLCanvasElement): Promise<Blob> =>
 export const blobToBase64 = (blob: Blob): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader()
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = () => reject(new Error('FileReader failed'))
+    reader.onload = () => {
+      resolve(reader.result as string)
+    }
+    reader.onerror = () => {
+      reject(new Error('FileReader failed'))
+    }
     reader.readAsDataURL(blob)
   })
 

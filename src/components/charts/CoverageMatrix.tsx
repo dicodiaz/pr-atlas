@@ -38,7 +38,9 @@ export const CoverageMatrix: FC<CoverageMatrixProps> = ({ data }) => {
   const { t } = useTranslation()
   const [activeCell, setActiveCell] = useState<MatrixCell | null>(null)
 
-  const handleClose = useCallback(() => setActiveCell(null), [])
+  const handleClose = useCallback(() => {
+    setActiveCell(null)
+  }, [])
 
   const rows = groupByCategory(data)
 
@@ -86,9 +88,11 @@ export const CoverageMatrix: FC<CoverageMatrixProps> = ({ data }) => {
                   return (
                     <td key={level} className="p-3">
                       <button
-                        onClick={() => setActiveCell(cell)}
+                        onClick={() => {
+                          setActiveCell(cell)
+                        }}
                         className="w-full cursor-pointer rounded-lg p-2 text-left transition-colors hover:bg-white/5"
-                        aria-label={`${row.label} ${level}: ${cell.covered} of ${cell.total} covered`}
+                        aria-label={`${row.label} ${level}: ${String(cell.covered)} of ${String(cell.total)} covered`}
                       >
                         <p className="text-primary text-xs">
                           {t('dashboard.coveredJobs', {
@@ -105,7 +109,7 @@ export const CoverageMatrix: FC<CoverageMatrixProps> = ({ data }) => {
                         <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white/10">
                           <div
                             className="h-full rounded-full bg-(--color-accent) transition-all duration-500"
-                            style={{ width: `${percent}%` }}
+                            style={{ width: `${String(percent)}%` }}
                           />
                         </div>
                       </button>

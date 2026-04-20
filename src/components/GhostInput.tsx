@@ -77,7 +77,9 @@ export const GhostInput: FC<GhostInputProps> = ({
         id={id}
         type="search"
         value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={(event) => {
+          onChange(event.target.value)
+        }}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         aria-describedby={suggestion ? suggestionId : undefined}

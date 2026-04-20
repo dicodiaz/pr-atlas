@@ -15,8 +15,8 @@ const getTopicSearchIndex = (topic: Topic): string =>
       ...topic.prs.map((pr) => pr.contribution),
       ...topic.prs.map((pr) => pr.repoName),
       ...topic.prs
-        .filter((pr) => pr.parentFeature)
-        .map((pr) => pr.parentFeature!),
+        .map((pr) => pr.parentFeature)
+        .filter((feature): feature is string => feature !== undefined),
     ].join(' '),
   )
 

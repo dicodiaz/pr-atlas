@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { logger } from '@/lib/logger'
 import { searchTopics } from '@/lib/search'
@@ -12,7 +12,12 @@ export const useSearchWorker = (topics: Topic[], query: string): Topic[] => {
   const [isReady, setIsReady] = useState(false)
   const topicIndex = useRef(new Map<TopicId, Topic>())
   const requestId = useRef(0)
-  const [results, setResults] = useState(() => searchTopics(topics, query))
+  const [results, setResults] = useState<Topic[]>([])
+
+  const fallbackResults = useMemo(
+    () => searchTopics(topics, query),
+    [topics, query],
+  )
 
   useEffect(() => {
     topicIndex.current = new Map(topics.map((t) => [t.id, t]))
@@ -33,16 +38,17 @@ export const useSearchWorker = (topics: Topic[], query: string): Topic[] => {
           `Search worker ready in ${(performance.now() - start).toFixed(1)}ms`,
         )
         setIsReady(true)
-      } else if (msg.type === 'results') {
-        if (msg.id < requestId.current) return
-        const resolved = msg.topicIds
-          .map((id) => topicIndex.current.get(id as TopicId))
-          .filter((t): t is Topic => t !== undefined)
-        logger.debug(
-          `Worker returned ${resolved.length} results for request #${msg.id}`,
-        )
-        setResults(resolved)
+        return
       }
+
+      if (msg.id < requestId.current) return
+      const resolved = msg.topicIds
+        .map((id) => topicIndex.current.get(id as TopicId))
+        .filter((t): t is Topic => t !== undefined)
+      logger.debug(
+        `Worker returned ${String(resolved.length)} results for request #${String(msg.id)}`,
+      )
+      setResults(resolved)
     }
 
     workerRef.current = worker
@@ -54,13 +60,13 @@ export const useSearchWorker = (topics: Topic[], query: string): Topic[] => {
 
   useEffect(() => {
     if (!supportsWorker || !isReady || !workerRef.current) {
-      setResults(searchTopics(topics, query))
       return
     }
     const id = ++requestId.current
-    logger.debug(`Posting search query "${query}" as request #${id}`)
+    logger.debug(`Posting search query "${query}" as request #${String(id)}`)
     workerRef.current.postMessage({ type: 'search', query, id })
   }, [query, isReady, topics])
 
+  if (!supportsWorker || !isReady) return fallbackResults
   return results
 }

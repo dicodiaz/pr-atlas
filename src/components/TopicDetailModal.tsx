@@ -21,7 +21,8 @@ export const TopicDetailModal: FC<TopicDetailModalProps> = ({
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
-    const dialog = dialogRef.current!
+    const dialog = dialogRef.current
+    if (!dialog) return
     if (cell) {
       if (!dialog.open) dialog.showModal()
     } else if (dialog.open) {
@@ -30,15 +31,22 @@ export const TopicDetailModal: FC<TopicDetailModalProps> = ({
   }, [cell])
 
   useEffect(() => {
-    const dialog = dialogRef.current!
-    const handleClose = () => onClose()
+    const dialog = dialogRef.current
+    if (!dialog) return
+    const handleClose = () => {
+      onClose()
+    }
     dialog.addEventListener('close', handleClose)
-    return () => dialog.removeEventListener('close', handleClose)
+    return () => {
+      dialog.removeEventListener('close', handleClose)
+    }
   }, [onClose])
 
   const handleBackdropClick = useCallback(
     (e: MouseEvent<HTMLDialogElement>) => {
-      if (e.target === dialogRef.current) dialogRef.current.close()
+      if (e.target === dialogRef.current) {
+        dialogRef.current.close()
+      }
     },
     [],
   )
@@ -56,7 +64,9 @@ export const TopicDetailModal: FC<TopicDetailModalProps> = ({
               {cellLabel(cell)}
             </h3>
             <button
-              onClick={() => dialogRef.current?.close()}
+              onClick={() => {
+                dialogRef.current?.close()
+              }}
               className="text-secondary hover:text-primary -mr-2 rounded-lg p-2 transition-colors"
               aria-label={t('dashboard.closeModal')}
             >

@@ -14,7 +14,7 @@ export const LanguageSwitcher: FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const lng = event.target.value
-    i18n.changeLanguage(lng)
+    void i18n.changeLanguage(lng)
     storage.set(LANG_KEY, lng)
   }
 

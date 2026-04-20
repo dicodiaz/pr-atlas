@@ -19,8 +19,8 @@ const buildSearchIndex = (topic: Topic): string =>
       ...topic.prs.map((pr) => pr.contribution),
       ...topic.prs.map((pr) => pr.repoName),
       ...topic.prs
-        .filter((pr) => pr.parentFeature)
-        .map((pr) => pr.parentFeature!),
+        .map((pr) => pr.parentFeature)
+        .filter((feature): feature is string => feature !== undefined),
     ].join(' '),
   )
 
@@ -34,7 +34,9 @@ export class TrigramIndex {
     this.searchTexts = topics.map(buildSearchIndex)
 
     for (let i = 0; i < this.searchTexts.length; i++) {
-      for (const trigram of extractTrigrams(this.searchTexts[i]!)) {
+      const text = this.searchTexts[i]
+      if (!text) continue
+      for (const trigram of extractTrigrams(text)) {
         let set = this.index.get(trigram)
         if (!set) {
           set = new Set()
@@ -58,7 +60,8 @@ export class TrigramIndex {
         // Token shorter than 3 chars -- fall back to linear scan for this token
         const matching = new Set<number>()
         for (let i = 0; i < this.searchTexts.length; i++) {
-          if (this.searchTexts[i]!.includes(token)) matching.add(i)
+          const text = this.searchTexts[i]
+          if (text && text.includes(token)) matching.add(i)
         }
         candidates =
           candidates === null ? matching : intersect(candidates, matching)
@@ -73,21 +76,26 @@ export class TrigramIndex {
               : intersect(trigramCandidates, posting)
           if (trigramCandidates.size === 0) return []
         }
+        if (trigramCandidates === null) return []
         candidates =
           candidates === null
-            ? trigramCandidates!
-            : intersect(candidates, trigramCandidates!)
+            ? trigramCandidates
+            : intersect(candidates, trigramCandidates)
       }
 
       if (candidates.size === 0) return []
     }
 
+    if (candidates === null) return []
+
     // Verify full substring match to eliminate trigram false positives
     const results: Topic[] = []
-    for (const idx of candidates!) {
-      const text = this.searchTexts[idx]!
+    for (const idx of candidates) {
+      const text = this.searchTexts[idx]
+      if (!text) continue
       if (tokens.every((token) => text.includes(token))) {
-        results.push(this.topics[idx]!)
+        const topic = this.topics[idx]
+        if (topic) results.push(topic)
       }
     }
     return results

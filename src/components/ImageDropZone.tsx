@@ -51,14 +51,20 @@ export const ImageDropZone: FC<ImageDropZoneProps> = ({ onFileSelected }) => {
     setDragging(true)
   }, [])
 
-  const handleDragLeave = useCallback(() => setDragging(false), [])
+  const handleDragLeave = useCallback(() => {
+    setDragging(false)
+  }, [])
 
-  const handleClick = useCallback(() => inputRef.current?.click(), [])
+  const handleClick = useCallback(() => {
+    inputRef.current?.click()
+  }, [])
 
   const handleInputChange = useCallback(() => {
     const file = inputRef.current?.files?.[0]
     if (file) handleFile(file)
-    inputRef.current!.value = ''
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
   }, [handleFile])
 
   return (

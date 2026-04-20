@@ -27,7 +27,8 @@ export const getSuggestion = (
   let hi = dictionary.length
   while (lo < hi) {
     const mid = (lo + hi) >>> 1
-    if (dictionary[mid]! < normalized) lo = mid + 1
+    const value = dictionary[mid]
+    if (value !== undefined && value < normalized) lo = mid + 1
     else hi = mid
   }
 

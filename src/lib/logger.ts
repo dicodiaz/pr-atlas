@@ -5,16 +5,16 @@ import { storage } from '@/lib/storage'
 const DEBUG_KEY = 'pr-atlas:debug'
 
 export const logger = createConsola({
-  level: storage.get<boolean>(DEBUG_KEY, false) ? 4 : 1,
+  level: storage.get(DEBUG_KEY, false as boolean) ? 4 : 1,
   formatOptions: { date: true },
 }).withTag('pr-atlas')
 
 export const toggleDebug = (): boolean => {
-  const next = !storage.get<boolean>(DEBUG_KEY, false)
+  const next = !storage.get(DEBUG_KEY, false as boolean)
   storage.set(DEBUG_KEY, next)
   logger.level = next ? 4 : 1
   return next
 }
 
 export const isDebugEnabled = (): boolean =>
-  storage.get<boolean>(DEBUG_KEY, false)
+  storage.get(DEBUG_KEY, false as boolean)

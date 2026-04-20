@@ -31,7 +31,9 @@ export const SavedSearches: FC<SavedSearchesProps> = ({
         >
           <button
             type="button"
-            onClick={() => onApply(query)}
+            onClick={() => {
+              onApply(query)
+            }}
             aria-label={t('saved.apply', { query })}
             className="text-secondary hover:text-primary focus-ring cursor-pointer rounded-sm transition"
           >
@@ -39,7 +41,9 @@ export const SavedSearches: FC<SavedSearchesProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => onRemove(query)}
+            onClick={() => {
+              onRemove(query)
+            }}
             aria-label={t('saved.remove', { query })}
             className="text-muted hover:text-primary focus-ring cursor-pointer rounded-full p-0.5 transition"
           >

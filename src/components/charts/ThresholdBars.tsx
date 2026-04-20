@@ -31,7 +31,14 @@ export const ThresholdBars: FC<ThresholdBarsProps> = ({ data }) => {
                 item.met ? 'bg-green-500' : 'bg-(--color-accent)'
               }`}
               style={{
-                width: `${Math.min(100, item.required > 0 ? (item.current / item.required) * 100 : 0)}%`,
+                width: `${String(
+                  Math.min(
+                    100,
+                    item.required > 0
+                      ? (item.current / item.required) * 100
+                      : 0,
+                  ),
+                )}%`,
               }}
             />
           </div>
