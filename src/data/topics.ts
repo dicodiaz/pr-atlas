@@ -109,84 +109,10 @@ const pullRequests: PullRequest[] = [
 
   // shopping-pwa
   {
-    id: PullRequestId.SHOPPING_PWA_18517,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump retail-lodging-offers-shopping-banners@1.1.4',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/18517',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_18045,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-product-review-details@4.26.3',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/18045',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_18031,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-product-rating-summary@6.24.3',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/18031',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_17976,
-    repoId: RepoId.SHOPPING_PWA,
-    title:
-      'chore: version bump @shared-ui/retail-product-rating-summary@6.23.6',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/17976',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_17433,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'fix: LBG prefetched data bug',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/17433',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_17414,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-product-rating-summary@6.19.1',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/17414',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_17090,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: add TnL and bump retail-product-rating-summary@6.18.0',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/17090',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_17074,
     repoId: RepoId.SHOPPING_PWA,
     title: 'feat: ATH redesign rollout',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/17074',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_17056,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-product-about-the-host@3.18.0',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/17056',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_16959,
-    repoId: RepoId.SHOPPING_PWA,
-    title:
-      'chore: version bump @shared-ui/retail-product-about-the-host@3.16.0',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/16959',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_16740,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-lodging-contact-host@9.26.2',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/16740',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_16696,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-product-about-the-host',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/16696',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_15437,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@8.1.2',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/15437',
   },
   {
     id: PullRequestId.SHOPPING_PWA_15411,
@@ -213,12 +139,6 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.com/eg-internal/shopping-pwa/pull/15076',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_15057,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@7.6.3',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/15057',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_15012,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: include price in adaptRequestSortAndFiltersToDict',
@@ -229,19 +149,6 @@ const pullRequests: PullRequest[] = [
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: AI Search filter replace logic',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/14925',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_14877,
-    repoId: RepoId.SHOPPING_PWA,
-    title:
-      'chore: version bump @shared-ui/retail-sort-and-filter-lodging@7.5.9',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/14877',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_14841,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@7.5.4',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/14841',
   },
   {
     id: PullRequestId.SHOPPING_PWA_14816,
@@ -268,65 +175,16 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.com/eg-internal/shopping-pwa/pull/14419',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_14260,
-    repoId: RepoId.SHOPPING_PWA,
-    title:
-      'chore: bump retail-sort-and-filter-lodging and react-universal-shopping',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/14260',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_14162,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/14162',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_13883,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: feature tests for filter bar',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/13883',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_13761,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@3.20.6',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/13761',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_13631,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump retail-sort-and-filter-lodging',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/13631',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_13377,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@3.18.15',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/13377',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_13142,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@3.18.6',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/13142',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_13135,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/retail-sort-and-filter-lodging@3.18.5',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/13135',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_13017,
     repoId: RepoId.SHOPPING_PWA,
     title: 'feat: add AI_SEARCH_QUERY case to buildUrlQueryString',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/13017',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_12865,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'fix: prevent filter sheet from overflowing',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/12865',
   },
   {
     id: PullRequestId.SHOPPING_PWA_12834,
@@ -341,28 +199,10 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.com/eg-internal/shopping-pwa/pull/12802',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_12294,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/lodging-property-search@21.4.1',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/12294',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_12257,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: neighborhood shouldReplaceParam check',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/12257',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_12226,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump uitk-react-sheet@9.1.22',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/12226',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_12111,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump retail-sort-and-filter-lodging@3.8.4',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/12111',
   },
   {
     id: PullRequestId.SHOPPING_PWA_11779,
@@ -371,47 +211,16 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.com/eg-internal/shopping-pwa/pull/11779',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_11764,
-    repoId: RepoId.SHOPPING_PWA,
-    title:
-      'chore: version bump @shared-ui/retail-sort-and-filter-lodging@3.5.6',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/11764',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_11420,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: add filterBarSpacing as a prop for filterBarSpacing',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/11420',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_11418,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump sort-and-filter-lodging and its peer deps',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/11418',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_11381,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: add mealPlan to ARRAY_PARAM_JOIN_WHITELIST',
     url: 'https://github.com/eg-internal/shopping-pwa/pull/11381',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_11315,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump USNF, maps and team carousel',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/11315',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_11133,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: bump @shared-ui/apollo-type-policies to 1.21.3',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/11133',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_10401,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: Bump @shared-ui/retail-sort-and-filter-lodging to 2.6.3',
-    url: 'https://github.com/eg-internal/shopping-pwa/pull/10401',
   },
   {
     id: PullRequestId.SHOPPING_PWA_9007,
@@ -432,28 +241,10 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8704',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_8694,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: version bump search-tools-lodging',
-    url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8694',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_8650,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: version bump apollo-type-policies',
-    url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8650',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_8403,
     repoId: RepoId.SHOPPING_PWA,
     title: 'fix: sync pets allowed filter with pets traveler selector',
     url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8403',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_8316,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: version bump search-tools-lodging',
-    url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8316',
   },
   {
     id: PullRequestId.SHOPPING_PWA_8297,
@@ -468,22 +259,10 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8122',
   },
   {
-    id: PullRequestId.SHOPPING_PWA_8099,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: version bump search tools lodging',
-    url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/8099',
-  },
-  {
     id: PullRequestId.SHOPPING_PWA_7538,
     repoId: RepoId.SHOPPING_PWA,
     title: 'feat: Dynamically change SRP template based on EALS response',
     url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/7538',
-  },
-  {
-    id: PullRequestId.SHOPPING_PWA_6651,
-    repoId: RepoId.SHOPPING_PWA,
-    title: 'chore: lodging-offers@20.6.3',
-    url: 'https://github.expedia.biz/Brand-Expedia/shopping-pwa/pull/6651',
   },
 
   // shared-ui-web
@@ -868,12 +647,6 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/14227',
   },
   {
-    id: PullRequestId.SHARED_UI_WEB_13937,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'chore(deps): uitk-react-sheet version bump',
-    url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/13937',
-  },
-  {
     id: PullRequestId.SHARED_UI_WEB_13546,
     repoId: RepoId.SHARED_UI_WEB,
     title: 'fix: quick filter popover sheets not closing correctly',
@@ -923,12 +696,6 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/11654',
   },
   {
-    id: PullRequestId.SHARED_UI_WEB_11616,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'chore: bump search tools packages',
-    url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/11616',
-  },
-  {
     id: PullRequestId.SHARED_UI_WEB_11332,
     repoId: RepoId.SHARED_UI_WEB,
     title:
@@ -940,12 +707,6 @@ const pullRequests: PullRequest[] = [
     repoId: RepoId.SHARED_UI_WEB,
     title: 'feat: add selected filters field',
     url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/11173',
-  },
-  {
-    id: PullRequestId.SHARED_UI_WEB_10758,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'chore: version bump sort-and-filter packages',
-    url: 'https://github.com/eg-internal/shared-ui-web/pull/10758',
   },
   {
     id: PullRequestId.SHARED_UI_WEB_10735,
@@ -983,12 +744,6 @@ const pullRequests: PullRequest[] = [
     repoId: RepoId.SHARED_UI_WEB,
     title: 'fix: refactor filterBarSpacing as a LodgingSortAndFilters prop',
     url: 'https://github.com/eg-internal/shared-ui-web/pull/9372',
-  },
-  {
-    id: PullRequestId.SHARED_UI_WEB_9279,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'chore: version bump @egds/react-lodging and uitk-react-slider',
-    url: 'https://github.com/eg-internal/shared-ui-web/pull/9279',
   },
   {
     id: PullRequestId.SHARED_UI_WEB_9215,
@@ -1048,35 +803,16 @@ const pullRequests: PullRequest[] = [
     url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/7191',
   },
   {
-    id: PullRequestId.SHARED_UI_WEB_7004,
-    repoId: RepoId.SHARED_UI_WEB,
-    title:
-      'chore: add uitk-react-pill@8.4.0 to lodging packages and version bump',
-    url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/7004',
-  },
-  {
     id: PullRequestId.SHARED_UI_WEB_6631,
     repoId: RepoId.SHARED_UI_WEB,
     title: 'feat: add persistent pills component',
     url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/6631',
   },
   {
-    id: PullRequestId.SHARED_UI_WEB_5767,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'chore: Bump sort-and-filter',
-    url: 'https://github.com/eg-internal/shared-ui-web/pull/5767',
-  },
-  {
     id: PullRequestId.SHARED_UI_WEB_5726,
     repoId: RepoId.SHARED_UI_WEB,
     title: 'chore: Add exposure logging to Default Pricing Filter experiment',
     url: 'https://github.com/eg-internal/shared-ui-web/pull/5726',
-  },
-  {
-    id: PullRequestId.SHARED_UI_WEB_5381,
-    repoId: RepoId.SHARED_UI_WEB,
-    title: 'feat: version boom + add contributor',
-    url: 'https://github.expedia.biz/Expedia-UI/shared-ui/pull/5381',
   },
   {
     id: PullRequestId.SHARED_UI_WEB_5329,
@@ -1206,12 +942,6 @@ const pullRequests: PullRequest[] = [
     repoId: RepoId.EGDS_COMPONENTS_REACT,
     title: 'fix(universal-shopping): Typings exports',
     url: 'https://github.com/eg-internal/egds-components-react/pull/771',
-  },
-  {
-    id: PullRequestId.EGDS_COMPONENTS_REACT_762,
-    repoId: RepoId.EGDS_COMPONENTS_REACT,
-    title: 'chore(universal-shopping): Version bump',
-    url: 'https://github.com/eg-internal/egds-components-react/pull/762',
   },
   {
     id: PullRequestId.EGDS_COMPONENTS_REACT_761,
@@ -1364,12 +1094,6 @@ const pullRequests: PullRequest[] = [
     title: 'feat: Implement LBG Clickstream Payload',
     url: 'https://github.com/eg-internal/experience-api-lodging-search/pull/12723',
   },
-  {
-    id: PullRequestId.EXP_API_LODGING_SEARCH_12436,
-    repoId: RepoId.EXP_API_LODGING_SEARCH,
-    title: 'chore: bump shared_graphql_library_version to 0.152.0',
-    url: 'https://github.com/eg-internal/experience-api-lodging-search/pull/12436',
-  },
 
   // experience-api-lodging-reviews
   {
@@ -1420,7 +1144,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHOPPING_PWA_15411,
     PullRequestId.SHOPPING_PWA_15012,
     PullRequestId.SHOPPING_PWA_14732,
-    PullRequestId.SHOPPING_PWA_12865,
     PullRequestId.SHOPPING_PWA_12834,
     PullRequestId.SHOPPING_PWA_12802,
     PullRequestId.SHOPPING_PWA_12257,
@@ -1472,7 +1195,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_14694,
     PullRequestId.SHARED_UI_WEB_14600,
     PullRequestId.SHARED_UI_WEB_14568,
-    PullRequestId.SHARED_UI_WEB_13937,
     PullRequestId.SHARED_UI_WEB_13546,
     PullRequestId.SHARED_UI_WEB_13267,
     PullRequestId.SHARED_UI_WEB_12522,
@@ -1480,13 +1202,10 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_12110,
     PullRequestId.SHARED_UI_WEB_11773,
     PullRequestId.SHARED_UI_WEB_11654,
-    PullRequestId.SHARED_UI_WEB_11616,
     PullRequestId.SHARED_UI_WEB_11173,
-    PullRequestId.SHARED_UI_WEB_10758,
     PullRequestId.SHARED_UI_WEB_10418,
     PullRequestId.SHARED_UI_WEB_9872,
     PullRequestId.SHARED_UI_WEB_9372,
-    PullRequestId.SHARED_UI_WEB_9279,
     PullRequestId.SHARED_UI_WEB_9215,
     PullRequestId.SHARED_UI_WEB_9109,
     PullRequestId.SHARED_UI_WEB_9015,
@@ -1496,11 +1215,8 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_7517,
     PullRequestId.SHARED_UI_WEB_7315,
     PullRequestId.SHARED_UI_WEB_7191,
-    PullRequestId.SHARED_UI_WEB_7004,
     PullRequestId.SHARED_UI_WEB_6631,
-    PullRequestId.SHARED_UI_WEB_5767,
     PullRequestId.SHARED_UI_WEB_5726,
-    PullRequestId.SHARED_UI_WEB_5381,
   ],
   [ParentFeature.AI_SEARCH]: [
     PullRequestId.SHOPPING_PWA_14925,
@@ -1518,12 +1234,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_14493,
   ],
   [ParentFeature.LOVED_BY_GUESTS]: [
-    PullRequestId.SHOPPING_PWA_18045,
-    PullRequestId.SHOPPING_PWA_18031,
-    PullRequestId.SHOPPING_PWA_17976,
-    PullRequestId.SHOPPING_PWA_17414,
-    PullRequestId.SHOPPING_PWA_17090,
-    PullRequestId.SHOPPING_PWA_17433,
     PullRequestId.SHARED_UI_WEB_36900,
     PullRequestId.SHARED_UI_WEB_35481,
     PullRequestId.SHARED_UI_WEB_35318,
@@ -1569,7 +1279,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.EGDS_COMPONENTS_REACT_862,
     PullRequestId.EGDS_COMPONENTS_REACT_848,
     PullRequestId.EGDS_COMPONENTS_REACT_771,
-    PullRequestId.EGDS_COMPONENTS_REACT_762,
     PullRequestId.EGDS_COMPONENTS_REACT_761,
     PullRequestId.SHARED_UI_WEB_14828,
     PullRequestId.SHARED_UI_WEB_10645,
@@ -1585,7 +1294,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.EGDS_COMPONENTS_REACT_1023,
   ],
   [ParentFeature.GREAT_FIND]: [
-    PullRequestId.SHOPPING_PWA_18517,
     PullRequestId.EXP_API_LODGING_OFFERS_10403,
     PullRequestId.EXP_API_LODGING_OFFERS_10243,
   ],
@@ -1598,9 +1306,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_7736,
   ],
   [ParentFeature.ABOUT_THE_HOST]: [
-    PullRequestId.SHOPPING_PWA_17056,
-    PullRequestId.SHOPPING_PWA_16959,
-    PullRequestId.SHOPPING_PWA_16696,
     PullRequestId.SHOPPING_PWA_17074,
     PullRequestId.PRODUCT_DETAILS_API_3350,
     PullRequestId.PRODUCT_DETAILS_API_3339,
@@ -1612,7 +1317,6 @@ const PARENT_FEATURE_PRS = {
     PullRequestId.SHARED_UI_WEB_30427,
   ],
   [ParentFeature.INQUIRY]: [
-    PullRequestId.SHOPPING_PWA_16740,
     PullRequestId.SHARED_UI_WEB_37156,
     PullRequestId.SHARED_UI_WEB_31599,
     PullRequestId.SHARED_UI_WEB_30536,
@@ -2098,6 +1802,13 @@ const prTopicMappings: PrTopicMappings = {
       score: 20,
     },
     {
+      topicId:
+        TopicId.CONFIGURES_CONTRIBUTION_WORKFLOW_USING_VERSION_CONTROL_TOOLS,
+      contribution:
+        'Husky pre-commit and pre-push hooks with lint-staged and conditional build checks',
+      score: 20,
+    },
+    {
       topicId: TopicId.MAINTAINS_CODE_QUALITY_OF_THE_APPLICATION,
       contribution: 'Build and tooling',
       score: 20,
@@ -2386,24 +2097,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 90,
     },
   ],
-  [PullRequestId.SHOPPING_PWA_17433]: [
-    {
-      topicId: TopicId.TROUBLESHOOTS_NETWORK_USING_TOOLS_AND_LIBRARIES,
-      contribution: 'Troubleshoot data prefetch pipeline',
-      score: 90,
-    },
-    {
-      topicId: TopicId.STORES_REUSES_AND_MANIPULATES_DATA,
-      contribution: 'Prefetched data manipulation',
-      score: 80,
-    },
-    {
-      topicId:
-        TopicId.USES_FRAMEWORK_RELATED_AND_BASIC_TOOLS_FOR_APPLICATION_S_DEBUGGING,
-      contribution: 'Debug prefetch data pipeline',
-      score: 75,
-    },
-  ],
 
   // --- Junior: Interacts with API and handles request metadata ---
   [PullRequestId.SHARED_UI_WEB_18981]: [
@@ -2453,18 +2146,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.DEBUGS_MARKUPS_AND_STYLES,
       contribution: 'Debug CSS spacing issue in filter bar',
       score: 90,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_12865]: [
-    {
-      topicId: TopicId.DEBUGS_MARKUPS_AND_STYLES,
-      contribution: 'Debug filter sheet overflow styling',
-      score: 90,
-    },
-    {
-      topicId: TopicId.STYLING_ELEMENTS_USING_FRAMEWORK_CAPABILITY,
-      contribution: 'Filter sheet overflow styling fix',
-      score: 80,
     },
   ],
   [PullRequestId.SHARED_UI_WEB_22700]: [
@@ -3845,24 +3526,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 80,
     },
   ],
-  [PullRequestId.EGDS_COMPONENTS_REACT_762]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Library version bump for egds-components-react',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Release alignment for carousel package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Publish / consume version coordination',
-      score: 45,
-    },
-  ],
   [PullRequestId.EGDS_COMPONENTS_REACT_761]: [
     {
       topicId:
@@ -3916,19 +3579,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.STORES_REUSES_AND_MANIPULATES_DATA,
       contribution: 'Shape and attach clickstream data structures',
       score: 70,
-    },
-  ],
-  [PullRequestId.EXP_API_LODGING_SEARCH_12436]: [
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Upgrade shared GraphQL library to 0.152.0',
-      score: 95,
-    },
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Dependency version alignment for search service',
-      score: 90,
     },
   ],
   [PullRequestId.PRODUCT_DETAILS_API_4037]: [
@@ -4598,24 +4248,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 75,
     },
   ],
-  [PullRequestId.SHARED_UI_WEB_13937]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump uitk-react-sheet dependency',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sheet package fixes in filter flows',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Lockfile / manifest update',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHARED_UI_WEB_13546]: [
     {
       topicId:
@@ -4714,24 +4346,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 85,
     },
   ],
-  [PullRequestId.SHARED_UI_WEB_11616]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump search-tools related packages',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Align sort-and-filter dependencies',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Workspace dependency refresh',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHARED_UI_WEB_11173]: [
     {
       topicId: TopicId.DISPLAYS_DATA_ON_THE_USER_INTERFACE,
@@ -4742,24 +4356,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.CREATES_SUPPORTS_AND_COMPOSES_USER_INTERFACE_COMPONENTS,
       contribution: 'Surface active filter chips / text',
       score: 75,
-    },
-  ],
-  [PullRequestId.SHARED_UI_WEB_10758]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump sort-and-filter packages',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt upstream S&F fixes',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Dependency alignment across lodging packages',
-      score: 45,
     },
   ],
   [PullRequestId.SHARED_UI_WEB_10645]: [
@@ -4811,24 +4407,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.CREATES_SUPPORTS_AND_COMPOSES_USER_INTERFACE_COMPONENTS,
       contribution: 'Parent-controlled spacing for lodging filter bar',
       score: 75,
-    },
-  ],
-  [PullRequestId.SHARED_UI_WEB_9279]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump @egds/react-lodging and uitk-react-slider',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt lodging + slider package releases',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Dependency graph update',
-      score: 45,
     },
   ],
   [PullRequestId.SHARED_UI_WEB_9215]: [
@@ -4955,24 +4533,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 70,
     },
   ],
-  [PullRequestId.SHARED_UI_WEB_7004]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Add uitk-react-pill to lodging packages',
-      score: 92,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Wire pill dependency into sort-and-filter stack',
-      score: 85,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Package manifest updates for lodging',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHARED_UI_WEB_6631]: [
     {
       topicId:
@@ -4986,24 +4546,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 80,
     },
   ],
-  [PullRequestId.SHARED_UI_WEB_5767]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump sort-and-filter dependency bundle',
-      score: 95,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Consume upstream S&F release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Lockfile alignment',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHARED_UI_WEB_5726]: [
     {
       topicId:
@@ -5015,234 +4557,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.CREATES_ECOSYSTEM_FOR_APPLICATION_STATE_MONITORING,
       contribution: 'Experiment telemetry in filter UI',
       score: 75,
-    },
-  ],
-  [PullRequestId.SHARED_UI_WEB_5381]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump and contributor metadata for packages',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Release housekeeping for sort-and-filter stack',
-      score: 80,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'Changelog / manifest contributor updates',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_18517]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-lodging-offers-shopping-banners dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt new shopping banners package release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_18045]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-review-details dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Loved By Guests review details package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_18031]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-rating-summary dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Loved By Guests rating summary package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_17976]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump retail-product-rating-summary',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Loved By Guests rating summary release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_17414]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-rating-summary dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Loved By Guests rating summary package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_17090]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-rating-summary and add TnL config',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt new rating summary package with localization wiring',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-    {
-      topicId:
-        TopicId.HANDLES_INTERNATIONALISATION_IN_SCOPE_OF_THE_APPLICATIONS_DEVELOPMENT,
-      contribution: 'Travel and localization config for rating summary',
-      score: 75,
-    },
-    {
-      topicId:
-        TopicId.HANDLES_DIFFERENT_TYPES_OF_LOCALIZATION_AND_TEXT_PROCESSING,
-      contribution: 'TnL keys for Loved By Guests strings',
-      score: 60,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_17056]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-about-the-host dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt About The Host shared-ui package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_16959]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump retail-product-about-the-host',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt About The Host package release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_16740]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-lodging-contact-host dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt contact host / inquiry package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_16696]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-product-about-the-host dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt About The Host shared-ui package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_15437]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
     },
   ],
   [PullRequestId.SHOPPING_PWA_15298]: [
@@ -5289,60 +4603,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 55,
     },
   ],
-  [PullRequestId.SHOPPING_PWA_15057]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_14877]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump retail-sort-and-filter-lodging',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_14841]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHOPPING_PWA_14559]: [
     {
       topicId:
@@ -5385,42 +4645,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 75,
     },
   ],
-  [PullRequestId.SHOPPING_PWA_14260]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump sort-and-filter-lodging and react-universal-shopping',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Align carousel and filter package versions',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_14162]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHOPPING_PWA_13883]: [
     {
       topicId:
@@ -5445,168 +4669,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 70,
     },
   ],
-  [PullRequestId.SHOPPING_PWA_13761]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_13631]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_13377]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_13142]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_13135]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_12294]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump lodging-property-search dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt property search package release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_12226]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump uitk-react-sheet dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sheet UI kit package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_12111]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_11764]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump retail-sort-and-filter-lodging',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHOPPING_PWA_11420]: [
     {
       topicId: TopicId.CREATES_SUPPORTS_AND_COMPOSES_USER_INTERFACE_COMPONENTS,
@@ -5622,24 +4684,6 @@ const prTopicMappings: PrTopicMappings = {
       topicId: TopicId.USES_FRAMEWORK_BUILT_IN_TOOLS_FOR_CODE_REUSABILITY,
       contribution: 'Reuse filter bar with configurable spacing',
       score: 70,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_11418]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump sort-and-filter-lodging and peer dependencies',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Align peer dependency graph for filter stack',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
     },
   ],
   [PullRequestId.SHOPPING_PWA_11381]: [
@@ -5659,60 +4703,6 @@ const prTopicMappings: PrTopicMappings = {
         TopicId.USES_BUILT_IN_ITERATORS_TO_TRAVERSE_THROUGH_DIFFERENT_TYPES_OF_COLLECTIONS,
       contribution: 'ARRAY_PARAM_JOIN_WHITELIST maintenance',
       score: 50,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_11315]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump USNF, maps, and team carousel packages',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt map and carousel related releases',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_11133]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump apollo-type-policies dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Apollo cache type policies package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_10401]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump retail-sort-and-filter-lodging dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt sort and filter lodging package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
     },
   ],
   [PullRequestId.SHOPPING_PWA_9007]: [
@@ -5754,60 +4744,6 @@ const prTopicMappings: PrTopicMappings = {
       score: 70,
     },
   ],
-  [PullRequestId.SHOPPING_PWA_8694]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump search-tools-lodging',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt lodging search tools package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_8650]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump apollo-type-policies',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt Apollo cache type policies package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_8316]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump search-tools-lodging',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt lodging search tools package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
   [PullRequestId.SHOPPING_PWA_8122]: [
     {
       topicId: TopicId.USES_BUILT_IN_MECHANISM_TO_MANAGE_COMPONENT_INTERACTION,
@@ -5825,42 +4761,6 @@ const prTopicMappings: PrTopicMappings = {
         TopicId.HANDLES_USER_INTERACTION_WITH_EVENT_HANDLERS_IN_FRAMEWORK,
       contribution: 'React disabled state for async search',
       score: 75,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_8099]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Version bump search-tools-lodging',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt lodging search tools package',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
-    },
-  ],
-  [PullRequestId.SHOPPING_PWA_6651]: [
-    {
-      topicId:
-        TopicId.MANAGES_AND_MAINTAINS_THE_CONDITION_OF_THE_APPLICATION_S_DEPENDENCIES,
-      contribution: 'Bump lodging-offers dependency',
-      score: 90,
-    },
-    {
-      topicId: TopicId.HANDLES_AND_RESOLVES_NEW_VERSIONS_OF_THE_PACKAGES,
-      contribution: 'Adopt lodging offers package release',
-      score: 90,
-    },
-    {
-      topicId: TopicId.MANAGES_PROJECT_DEPENDENCIES_WITH_PACKAGE_MANAGERS,
-      contribution: 'pnpm dependency version update',
-      score: 45,
     },
   ],
 }
