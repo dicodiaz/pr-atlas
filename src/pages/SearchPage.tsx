@@ -5,19 +5,20 @@ import { EmptyState } from '@/components/EmptyState'
 import { SavedSearches } from '@/components/SavedSearches'
 import { SearchControls } from '@/components/SearchControls'
 import { TopicTable } from '@/components/TopicTable'
-import { topics } from '@/data/topics'
 import { buildDictionary } from '@/lib/autocomplete'
 import { logger } from '@/lib/logger'
 import { getQueryFromUrl, setQueryInUrl } from '@/lib/url-state'
 import { useDebouncedValue } from '@/lib/use-debounced-value'
 import { useSavedSearches } from '@/lib/use-saved-searches'
 import { useSearchWorker } from '@/lib/use-search-worker'
+import { useTopics } from '@/lib/use-topics'
 
 const SEARCH_DEBOUNCE_MS = 250
 const ANNOUNCE_DELAY_MS = 1000
 
 export const SearchPage: FC = () => {
   const { t } = useTranslation()
+  const topicsState = useTopics()
   const [inputQuery, setInputQuery] = useState(getQueryFromUrl)
   const [countAnnouncement, setCountAnnouncement] = useState('')
   const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -26,9 +27,12 @@ export const SearchPage: FC = () => {
     SEARCH_DEBOUNCE_MS,
   )
 
+  const readyTopics =
+    topicsState.status === 'ready' ? topicsState.topics : undefined
+  const topics = useMemo(() => readyTopics ?? [], [readyTopics])
   const results = useSearchWorker(topics, activeQuery)
 
-  const dictionary = useMemo(() => buildDictionary(topics), [])
+  const dictionary = useMemo(() => buildDictionary(topics), [topics])
 
   useEffect(() => {
     logger.debug(
@@ -42,7 +46,10 @@ export const SearchPage: FC = () => {
     let text: string
     let delay: number
 
-    if (activeQuery.length === 0) {
+    if (topicsState.status !== 'ready') {
+      text = ''
+      delay = 0
+    } else if (activeQuery.length === 0) {
       text = t('announce.cleared', { count: topics.length })
       delay = 0
     } else if (trimmed.length === 0) {
@@ -62,7 +69,7 @@ export const SearchPage: FC = () => {
     return () => {
       clearTimeout(id)
     }
-  }, [activeQuery, results.length, t])
+  }, [activeQuery, results.length, t, topics.length, topicsState.status])
 
   useEffect(() => {
     const handlePopState = () => {
@@ -124,13 +131,22 @@ export const SearchPage: FC = () => {
             {t('snapshot.label')}
           </p>
           <p className="text-primary font-display mt-3 text-3xl font-semibold">
-            {topics.length}
+            {topicsState.status === 'ready' ? topics.length : '…'}
           </p>
           <p className="text-secondary mt-2 text-sm leading-6">
             {t('snapshot.description')}
           </p>
         </div>
       </header>
+
+      {topicsState.status === 'error' ? (
+        <div className="border-default mt-6 rounded-3xl border bg-[rgba(10,18,30,0.86)] p-6">
+          <p className="text-primary font-medium">{t('results.heading')}</p>
+          <p className="text-secondary mt-2 text-sm leading-6">
+            {t('announce.noResults', { query: activeQuery.trim() })}
+          </p>
+        </div>
+      ) : null}
 
       <SearchControls
         dictionary={dictionary}
@@ -162,14 +178,22 @@ export const SearchPage: FC = () => {
             </p>
           </div>
           <p className="text-secondary text-sm font-medium">
-            {t('results.count', { count: results.length })}
+            {topicsState.status === 'ready'
+              ? t('results.count', { count: results.length })
+              : t('results.count', { count: 0 })}
           </p>
           <p aria-live="polite" aria-atomic="true" className="sr-only">
             {countAnnouncement}
           </p>
         </div>
 
-        {results.length > 0 ? (
+        {topicsState.status !== 'ready' ? (
+          <div className="grid gap-3">
+            <div className="h-10 w-full animate-pulse rounded-xl bg-(--color-surface-strong)" />
+            <div className="h-10 w-full animate-pulse rounded-xl bg-(--color-surface-strong)" />
+            <div className="h-10 w-full animate-pulse rounded-xl bg-(--color-surface-strong)" />
+          </div>
+        ) : results.length > 0 ? (
           <TopicTable query={activeQuery} topics={results} />
         ) : (
           <EmptyState query={activeQuery.trim()} />
